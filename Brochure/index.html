@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html data-sign="OSB">
+  <head>
+    <title>Template title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="css/minireset.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/placeholder-controller.css">
+
+    <style>
+      @import url('https://fonts.googleapis.com/css?family=Archivo+Black&display=swap');
+      @import url('https://fonts.googleapis.com/css?family=Archivo:400,700&display=swap');
+      @import url('https://fonts.googleapis.com/css?family=Taviraj&display=swap');
+
+      :root {
+        --font-archivo: "Archivo";
+        --font-archivo-black: "Archivo Black";
+        --font-taviraj: "Taviraj";
+
+        --red: {{account.colors.red}};
+        --green: {{account.colors.green}};
+        --blue: {{account.colors.blue}};
+        --yellow: {{account.colors.yellow}};
+        --white: {{{account.colors.white}}};
+        --black: {{{account.colors.black}}};
+
+        /* Cover Page Block Banner */
+        --banner-background-color: var(--red);
+        --banner-heading-color: var(--black);
+        --banner-heading-bold-color: var(--white);
+        --banner-body-content-heading: var(--black);
+        --banner-body-content-heading-bold: var(--white);
+        --banner-body-content: var(--white);
+        --banner-body-content-bold: var(--red);
+
+        /* Cover Page Highigh Banner */
+        --body-heading-color: var(--white);
+        --body-heading-bold-color: var(--red);
+        --body-subheading-color: var(--white);
+        --body-subheading-bold-color: var(--red);
+        --body-copy-color: var(--white);
+        --body-copy-bold-color: var(--red);
+        --footer-banner-background: var(--red);
+        --footer-banner-heading: var(--black);
+        --footer-banner-heading-bold: var(--white);
+        --footer-banner-content: var(--black);
+        --border-item-before-background: transparent;
+      }
+
+      /* COVER PAGE BLOCK BANNER */
+      /* Banner Theme Colour */
+      .themeColour--red .bannerTheme--colour {
+        --banner-background-color: var(--red);
+        --banner-heading-color: var(--black);
+        --banner-heading-bold-color: var(--white);
+        --banner-body-content-heading: var(--black);
+        --banner-body-content-heading-bold: var(--white);
+        --banner-body-content: var(--white);
+        --banner-body-content-bold: var(--white);
+      }
+
+      .themeColour--blue .bannerTheme--colour {
+        --banner-background-color: var(--blue);
+        --banner-heading-color: var(--white);
+        --banner-heading-bold-color: var(--white);
+        --banner-body-content-heading: var(--white);
+        --banner-body-content-heading-bold: var(--white);
+        --banner-body-content: var(--white);
+        --banner-body-content-bold: var(--white);
+      }
+
+      .themeColour--green .bannerTheme--colour {
+        --banner-background-color: var(--green);
+        --banner-heading-color: var(--black);
+        --banner-heading-bold-color: var(--black);
+        --banner-body-content-heading: var(--black);
+        --banner-body-content-heading-bold: var(--black);
+        --banner-body-content: var(--black);
+        --banner-body-content-bold: var(--black);
+      }
+
+      .themeColour--yellow .bannerTheme--colour {
+        --banner-background-color: var(--yellow);
+        --banner-heading-color: var(--black);
+        --banner-heading-bold-color: var(--black);
+        --banner-body-content-heading: var(--black);
+        --banner-body-content-heading-bold: var(--black);
+        --banner-body-content: var(--black);
+        --banner-body-content-bold: var(--black);
+      }
+
+      .themeColour--black .bannerTheme--colour {
+        --banner-background-color: var(--black);
+        --banner-heading-color: var(--white);
+        --banner-heading-bold-color: var(--white);
+        --banner-body-content-heading: var(--whhite);
+        --banner-body-content-heading-bold: var(--white);
+        --banner-body-content: var(--white);
+        --banner-body-content-bold: var(--white);
+      }
+
+      .themeColour--white .bannerTheme--colour {
+        --banner-background-color: var(--white);
+        --banner-heading-color: var(--black);
+        --banner-heading-bold-color: var(--black);
+        --banner-body-content-heading: var(--black);
+        --banner-body-content-heading-bold: var(--black);
+        --banner-body-content: var(--black);
+        --banner-body-content-bold: var(--black);
+      }
+
+      /* Banner Theme Light */
+
+      .bannerTheme--light {
+        --banner-background-color: var(--white);
+        --banner-heading-color: var(--black);
+        --banner-heading-bold-color: var(--black);
+        --banner-body-content-heading: var(--black);
+        --banner-body-content-heading-bold: var(--black);
+        --banner-body-content: var(--black);
+        --banner-body-content-bold: var(--black);
+      }
+      .themeColour--red .bannerTheme--light {
+        --banner-heading-bold-color: var(--red);
+        --banner-body-content-heading-bold: var(--red);
+        --banner-body-content-bold: var(--red);
+      }
+
+      .themeColour--blue .bannerTheme--light {
+        --banner-heading-bold-color: var(--blue);
+        --banner-body-content-heading-bold: var(--blue);
+        --banner-body-content-bold: var(--blue);
+      }
+
+      /* Banner Theme Dark */
+
+      .bannerTheme--dark {
+        --banner-background-color: var(--black);
+        --banner-heading-color: var(--white);
+        --banner-heading-bold-color: var(--white);
+        --banner-body-content-heading: var(--white);
+        --banner-body-content-heading-bold: var(--white);
+        --banner-body-content: var(--white);
+        --banner-body-content-bold: var(--white);
+      }
+
+      .themeColour--red .bannerTheme--dark {
+        --banner-heading-bold-color: var(--red);
+        --banner-body-content-heading-bold: var(--red);
+        --banner-body-content-bold: var(--red);
+      }
+
+      .themeColour--green .bannerTheme--dark {
+        --banner-heading-bold-color: var(--green);
+        --banner-body-content-heading-bold: var(--green);
+        --banner-body-content-bold: var(--green);
+      }
+
+      .themeColour--yellow .bannerTheme--dark {
+        --banner-heading-bold-color: var(--yellow);
+        --banner-body-content-heading-bold: var(--yellow);
+        --banner-body-content-bold: var(--yellow);
+      }
+
+      /* Banner Theme Transparent */
+      .bannerTheme--transparent {
+        --banner-background-color: var(--transparent);
+        --banner-heading-color: var(--white);
+        --banner-heading-bold-color: var(--white);
+        --banner-body-content-heading: var(--white);
+        --banner-body-content-heading-bold: var(--white);
+        --banner-body-content: var(--white);
+        --banner-body-content-bold: var(--white);
+      }
+
+      .themeColour--red .bannerTheme--transparent {
+        --banner-heading-bold-color: var(--red);
+        --banner-body-content-heading-bold: var(--red);
+        --banner-body-content-bold: var(--red);
+      }
+
+      .themeColour--blue .bannerTheme--transparent {
+        --banner-heading-bold-color: var(--blue);
+        --banner-body-content-heading-bold: var(--blue);
+        --banner-body-content-bold: var(--blue);
+      }
+
+
+      .themeColour--green .bannerTheme--transparent {
+        --banner-heading-bold-color: var(--green);
+        --banner-body-content-heading-bold: var(--green);
+        --banner-body-content-bold: var(--green);
+      }
+
+
+      .themeColour--yellow .bannerTheme--transparent {
+        --banner-heading-bold-color: var(--yellow);
+        --banner-body-content-heading-bold: var(--yellow);
+        --banner-body-content-bold: var(--yellow);
+      }
+
+      .themeColour--black .bannerTheme--transparent {
+        --banner-heading-bold-color: var(--black);
+        --banner-body-content-heading-bold: var(--black);
+        --banner-body-content-bold: var(--black);
+      }
+
+
+      /* COVER PAGE HIGHLIGHT BANNER */
+      /* Body Content */
+
+      .themeColour--red {
+        --body-heading-bold-color: var(--red);
+        --body-subheading-bold-color: var(--red);
+        --body-copy-bold-color: var(--red);
+      }
+
+      .themeColour--blue {
+        --body-heading-bold-color: var(--blue);
+        --body-subheading-bold-color: var(--blue);
+        --body-copy-bold-color: var(--blue);
+      }
+
+      .themeColour--green {
+        --body-heading-bold-color: var(--green);
+        --body-subheading-bold-color: var(--green);
+        --body-copy-bold-color: var(--green);
+      }
+
+      .themeColour--yellow  {
+        --body-heading-bold-color: var(--yellow);
+        --body-subheading-bold-color: var(--yellow);
+        --body-copy-bold-color: var(--yellow);
+      }
+
+      .themeColour--black {
+        --body-heading-bold-color: var(--black);
+        --body-subheading-bold-color: var(--black);
+        --body-copy-bold-color: var(--black);
+      }
+
+      .themeColour--white {
+        --body-heading-bold-color: var(--white);
+        --body-subheading-bold-color: var(--white);
+        --body-copy-bold-color: var(--white);
+      }
+
+      /* Footer Banner */
+      /* Banner Theme Colour */
+      .themeColour--red .footerBannerTheme--colour {
+        --footer-banner-background: var(--red);
+        --footer-banner-heading: var(--black);
+        --footer-banner-heading-bold: var(--white);
+        --footer-banner-content: var(--white);
+      }
+
+      .themeColour--blue .footerBannerTheme--colour {
+        --footer-banner-background: var(--blue);
+        --footer-banner-heading: var(--white);
+        --footer-banner-heading-bold: var(--white);
+        --footer-banner-content: var(--white);
+      }
+
+      .themeColour--green .footerBannerTheme--colour {
+        --footer-banner-background: var(--green);
+        --footer-banner-heading: var(--black);
+        --footer-banner-heading-bold: var(--black);
+        --footer-banner-content: var(--black);
+      }
+
+      .themeColour--yellow .footerBannerTheme--colour {
+        --footer-banner-background: var(--yellow);
+        --footer-banner-heading: var(--black);
+        --footer-banner-heading-bold: var(--black);
+        --footer-banner-content: var(--black);
+      }
+
+      .themeColour--black .footerBannerTheme--colour {
+        --footer-banner-background: var(--black);
+        --footer-banner-heading: var(--white);
+        --footer-banner-heading-bold: var(--white);
+        --footer-banner-content: var(--white);
+      }
+
+      .themeColour--white .footerBannerTheme--colour {
+        --footer-banner-background: var(--white);
+        --footer-banner-heading: var(--black);
+        --footer-banner-heading-bold: var(--black);
+        --footer-banner-content: var(--black);
+      }
+
+      /* Footer Banner */
+      /* Banner Light */
+
+      .footerBannerTheme--light {
+        --footer-banner-background: var(--white);
+        --footer-banner-heading: var(--black);
+        --footer-banner-heading-bold: var(--black);
+        --footer-banner-content: var(--black);
+      }
+
+      .themeColour--red .footerBannerTheme--light { --footer-banner-heading-bold: var(--red); }
+      .themeColour--blue .footerBannerTheme--light { --footer-banner-heading-bold: var(--blue); }
+
+      /* Banner Dark */
+      .footerBannerTheme--dark {
+        --footer-banner-background: var(--black);
+        --footer-banner-heading: var(--white);
+        --footer-banner-heading-bold: var(--white);
+        --footer-banner-content: var(--white);
+      }
+
+      .themeColour--red .footerBannerTheme--dark { 
+        --footer-banner-heading-bold: var(--red); 
+      }
+
+      .themeColour--green .footerBannerTheme--dark { 
+        --footer-banner-heading-bold: var(--green); 
+      }
+
+      .themeColour--yellow .footerBannerTheme--dark { 
+        --footer-banner-heading-bold: var(--yellow); 
+      }   
+
+      /*Banner Transparent */
+      /* Banner Dark */
+      .footerBannerTheme--transparent {
+        --footer-banner-background: var(--transparent);
+        --footer-banner-heading: var(--white);
+        --footer-banner-heading-bold: var(--white);
+        --footer-banner-content: var(--white);
+        --border-item-before-background: var(--white);
+      }
+
+      .themeColour--red .footerBannerTheme--transparent { 
+        --footer-banner-heading-bold: var(--red); 
+      }
+
+      .themeColour--blue .footerBannerTheme--transparent { 
+        --footer-banner-heading-bold: var(--blue); 
+      }
+
+      .themeColour--green .footerBannerTheme--transparent { 
+        --footer-banner-heading-bold: var(--green); 
+      }
+
+      .themeColour--yellow .footerBannerTheme--transparent { 
+        --footer-banner-heading-bold: var(--yellow); 
+      }
+
+      .themeColour--black .footerBannerTheme--transparent { 
+        --footer-banner-heading-bold: var(--black); 
+      }
+
+      /* 
+      Input Order
+      {{show-crop}}
+      {{placeholder-opacity}}
+      {{placeholder-image-1}}
+      {{placeholder-toggle-new}}
+      {{placeholder-validation}}
+      {{BA_dark_logo--br}}
+      {{BA_light_logo--br}}
+      {{#collection.BA_cover-page--br}}
+      {{#block.BA_cover-page-block-banner--br}}
+      {{page-theme--br}}
+      {{background-image--br}}
+      {{image-opacity}}
+      {{banner-theme--br}}
+      {{themeColour--br}}
+      {{banner-transparency--br}}
+      {{banner-position--br}}
+      {{cover-heading--br}}
+      {{brochure-highlight--br}}
+      {{/block.BA_cover-page-block-banner--br}}
+      {{#block.BA_cover-page-highlight-banner--br}}
+      {{page-theme--br}}
+      {{background-image--br}}
+      {{image-opacity}}
+      {{cover-heading--br}}
+      {{heading-position--br}}
+      {{banner-theme--br}}
+      {{themeColour--br}}
+      {{#collection.highlights--br}}{{/collection.highlights--br}}
+      {{/block.BA_cover-page-highlight-banner--br}}
+      {{/collection.BA_cover-page--br}}
+      */
+
+      html {
+        font-family: var(--font-archivo);
+        font-size: 11pt;
+        color: var(--white);
+        word-break: break-word;
+      }
+
+      .backgroundImage {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        overflow: hidden;
+      }
+
+      .backgroundImage div {
+        width: auto !important;
+        height: auto !important;
+        right: 0;
+        bottom: 0;
+      }
+
+      /* Helper classes */
+      .u-hide { display: none; }
+
+      /* Helper class for fixing Reposition tool bug */
+      .reposition-fix {
+        position: absolute;
+        overflow: hidden;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;        
+      }
+
+      .reposition-fix div {
+        top: 0 !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+      }
+
+      .fit { display: flex; }      
+      .fit--coverPageHighlightBanner { flex-direction: column; }
+
+      .body {
+        position: relative;
+        display: flex;
+        flex: 1;
+      }
+
+      .body--coverPageBlockBanner {
+        align-items: flex-end;
+        padding-bottom: 1.85rem;
+      }
+
+      .bannerPosition--right  .body--coverPageBlockBanner { justify-content: flex-end; }
+
+      .body--coverPageHighlightBanner {
+        align-items: flex-start;
+        padding: 1.7rem 5.3rem 2.1rem 1.95rem;
+      }
+
+      .headingPosition--center .body--coverPageHighlightBanner { align-items: center; }
+      .headingPosition--bottom .body--coverPageHighlightBanner { align-items: flex-end; }
+
+      .footer {
+        position: relative;
+        height: 3.45rem;
+      }
+
+      .footer--coverPageHighlightBanner { display: flex;}
+
+      .logo__container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0.95rem 0.95rem 0.75rem 0.75rem;
+        background: var(--black);
+      }
+
+      .logo__container--coverPageBlockBanner {
+        position: absolute;
+        top: 0;
+        right: 0;
+      }
+
+      .logo__container--coverPageBlockBanner--coverPageHighlightBanner {         
+        padding-top: 0.75rem;
+        padding-bottom: 0.95rem;
+      }
+
+      .pageTheme--light  .logo__container,
+      .dark-logo-exist .pageTheme--dark  .logo__container { 
+        background: var(--white);
+      }
+
+      .pageTheme--dark .logo__container,
+      .light-logo-exist .pageTheme--light .logo__container {
+        background: var(--black); 
+      }
+
+      .logo {
+        display: none;
+        max-height: 2rem;
+        width: auto;
+        max-width: 5rem;
+      }
+
+      .logo--defaultLight,
+      .logo--defaultDark {
+        width: 2rem;
+      }
+
+      .pageTheme--light .logo--defaultLight,
+      .pageTheme--dark .logo--defaultDark,
+      .dark-logo-exist .pageTheme--dark .logo--dark,
+      .light-logo-exist .pageTheme--light .logo--light {
+        display: block;
+      }
+
+      .dark-logo-exist .logo--defaultDark,
+      .dark-logo-exist .logo--defaultLight,
+      .light-logo-exist .logo--defaultDark,
+      .light-logo-exist .logo--defaultLight {
+        display: none;
+      }
+
+      .banner {
+        position: relative;
+        display: flex;
+        align-items: flex-end;
+        width: 12.35rem;
+        padding: 0.8rem 1.7rem 1rem 1.95rem;
+      }
+
+      .banner__backgroundColor {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: var(--banner-background-color);
+      }
+
+
+      .bannerTheme--colour.bannerTransparency--transparent .banner__backgroundColor { opacity: 0.5; }
+      .bannerTheme--transparent .banner__backgroundColor { opacity: 0; }
+
+      .banner__heading {
+        position: relative;
+        flex: 1;
+        max-height: 3.1rem;
+      }
+
+      .heading--coverPageHighlightBanner {
+        max-height: 7rem;
+      }
+
+      .banner__heading h1,
+      .heading--coverPageHighlightBanner h1 {
+        font-size: 0.92rem;
+        line-height: 1em;
+        font-weight: 700;
+        text-transform: uppercase;
+        margin-bottom: 0.38rem;
+      }      
+
+      .banner__heading h1 { color: var(--banner-heading-color); }
+
+      .banner__heading h1 strong {
+        color: var(--banner-heading-bold-color);
+        font-weight: 700;
+      }
+
+      .heading--coverPageHighlightBanner h1 { color: var(--body-heading-color); }
+      .heading--coverPageHighlightBanner h1 strong { 
+        color: var(--body-heading-bold-color);
+        font-weight: 700;
+      }
+
+      .banner__heading h1:last-child,
+      .heading--coverPageHighlightBanner h1:last-child { 
+        margin-bottom: 0; 
+      }
+
+      .banner__heading h2,
+      .heading--coverPageHighlightBanner h2 {
+        font-size: 0.32rem;
+        line-height: 1.2em;
+        font-family: var(--font-taviraj);        
+        margin-bottom: 0.2rem;
+      }
+
+      .banner__heading h2 { 
+        color: var(--banner-body-content);
+        font-weight: 400;
+      }
+
+      .banner__heading h2 strong {
+        color: var(--banner-body-content-bold);
+        font-weight: 400;
+      }
+
+      .heading--coverPageHighlightBanner h2 { color: var(--body-subheading-color); }
+
+      .heading--coverPageHighlightBanner h2 strong {      
+        color: var(--body-subheading-bold-color);
+        font-weight: 400;
+      }
+
+      .banner__heading h2:last-child,
+      .heading--coverPageHighlightBanner h2:last-child { 
+        margin-bottom: 0; 
+      }
+
+      .banner__highlight {
+        position: relative;
+        margin-bottom: 0.05rem;
+        margin-left: 1.4rem;
+        max-height: 3.1rem;
+        width: 1.784rem;
+        text-align: right;
+      }
+
+      .banner__highlight h3 {
+        font-size: 0.23rem;
+        line-height: 1.2em;
+        font-family: var(--font-archivo-black);
+        color: var(--banner-body-content-heading);
+        text-transform: uppercase;
+        margin-bottom: 0.55rem;
+      }
+
+
+      .banner__highlight h3 strong {
+        color: var(--banner-body-content-heading-bold);
+        font-weight: normal;
+      }
+
+      .banner__highlight h4 {
+        font-size: 0.25rem;
+        line-height: 1.4em;
+        font-family: var(--font-taviraj);
+        color: var(--banner-body-content);
+        margin-bottom: 0.15rem;
+      }
+
+      .banner__highlight h4 strong {
+        color: var(--banner-body-content-bold);
+        font-weight: 400;
+      }
+
+      .banner__highlight h4:last-child,
+      .banner__highlight h3:last-child { 
+        margin-bottom: 0;
+      }
+
+      .banner__highlight p,
+      .footerBanner__item p {
+        font-size: 0.16rem;
+        line-height: 1.3em;
+      }
+
+      .heading--coverPageHighlightBanner h3 {
+        font-size: 0.23rem;
+        line-height: 1.2em;
+        text-transform: uppercase;
+        margin-bottom: 0.55rem;
+      }
+
+      .heading--coverPageHighlightBanner h3 { color: var(--body-copy-color); }
+
+      .footerBanner__item p { color: var(--footer-banner-content); }
+
+      .banner__highlight p { color: var(--banner-body-content); }
+
+      .banner__highlight p strong {
+        color: var(--banner-body-content-bold);
+        font-weight: 400;
+      }
+
+      .heading--coverPageHighlightBanner h3 strong { 
+        color: var(--body-copy-bold-color); 
+        font-weight: 400;
+      }
+
+      .footerBanner {
+        position: relative;
+        display: flex;
+        align-items: flex-start;
+        flex: 1;
+        padding: 0.7rem 0.8rem 0.6rem 1.93rem;
+      }
+
+      .footerBanner__backgroundColor {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;    
+        background: var(--footer-banner-background);
+      }
+
+      .footerBanner__item {
+        position: relative;
+        flex: 1;
+        flex-shrink: 0;
+      }
+
+      .footerBanner__item + .footerBanner__item { margin-left: 0.9rem; }
+
+      .footerBanner__item:before {
+        content: '';
+        position: absolute;
+        right: 110%;
+        width: 0.1rem;
+        height: 100%;
+        border-left: 1pt solid var(--border-item-before-background);
+      }
+
+      .footerBanner__item h3 {
+        font-size: 0.25rem;
+        line-height: 1.2em;
+        font-family: var(--font-taviraj);        
+        margin-bottom: 0.2rem;
+        color: var(--footer-banner-heading);
+      }
+
+      .footerBanner__item h3 strong {
+        color: var(--footer-banner-heading-bold);
+        font-weight: 400;
+      }
+
+      .footerBanner__item h3:last-child { margin-bottom: 0; }
+
+      /* ANY OTHER STYLES THAT NEED MUSTACHE.JS CAPABILITIES */
+    </style>
+  </head>
+  <body style="background: white" 
+        data-crop="{{show-crop}}" 
+        data-reduce-export-font-size-by-percent="0" 
+        data-reduce-firefox-font-size-by-percent="0" 
+        data-prevent-export-overflow="false"
+        class="
+               {{#BA_dark_logo--br}}dark-logo-exist{{/BA_dark_logo--br}}
+               {{#BA_light_logo--br}}light-logo-exist{{/BA_light_logo--br}}             
+               ">
+    <div class="placeholderMaster" data-opacity="{{ placeholder-opacity }}">
+      <div class="placeholderMaster__item" data-bg="{{ placeholder-image-1 }}"></div>
+    </div><!-- end placeholderMaster -->
+
+    {{#collection.BA_cover-page--br}}
+    {{#block.BA_cover-page-block-banner--br}}
+    <div class="page themeColour--{{themeColour--br}}{{^themeColour--br}}red{{/themeColour--br}}">
+
+      <div class="bleed">
+
+        <div class="container fit fit--coverPageBlockBanner
+                    pageTheme--{{page-theme--br}}{{^page-theme--br}}light{{/page-theme--br}}
+                    bannerTheme--{{banner-theme--br}}{{^banner-theme--br}}colour{{/banner-theme--br}}
+                    bannerTransparency--{{banner-transparency--br}}{{^banner-transparency--br}}fullColour{{/banner-transparency--br}}
+                    bannerPosition--{{banner-position--br}}{{^banner-position--br}}left{{/banner-position--br}}
+                    ">
+          <div class="backgroundImage" style="opacity: {{image-opacity}}{{^image-opacity}}1{{/image-opacity}};">
+            <div class="reposition-fix">{{{background-image--br}}}</div><!-- reposition-fix -->
+          </div><!-- backgroundImage -->
+          <div class="logo__container logo__container--coverPageBlockBanner">         
+            <img src="{{{account.logos.BA_Reverse}}}" class="logo logo--defaultDark" />
+            <img src="{{{account.logos.BA_Mono}}}" class="logo logo--defaultLight" />
+            <img src="{{BA_dark_logo--br}}" class="logo logo--dark" />
+            <img src="{{BA_light_logo--br}}" class="logo logo--light" />
+          </div><!-- logo__container -->
+          <div class="body body--coverPageBlockBanner">
+            <div class="banner">
+              <div class="banner__backgroundColor"></div><!-- banner__backgroundColor -->
+              <div class="banner__heading" data-max-height="css">{{{cover-heading--br}}}</div><!-- banner__heading -->
+              {{#brochure-highlight--br}}
+              <div class="banner__highlight" data-max-height="css">{{{brochure-highlight--br}}}</div><!-- banner__highlight -->
+              {{/brochure-highlight--br}}
+            </div><!-- banner -->
+          </div><!-- body -->
+        </div><!--container fit-->
+
+      </div><!--bleed-->
+
+    </div><!--page-->
+    {{/block.BA_cover-page-block-banner--br}}
+    {{#block.BA_cover-page-highlight-banner--br}}
+    <div class="page themeColour--{{themeColour--br}}{{^themeColour--br}}red{{/themeColour--br}}">
+
+      <div class="bleed">
+
+        <div class="container fit fit--coverPageHighlightBanner
+                    pageTheme--{{page-theme--br}}{{^page-theme--br}}light{{/page-theme--br}}
+                    headingPosition--{{heading-position--br}}{{^heading-position--br}}top{{/heading-position--br}}
+                    footerBannerTheme--{{banner-theme--br}}{{^banner-theme--br}}colour{{/banner-theme--br}}
+                    ">
+          <div class="backgroundImage" style="opacity: {{image-opacity}}{{^image-opacity}}1{{/image-opacity}};">
+            <div class="reposition-fix">{{{background-image--br}}}</div><!-- reposition-fix -->
+          </div><!-- backgroundImage -->
+          <div class="body body--coverPageHighlightBanner">
+            <div class="heading heading--coverPageHighlightBanner" data-max-height="css">
+              {{{cover-heading--br}}}
+            </div><!-- heading -->
+          </div><!-- body -->
+          <div class="footer footer--coverPageHighlightBanner">
+            <div class="footerBanner">
+              <div class="footerBanner__backgroundColor"></div><!-- footerBanner__backgroundColor -->
+              {{#collection.highlights--br}}
+              {{#block.brochure-highlight--br}}
+              <div class="footerBanner__item" data-max-height="dynamic">
+                {{{highlight-copy--br}}}
+              </div><!-- footerBanner__item -->
+              {{/block.brochure-highlight--br}}
+              {{/collection.highlights--br}}
+            </div><!-- footerBanner -->
+            <div class="logo__container logo__container--coverPageHighlightBanner">
+              <img src="{{{account.logos.BA_Reverse}}}" class="logo logo--defaultDark" />
+              <img src="{{{account.logos.BA_Mono}}}" class="logo logo--defaultLight" />
+              <img src="{{BA_dark_logo--br}}" class="logo logo--dark" />
+              <img src="{{BA_light_logo--br}}" class="logo logo--light" />
+            </div><!-- logo__container -->
+          </div><!-- footer -->
+        </div><!--container fit-->
+
+      </div><!--bleed-->
+
+    </div><!--page-->
+    {{/block.BA_cover-page-highlight-banner--br}}
+    {{/collection.BA_cover-page--br}}
+
+
+    <script>
+      window.showCrop = {{show-crop}}{{^show-crop}}true{{/show-crop}};
+    </script>
+    <script src="js/main.js"></script>   
+    <script src="js/prefixfree.js"></script>
+    <script src="js/placeholder-controller.js"></script>
+    <script src="js/char-limit.js"></script>
+    <script src="js/check-export-mode.js"></script>
+    <script src="js/max-line-check.js"></script>
+    <script src="js/max-height-check.js"></script>
+    <script src="js/hide-empty-titles.js"></script>
+    <script src="js/custom-rich-text.js"></script>
+    <script src="js/dynamic-inject.js"></script>
+    <script src="js/text-fit-min.js"></script>
+    <script src="js/fontfaceobserver.js"></script>
+    <script src="https://outfit-assets-production.s3-accelerate.amazonaws.com/scripts/textfit.0.0.4.min.js" type="text/javascript"></script>
+    <script>
+      {{ #placeholder-toggle-new }}document.body.classList.add("u-placeholder-{{ placeholder-toggle-new }}{{^placeholder-toggle-new}}hide{{/placeholder-toggle-new}}"); {{ /placeholder-toggle-new }}
+      {{ #placeholder-validation }}document.body.classList.add("placeholder__validation--{{placeholder-validation}}"){{ /placeholder-validation }}
+    </script>
+    <script>
+
+      //console.clear();
+
+      // Tracking text changes and firing text restriction functions (mutationObserver)
+      const overflowObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          maxLineCheck();
+          maxHeightCheck();
+          charLimit();
+          hideEmptyTitles();
+        });
+      });
+
+      const injectObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          injectDynamicContent();
+        });
+      });      
+
+      const injectSources = document.querySelectorAll('[data-target-id]');
+
+      overflowObserver.observe(document.body, {
+        attributes: false,
+        characterData: true,
+        childList: true,
+        subtree: true,
+        attributeOldValue: false,
+        characterDataOldValue: true
+      });
+
+      if ( injectSources.length > 0 ) {
+        injectSources.forEach(src => {
+          injectObserver.observe(src, {
+            attributes: false,
+            characterData: true,
+            childList: true,
+            subtree: true,
+            attributeOldValue: false,
+            characterDataOldValue: true
+          });            
+        });
+      }    
+
+      // Calling text size restriction functions once the fonts are loaded
+      // All external font-families need to be added to 'fonts' array
+      document.addEventListener('DOMContentLoaded', function(event) {
+        const fonts = ['Archivo','Taviraj','Archivo Black'];
+        const fontObservers = [];
+
+        fonts.forEach(font => {
+          const obs = new FontFaceObserver(font);
+          fontObservers.push(obs.load())
+        });
+
+        Promise.all(fontObservers).then(() => {
+          maxLineCheck();
+          maxHeightCheck();
+          injectDynamicContent();
+          hideEmptyTitles();
+
+          document.dispatchEvent(new Event('printready'));
+        });
+      });      
+
+      placeholderController();
+      checkCrop();
+      checkExport();
+      charLimit();
+
+      // TextFit function decreases the font of the selected element to make it fit in single line (if needed, uncomment the code bellow)
+      TextFit.fit({
+        selector: '.textFit'
+      });
+
+
+    </script>
+
+
+  </body>
+</html>
