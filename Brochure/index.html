@@ -474,7 +474,10 @@
         height: 3.45rem;
       }
 
-      .footer--coverPageHighlightBanner { display: flex;}
+      .footer--coverPageHighlightBanner { 
+        display: flex;
+        background: var(--footer-banner-background);
+      }
 
       .logo__container {
         display: flex;
@@ -717,15 +720,6 @@
         align-items: flex-start;
         flex: 1;
         padding: 0.7rem 0.8rem 0.6rem 1.93rem;
-        background: var(--footer-banner-background);
-      }
-
-      .footerBanner__backgroundColor {
-        position: absolute;
-        top: 0;
-        left: 0;
-        bottom: 0;
-        right: 0;    
       }
 
       .footerBanner__item {
@@ -855,7 +849,6 @@
           </div><!-- body -->
           <div class="footer footer--coverPageHighlightBanner js-footer">
             <div class="footerBanner">
-              <div class="footerBanner__backgroundColor"></div><!-- footerBanner__backgroundColor -->
               {{#collection.highlights--br}}
               {{#block.brochure-highlight--br}}
               <div class="footerBanner__item" data-max-height="dynamic">
