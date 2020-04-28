@@ -359,6 +359,7 @@
       {{show-crop}}
       {{placeholder-opacity}}
       {{placeholder-image-1}}
+      {{placeholder-image-2}}
       {{placeholder-toggle-new}}
       {{placeholder-validation}}
       {{BA_dark_logo--br}}
@@ -386,6 +387,12 @@
       {{#collection.highlights--br}}{{/collection.highlights--br}}
       {{/block.BA_cover-page-highlight-banner--br}}
       {{/collection.BA_cover-page--br}}
+      {{#collection.BA_back-page--br}}
+      {{background-color--br}}
+      {{contact-position--br}}
+      {{page-heading--br}}
+      {{contact-details--br}}
+      {{/collection.BA_back-page--br}}
       */
 
       html {
@@ -434,7 +441,9 @@
       }
 
       .fit { display: flex; }      
-      .fit--coverPageHighlightBanner { flex-direction: column; }
+      .fit--coverPageHighlightBanner { flex-direction: column; }    
+      .fitBackgroundColor--black { background: var(--black); }
+      .fitBackgroundColor--white { background: var(--white); }
 
       .body {
         position: relative;
@@ -456,6 +465,9 @@
 
       .headingPosition--center .body--coverPageHighlightBanner { align-items: center; }
       .headingPosition--bottom .body--coverPageHighlightBanner { align-items: flex-end; }
+      .body--backPage { padding: 2.1rem 1.65rem 1.9rem; }
+
+      .contactPosition--bottom .body { align-items: flex-end; }
 
       .footer {
         position: relative;
@@ -468,19 +480,19 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        padding: 0.95rem 0.95rem 0.75rem 0.75rem;
         background: var(--black);
       }
 
-      .logo__container--coverPageBlockBanner {
+      .logo__container--coverPageBlockBanner{
         position: absolute;
         top: 0;
         right: 0;
+        padding: 1.45rem 0.85rem 1.35rem 0.75rem;
       }
 
-      .logo__container--coverPageBlockBanner--coverPageHighlightBanner {         
+      .logo__container--coverPageHighlightBanner {    
+        padding: 0.75rem 0.95rem 0.95rem 0.75rem;
         padding-top: 0.75rem;
-        padding-bottom: 0.95rem;
       }
 
       .pageTheme--light  .logo__container,
@@ -493,12 +505,25 @@
         background: var(--black); 
       }
 
+      .logo__container--backPage { 
+        background: transparent;
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        padding: 0.65rem 0.85rem 0.85rem 0.75rem;
+      }
+
+      .contactPosition--bottom .logo__container--backPage {
+        top: 0.2rem;
+        bottom: unset;
+      }
+
       .logo {
         display: none;
-        max-height: 2rem;
-        width: auto;
-        max-width: 5rem;
+        height: 0.7rem;
       }
+
+      .footer-alt .logo { height: 0.8rem; }
 
       .logo--defaultLight,
       .logo--defaultDark {
@@ -513,10 +538,18 @@
       }
 
       .dark-logo-exist .logo--defaultDark,
-      .dark-logo-exist .logo--defaultLight,
-      .light-logo-exist .logo--defaultDark,
       .light-logo-exist .logo--defaultLight {
         display: none;
+      }
+
+      .logo--backPage {
+        height: auto;
+        width: 2.4rem;
+      }
+
+      .fitBackgroundColor--black .logo--backPage.logo--defaultLight,
+      .fitBackgroundColor--white .logo--backPage.logo--defaultDark {
+        display: block;
       }
 
       .banner {
@@ -684,6 +717,7 @@
         align-items: flex-start;
         flex: 1;
         padding: 0.7rem 0.8rem 0.6rem 1.93rem;
+        background: var(--footer-banner-background);
       }
 
       .footerBanner__backgroundColor {
@@ -692,7 +726,6 @@
         left: 0;
         bottom: 0;
         right: 0;    
-        background: var(--footer-banner-background);
       }
 
       .footerBanner__item {
@@ -702,6 +735,8 @@
       }
 
       .footerBanner__item + .footerBanner__item { margin-left: 0.9rem; }
+
+      .footer-alt .footerBanner__item:nth-child(3) { display: none; }
 
       .footerBanner__item:before {
         content: '';
@@ -727,6 +762,22 @@
 
       .footerBanner__item h3:last-child { margin-bottom: 0; }
 
+      .contact__heading {
+        margin-bottom: 0.21rem;
+        font-size: 0.64rem;
+        font-weight: 700;
+        color: var(--green);
+        text-transform: uppercase;
+      }
+
+      .contact__text {
+        font-size: 0.233rem;
+        line-height: 1.7em;
+        color: var(--white);
+      }
+
+      .fitBackgroundColor--white .contact__text { color: var(--black) }
+
       /* ANY OTHER STYLES THAT NEED MUSTACHE.JS CAPABILITIES */
     </style>
   </head>
@@ -741,10 +792,13 @@
                ">
     <div class="placeholderMaster" data-opacity="{{ placeholder-opacity }}">
       <div class="placeholderMaster__item" data-bg="{{ placeholder-image-1 }}"></div>
+      <div class="placeholderMaster__item" data-bg="{{ placeholder-image-2 }}"></div>
     </div><!-- end placeholderMaster -->
 
+    <!-- COVER PAGE -->
     {{#collection.BA_cover-page--br}}
     {{#block.BA_cover-page-block-banner--br}}
+    <!-- COVER PAGE BLOCK BANNER -->
     <div class="page themeColour--{{themeColour--br}}{{^themeColour--br}}red{{/themeColour--br}}">
 
       <div class="bleed">
@@ -761,8 +815,8 @@
           <div class="logo__container logo__container--coverPageBlockBanner">         
             <img src="{{{account.logos.BA_Reverse}}}" class="logo logo--defaultDark" />
             <img src="{{{account.logos.BA_Mono}}}" class="logo logo--defaultLight" />
-            <img src="{{BA_dark_logo--br}}" class="logo logo--dark" />
-            <img src="{{BA_light_logo--br}}" class="logo logo--light" />
+            <img src="{{BA_dark_logo--br}}" class="logo logo--dark js-logo" />
+            <img src="{{BA_light_logo--br}}" class="logo logo--light js-logo" />
           </div><!-- logo__container -->
           <div class="body body--coverPageBlockBanner">
             <div class="banner">
@@ -778,8 +832,10 @@
       </div><!--bleed-->
 
     </div><!--page-->
+    <!-- COVER PAGE BLOCK BANNER -->
     {{/block.BA_cover-page-block-banner--br}}
     {{#block.BA_cover-page-highlight-banner--br}}
+    <!-- COVER PAGE HIGHLIGHT -->
     <div class="page themeColour--{{themeColour--br}}{{^themeColour--br}}red{{/themeColour--br}}">
 
       <div class="bleed">
@@ -797,7 +853,7 @@
               {{{cover-heading--br}}}
             </div><!-- heading -->
           </div><!-- body -->
-          <div class="footer footer--coverPageHighlightBanner">
+          <div class="footer footer--coverPageHighlightBanner js-footer">
             <div class="footerBanner">
               <div class="footerBanner__backgroundColor"></div><!-- footerBanner__backgroundColor -->
               {{#collection.highlights--br}}
@@ -811,8 +867,8 @@
             <div class="logo__container logo__container--coverPageHighlightBanner">
               <img src="{{{account.logos.BA_Reverse}}}" class="logo logo--defaultDark" />
               <img src="{{{account.logos.BA_Mono}}}" class="logo logo--defaultLight" />
-              <img src="{{BA_dark_logo--br}}" class="logo logo--dark" />
-              <img src="{{BA_light_logo--br}}" class="logo logo--light" />
+              <img src="{{BA_dark_logo--br}}" class="logo logo--dark js-footer-logo" />
+              <img src="{{BA_light_logo--br}}" class="logo logo--light js-footer-logo" />
             </div><!-- logo__container -->
           </div><!-- footer -->
         </div><!--container fit-->
@@ -820,8 +876,43 @@
       </div><!--bleed-->
 
     </div><!--page-->
+    <!-- COVER PAGE HIGHLIGHT -->
     {{/block.BA_cover-page-highlight-banner--br}}
     {{/collection.BA_cover-page--br}}
+    <!-- COVER PAGE -->
+    <!-- BACK PAGE -->
+    {{#collection.BA_back-page--br}}
+    <div class="page">
+
+      <div class="bleed">
+
+        <div class="container 
+                    fit 
+                    fit--backPage
+                    fitBackgroundColor--{{background-color--br}}{{^background-color--br}}black{{/background-color--br}}
+                    contactPosition--{{contact-position--br}}{{^contact-position--br}}top{{/contact-position--br}}
+                    ">
+          <div class="body body--backPage">
+            <div class="contact">
+              {{#page-heading--br}}
+              <div class="contact__heading" data-max-line="1">{{{page-heading--br}}}</div><!-- contact__heading -->
+              {{/page-heading--br}}
+              {{#contact-details--br}}
+              <div class="contact__text" data-max-line="6">{{{contact-details--br}}}</div><!-- contact__text -->
+              {{/contact-details--br}}
+            </div><!-- contact -->
+          </div> <!-- body -->
+          <div class="logo__container logo__container--backPage">
+            <img src="https://files.outfit.io/media_library_items/157158/NSWBC_Wordmark_NSW_Stack_Black_RGB.svg" class="logo logo--defaultDark logo--backPage " />
+            <img src="https://files.outfit.io/media_library_items/157159/NSWBC_Wordmark_NSW_Stack_White_RGB.svg" class="logo logo--defaultLight logo--backPage" />
+          </div><!-- logo__container -->
+        </div><!--container fit-->
+
+      </div><!--bleed-->
+
+    </div><!--page-->
+    {{/collection.BA_back-page--br}}
+    <!-- BACK PAGE -->
 
 
     <script>
@@ -919,6 +1010,26 @@
         selector: '.textFit'
       });
 
+      function footerController() {
+        const footer = document.querySelector('.js-footer');
+        const logos = document.querySelectorAll('.js-footer-logo')    
+        logos.forEach(logo => {
+          const logoStyles = window.getComputedStyle(logo);
+          if (logoStyles.getPropertyValue('display') === 'none') return;
+
+          const logoWidth = logo.offsetWidth;
+          const logoHeight = logo.offsetHeight;          
+
+          if (logoHeight * 4 >= logoWidth) footer.classList.add('footer-alt');
+
+          logo.onload = () => {
+            footerController()
+            maxHeightCheck();
+          };
+        })
+      }
+
+      footerController();
 
     </script>
 
