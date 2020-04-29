@@ -47,6 +47,9 @@
         --footer-banner-heading-bold: var(--white);
         --footer-banner-content: var(--black);
         --border-item-before-background: transparent;
+
+        /* Back Page */
+        --contact-heading-color: var(--red);
       }
 
       /* COVER PAGE BLOCK BANNER */
@@ -354,12 +357,25 @@
         --footer-banner-heading-bold: var(--black); 
       }
 
+      /*Back Page */
+
+      /* COVER PAGE BLOCK BANNER */
+      /* Banner Theme Colour */
+      .themeColour--red { --contact-heading-color: var(--red); }
+      .themeColour--blue { --contact-heading-color: var(--blue); }
+      .themeColour--green { --contact-heading-color: var(--green); }
+      .themeColour--yellow { --contact-heading-color: var(--yellow); }
+      .themeColour--black { --contact-heading-color: var(--black); }
+      .themeColour--white { --contact-heading-color: var(--white); }
+
+
       /* 
       Input Order
       {{show-crop}}
       {{placeholder-opacity}}
       {{placeholder-image-1}}
       {{placeholder-image-2}}
+      {{placeholder-image-3}}
       {{placeholder-toggle-new}}
       {{placeholder-validation}}
       {{BA_dark_logo--br}}
@@ -387,6 +403,14 @@
       {{#collection.highlights--br}}{{/collection.highlights--br}}
       {{/block.BA_cover-page-highlight-banner--br}}
       {{/collection.BA_cover-page--br}}
+      {{#collection.BA_content-page--br}}
+      {{#block.BA_one-column--br}}
+      {{background-color--br}}
+      {{page-heading--br}}
+      {{#spreadsheet.table-of-contents--br}}
+      {{/spreadsheet.table-of-contents--br}}
+      {{/block.BA_one-column--br}}
+      {{/collection.BA_content-page--br}}
       {{#collection.BA_back-page--br}}
       {{background-color--br}}
       {{contact-position--br}}
@@ -445,6 +469,20 @@
       .fitBackgroundColor--black { background: var(--black); }
       .fitBackgroundColor--white { background: var(--white); }
 
+      .fit--contentOneColumn,
+      .fit--contentTwoColumn { 
+        flex-direction: column;
+        padding: 0.85rem 0.85rem 0.85rem 1.6rem;
+      }
+
+      .fit--contentTwoColumn { padding-top: 1.65rem; }
+
+      .header--contentOneColumn {
+        display: flex;
+        justify-content: flex-end;
+        margin-bottom: 2.85rem;
+      }
+
       .body {
         position: relative;
         display: flex;
@@ -463,6 +501,16 @@
         padding: 1.7rem 5.3rem 2.1rem 1.95rem;
       }
 
+      .body--contentOneColumn { 
+        display: block;
+        padding-right: 4.45rem;
+      }
+
+      .body--contentTwoColumn { display: block; }
+
+      .fitBackgroundColor--white .body--contentOneColumn,
+      .fitBackgroundColor--white .body--contentTwoColumn { color: var(--black); } 
+
       .headingPosition--center .body--coverPageHighlightBanner { align-items: center; }
       .headingPosition--bottom .body--coverPageHighlightBanner { align-items: flex-end; }
       .body--backPage { padding: 2.1rem 1.65rem 1.9rem; }
@@ -477,6 +525,12 @@
       .footer--coverPageHighlightBanner { 
         display: flex;
         background: var(--footer-banner-background);
+      }
+
+      .footer--contentTwoColumn {
+        height: auto;
+        display: flex;
+        justify-content: flex-end;
       }
 
       .logo__container {
@@ -521,6 +575,12 @@
         bottom: unset;
       }
 
+      .logo__container--contentOneColumn,
+      .logo__container--contentTwoColumn {
+        background: transparent;
+      }
+
+
       .logo {
         display: none;
         height: 0.7rem;
@@ -545,13 +605,19 @@
         display: none;
       }
 
-      .logo--backPage {
+      .logo--backPage,
+      .logo--contentOneColumn,
+      .logo--contentTwoColumn {
         height: auto;
         width: 2.4rem;
       }
 
       .fitBackgroundColor--black .logo--backPage.logo--defaultLight,
-      .fitBackgroundColor--white .logo--backPage.logo--defaultDark {
+      .fitBackgroundColor--white .logo--backPage.logo--defaultDark,
+      .fitBackgroundColor--black .logo--contentOneColumn.logo--defaultLight,
+      .fitBackgroundColor--white .logo--contentOneColumn.logo--defaultDark,
+      .fitBackgroundColor--black .logo--contentTwoColumn.logo--defaultLight,
+      .fitBackgroundColor--white .logo--contentTwoColumn.logo--defaultDark {
         display: block;
       }
 
@@ -714,6 +780,17 @@
         font-weight: 400;
       }
 
+      .heading--contentOneColumn,
+      .heading--contentTwoColumn {
+        font-size: 0.73rem;
+        line-height: 1.2em;
+        font-weight: 700;
+        text-transform: uppercase;
+      }
+
+      .heading--contentOneColumn { margin-bottom: 3.2rem; }
+      .heading--contentTwoColumn { margin-bottom: 0.95rem; }
+
       .footerBanner {
         position: relative;
         display: flex;
@@ -760,7 +837,7 @@
         margin-bottom: 0.21rem;
         font-size: 0.64rem;
         font-weight: 700;
-        color: var(--green);
+        color: var(--contact-heading-color);
         text-transform: uppercase;
       }
 
@@ -770,7 +847,44 @@
         color: var(--white);
       }
 
-      .fitBackgroundColor--white .contact__text { color: var(--black) }
+      .fitBackgroundColor--white .contact__text { color: var(--black) } 
+
+      .table {
+        margin-left: 0.05rem;
+        font-size: 0.325rem;
+        line-height: 1.2em;
+      }
+
+      .table--contentOneColumn { font-weight: 700; }
+
+      .table__row {
+        margin-bottom: 0.36rem;
+        display: flex;
+      }
+
+      .table__row--contentTwoColumn {
+        font-size: 0.23rem;
+      }
+
+      .table__row--contentTwoColumn:first-child {
+        font-size: 0.28rem;
+        color: var(--red);
+      }
+
+      .table__row:last-child { margin-bottom: 0; }
+
+      .table__item--primary { width: 2.15rem; }
+      .table__item--contentTwoColumn.table__item--primary { width: 1.35rem; }
+
+      .table__item--secondary { flex: 1; }
+
+      .table__item--tertiary { width: 1.2rem; }
+
+      .column__container { display: flex; }
+
+      .column { flex: 1; }
+      .column + .column { margin-left: 0.8rem; }
+
 
       /* ANY OTHER STYLES THAT NEED MUSTACHE.JS CAPABILITIES */
     </style>
@@ -787,13 +901,14 @@
     <div class="placeholderMaster" data-opacity="{{ placeholder-opacity }}">
       <div class="placeholderMaster__item" data-bg="{{ placeholder-image-1 }}"></div>
       <div class="placeholderMaster__item" data-bg="{{ placeholder-image-2 }}"></div>
+      <div class="placeholderMaster__item" data-bg="{{ placeholder-image-3 }}"></div>
     </div><!-- end placeholderMaster -->
 
     <!-- COVER PAGE -->
     {{#collection.BA_cover-page--br}}
     {{#block.BA_cover-page-block-banner--br}}
     <!-- COVER PAGE BLOCK BANNER -->
-    <div class="page themeColour--{{themeColour--br}}{{^themeColour--br}}red{{/themeColour--br}}">
+    <div class="page themeColour--{{themeColour--br}}{{^themeColour--br}}red{{/themeColour--br}} js-cover-page">
 
       <div class="bleed">
 
@@ -830,7 +945,7 @@
     {{/block.BA_cover-page-block-banner--br}}
     {{#block.BA_cover-page-highlight-banner--br}}
     <!-- COVER PAGE HIGHLIGHT -->
-    <div class="page themeColour--{{themeColour--br}}{{^themeColour--br}}red{{/themeColour--br}}">
+    <div class="page themeColour--{{themeColour--br}}{{^themeColour--br}}red{{/themeColour--br}} js-cover-page">
 
       <div class="bleed">
 
@@ -873,9 +988,103 @@
     {{/block.BA_cover-page-highlight-banner--br}}
     {{/collection.BA_cover-page--br}}
     <!-- COVER PAGE -->
+    <!-- CONTENT PAGE -->
+    {{#collection.BA_content-page--br}}
+    {{#block.BA_one-column--br}}
+    <!-- ONE COLUMN PAGE -->
+    <div class="page">
+
+      <div class="bleed">
+
+        <div class="container 
+                    fit 
+                    fit--contentOneColumn
+                    fitBackgroundColor--{{background-color--br}}{{^background-color--br}}black{{/background-color--br}}
+                    ">
+          <div class="header header--contentOneColumn">
+            <div class="logo__container logo__container--contentOneColumn">
+              <img src="https://files.outfit.io/media_library_items/157158/NSWBC_Wordmark_NSW_Stack_Black_RGB.svg" class="logo logo--defaultDark logo--contentOneColumn " />
+              <img src="https://files.outfit.io/media_library_items/157159/NSWBC_Wordmark_NSW_Stack_White_RGB.svg" class="logo logo--defaultLight logo--contentOneColumn" />
+            </div><!-- logo__container -->
+          </div><!-- header -->
+          <div class="body body--contentOneColumn">
+            <div class="body__inner" data-max-height="dynamic">
+              {{#page-heading--br}}
+              <div class="heading heading--contenColumn">{{{page-heading--br}}}</div><!-- heading -->
+              {{/page-heading--br}}
+              <div class="table">
+                {{#spreadsheet.table-of-contents--br}}
+                <div class="table__row">
+                  <div class="table__item table__item--primary">{{column-1}}</div><!-- table__item -->
+                  <div class="table__item table__item--secondary">{{column-2}}</div><!-- table__item -->
+                </div><!-- table__row -->
+                {{/spreadsheet.table-of-contents--br}}
+              </div><!-- table -->
+            </div><!-- body__inner -->
+          </div><!-- body -->
+        </div><!--container fit-->
+
+      </div><!--bleed-->
+
+    </div><!--page-->
+    <!-- ONE COLUMN PAGE -->
+    {{/block.BA_one-column--br}}
+    {{#block.BA_two-column--br}}
+    <!-- TWO COLUMN PAGE -->
+    <div class="page">
+
+      <div class="bleed">
+
+        <div class="container fit
+                    fit--contentTwoColumn
+                    fitBackgroundColor--{{background-color--br}}{{^background-color--br}}black{{/background-color--br}}
+                    ">
+          <div class="body body--contentTwoColumn">
+            <div class="body__inner" data-max-height="dynamic">
+              {{#page-heading--br}}
+              <div class="heading heading--contentTwoColumn">{{{page-heading--br}}}</div><!-- heading -->
+              {{/page-heading--br}}
+              <div class="column__container">
+                {{#collection.columns--br}}
+                {{#block.column--br}}
+                <div class="column">
+                  {{#collection.chapters--br}}
+                  {{#block.chapter--br}}
+                  <div class="table table--contentTwoColumn">
+                    {{#spreadsheet.chapter-contents--br}}
+                    <div class="table__row table__row--contentTwoColumn">
+                      <div class="table__item table__item--primary table__item--contentTwoColumn">{{column-1}}</div><!-- table__item -->
+                      <div class="table__item table__item--secondary table__item--contentTwoColumn">{{column-2}}</div><!-- table__item -->
+                      <div class="table__item table__item--tertiary table__item--contentTwoColumn">{{column-3}}</div><!-- table__item -->
+                    </div><!-- table__row -->
+                    {{/spreadsheet.chapter-contents--br}}
+                  </div><!-- table -->
+                  {{/block.chapter--br}}
+                  {{/collection.chapters--br}}
+                </div><!-- column -->
+                {{/block.column--br}}
+                {{/collection.columns--br}}
+              </div><!-- column__container -->
+            </div><!-- body__inner -->
+          </div><!-- body -->
+          <div class="footer footer--contentTwoColumn">
+            <div class="logo__container logo__container--contentTwoColumn">
+              <img src="https://files.outfit.io/media_library_items/157158/NSWBC_Wordmark_NSW_Stack_Black_RGB.svg" class="logo logo--defaultDark logo--contentTwoColumn " />
+              <img src="https://files.outfit.io/media_library_items/157159/NSWBC_Wordmark_NSW_Stack_White_RGB.svg" class="logo logo--defaultLight logo--contentTwoColumn" />
+            </div><!-- logo__container -->
+          </div><!-- footer -->
+        </div><!--container fit-->
+
+      </div><!--bleed-->
+
+    </div><!--page-->
+    <!-- TWO COLUMN PAGE -->
+    {{/block.BA_two-column--br}}
+    {{/collection.BA_content-page--br}}
+    <!-- CONTENT PAGE -->
     <!-- BACK PAGE -->
     {{#collection.BA_back-page--br}}
-    <div class="page">
+    <div class="page js-back-page">
 
       <div class="bleed">
 
@@ -1023,6 +1232,17 @@
       }
 
       footerController();
+
+      function backPageHeadingColorController() {
+        const coverPages = document.querySelectorAll('.js-cover-page');
+        const backPage = document.querySelector('.js-back-page')
+
+        if(!backPage || !coverPages)  return;
+        const coverPageClass = coverPages[0].classList[1];
+        backPage.classList.add(coverPageClass);
+      }
+
+      backPageHeadingColorController();
 
     </script>
 
