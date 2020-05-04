@@ -49,7 +49,7 @@
         --border-item-before-background: transparent;
 
         /* Back Page */
-        --contact-heading-color: var(--red);
+        --dynamic-color: var(--red);
       }
 
       /* COVER PAGE BLOCK BANNER */
@@ -361,13 +361,12 @@
 
       /* COVER PAGE BLOCK BANNER */
       /* Banner Theme Colour */
-      .themeColour--red { --contact-heading-color: var(--red); }
-      .themeColour--blue { --contact-heading-color: var(--blue); }
-      .themeColour--green { --contact-heading-color: var(--green); }
-      .themeColour--yellow { --contact-heading-color: var(--yellow); }
-      .themeColour--black { --contact-heading-color: var(--black); }
-      .themeColour--white { --contact-heading-color: var(--white); }
-
+      .dynamicColor--red { --dynamic-color: var(--red); }
+      .dynamicColor--blue { --dynamic-color: var(--blue); }
+      .dynamicColor--green { --dynamic-color: var(--green); }
+      .dynamicColor--yellow { --dynamic-color: var(--yellow); }
+      .dynamicColor--black { --dynamic-color: var(--black); }
+      .dynamicColor--white { --dynamic-color: var(--white); }
 
       /* 
       Input Order
@@ -789,7 +788,9 @@
       }
 
       .heading--contentOneColumn { margin-bottom: 3.2rem; }
-      .heading--contentTwoColumn { margin-bottom: 0.95rem; }
+      .heading--contentTwoColumn { margin-bottom: 0.93rem; }
+      
+      .heading--contentOneColumn strong { color: var(--dynamic-color); }
 
       .footerBanner {
         position: relative;
@@ -837,7 +838,7 @@
         margin-bottom: 0.21rem;
         font-size: 0.64rem;
         font-weight: 700;
-        color: var(--contact-heading-color);
+        color: var(--dynamic-color);
         text-transform: uppercase;
       }
 
@@ -856,6 +857,7 @@
       }
 
       .table--contentOneColumn { font-weight: 700; }
+      .table--contentTwoColumn { margin-bottom: 0.85rem; }
 
       .table__row {
         margin-bottom: 0.36rem;
@@ -863,12 +865,19 @@
       }
 
       .table__row--contentTwoColumn {
+        margin-bottom: 0.14rem;
         font-size: 0.23rem;
       }
 
       .table__row--contentTwoColumn:first-child {
+        margin-bottom: 0.4rem;
         font-size: 0.28rem;
-        color: var(--red);
+        font-weight: 700;
+      }
+
+      .table__row--contentTwoColumn:first-child .table__item--secondary,
+      .table__row--contentTwoColumn:first-child .table__item--tertiary {
+        color: var(--dynamic-color);
       }
 
       .table__row:last-child { margin-bottom: 0; }
@@ -896,7 +905,15 @@
         data-prevent-export-overflow="false"
         class="
                {{#BA_dark_logo--br}}dark-logo-exist{{/BA_dark_logo--br}}
-               {{#BA_light_logo--br}}light-logo-exist{{/BA_light_logo--br}}             
+               {{#BA_light_logo--br}}light-logo-exist{{/BA_light_logo--br}}    
+               {{#collection.BA_cover-page--br}}
+               {{#block.BA_cover-page-block-banner--br}}
+               dynamicColor--{{themeColour--br}}
+               {{/block.BA_cover-page-block-banner--br}}
+               {{#block.BA_cover-page-highlight-banner--br}}
+               dynamicColor--{{themeColour--br}}
+               {{/block.BA_cover-page-highlight-banner--br}}
+               {{/collection.BA_cover-page--br}}
                ">
     <div class="placeholderMaster" data-opacity="{{ placeholder-opacity }}">
       <div class="placeholderMaster__item" data-bg="{{ placeholder-image-1 }}"></div>
@@ -908,7 +925,7 @@
     {{#collection.BA_cover-page--br}}
     {{#block.BA_cover-page-block-banner--br}}
     <!-- COVER PAGE BLOCK BANNER -->
-    <div class="page themeColour--{{themeColour--br}}{{^themeColour--br}}red{{/themeColour--br}} js-cover-page">
+    <div class="page themeColour--{{themeColour--br}}{{^themeColour--br}}red{{/themeColour--br}}">
 
       <div class="bleed">
 
@@ -945,7 +962,7 @@
     {{/block.BA_cover-page-block-banner--br}}
     {{#block.BA_cover-page-highlight-banner--br}}
     <!-- COVER PAGE HIGHLIGHT -->
-    <div class="page themeColour--{{themeColour--br}}{{^themeColour--br}}red{{/themeColour--br}} js-cover-page">
+    <div class="page themeColour--{{themeColour--br}}{{^themeColour--br}}red{{/themeColour--br}} ">
 
       <div class="bleed">
 
@@ -1010,7 +1027,7 @@
           <div class="body body--contentOneColumn">
             <div class="body__inner" data-max-height="dynamic">
               {{#page-heading--br}}
-              <div class="heading heading--contenColumn">{{{page-heading--br}}}</div><!-- heading -->
+              <div class="heading heading--contentOneColumn">{{{page-heading--br}}}</div><!-- heading -->
               {{/page-heading--br}}
               <div class="table">
                 {{#spreadsheet.table-of-contents--br}}
@@ -1084,7 +1101,7 @@
     <!-- CONTENT PAGE -->
     <!-- BACK PAGE -->
     {{#collection.BA_back-page--br}}
-    <div class="page js-back-page">
+    <div class="page">
 
       <div class="bleed">
 
@@ -1232,17 +1249,6 @@
       }
 
       footerController();
-
-      function backPageHeadingColorController() {
-        const coverPages = document.querySelectorAll('.js-cover-page');
-        const backPage = document.querySelector('.js-back-page')
-
-        if(!backPage || !coverPages)  return;
-        const coverPageClass = coverPages[0].classList[1];
-        backPage.classList.add(coverPageClass);
-      }
-
-      backPageHeadingColorController();
 
     </script>
 
