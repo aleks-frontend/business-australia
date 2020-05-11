@@ -315,17 +315,9 @@
         --footer-banner-content: var(--white);
       }
 
-      .themeColour--red .footerBannerTheme--dark { 
-        --footer-banner-heading-bold: var(--red); 
-      }
-
-      .themeColour--green .footerBannerTheme--dark { 
-        --footer-banner-heading-bold: var(--green); 
-      }
-
-      .themeColour--yellow .footerBannerTheme--dark { 
-        --footer-banner-heading-bold: var(--yellow); 
-      }   
+      .themeColour--red .footerBannerTheme--dark { --footer-banner-heading-bold: var(--red); }
+      .themeColour--green .footerBannerTheme--dark { --footer-banner-heading-bold: var(--green);  }
+      .themeColour--yellow .footerBannerTheme--dark {  --footer-banner-heading-bold: var(--yellow);  }   
 
       /*Banner Transparent */
       /* Banner Dark */
@@ -337,36 +329,22 @@
         --border-item-before-background: var(--white);
       }
 
-      .themeColour--red .footerBannerTheme--transparent { 
-        --footer-banner-heading-bold: var(--red); 
-      }
-
-      .themeColour--blue .footerBannerTheme--transparent { 
-        --footer-banner-heading-bold: var(--blue); 
-      }
-
-      .themeColour--green .footerBannerTheme--transparent { 
-        --footer-banner-heading-bold: var(--green); 
-      }
-
-      .themeColour--yellow .footerBannerTheme--transparent { 
-        --footer-banner-heading-bold: var(--yellow); 
-      }
-
-      .themeColour--black .footerBannerTheme--transparent { 
-        --footer-banner-heading-bold: var(--black); 
-      }
+      .themeColour--red .footerBannerTheme--transparent { --footer-banner-heading-bold: var(--red); }
+      .themeColour--blue .footerBannerTheme--transparent { --footer-banner-heading-bold: var(--blue); }
+      .themeColour--green .footerBannerTheme--transparent { --footer-banner-heading-bold: var(--green); }
+      .themeColour--yellow .footerBannerTheme--transparent { --footer-banner-heading-bold: var(--yellow); }
+      .themeColour--black .footerBannerTheme--transparent { --footer-banner-heading-bold: var(--black);  }
 
       /*Back Page */
 
       /* COVER PAGE BLOCK BANNER */
       /* Banner Theme Colour */
-      .dynamicColor--red { --dynamic-color: var(--red); }
-      .dynamicColor--blue { --dynamic-color: var(--blue); }
-      .dynamicColor--green { --dynamic-color: var(--green); }
-      .dynamicColor--yellow { --dynamic-color: var(--yellow); }
-      .dynamicColor--black { --dynamic-color: var(--black); }
-      .dynamicColor--white { --dynamic-color: var(--white); }
+      .themeColour--red { --dynamic-color: var(--red); }
+      .themeColour--blue { --dynamic-color: var(--blue); }
+      .themeColour--green { --dynamic-color: var(--green); }
+      .themeColour--yellow { --dynamic-color: var(--yellow); }
+      .themeColour--black { --dynamic-color: var(--black); }
+      .themeColour--white { --dynamic-color: var(--white); }
 
       /* 
       Input Order
@@ -377,13 +355,14 @@
       {{placeholder-image-3}}
       {{placeholder-toggle-new}}
       {{placeholder-validation}}
+      {{BA_themeColour--br}}
+      {{BA_document-title--br}} -- this input isnt added to pages yet
       {{BA_dark_logo--br}}
       {{BA_light_logo--br}}
       {{#collection.BA_cover-page--br}}
       {{#block.BA_cover-page-block-banner--br}}
       {{page-theme--br}}
       {{background-image--br}}
-      {{image-opacity}}
       {{banner-theme--br}}
       {{themeColour--br}}
       {{banner-transparency--br}}
@@ -394,7 +373,6 @@
       {{#block.BA_cover-page-highlight-banner--br}}
       {{page-theme--br}}
       {{background-image--br}}
-      {{image-opacity}}
       {{cover-heading--br}}
       {{heading-position--br}}
       {{banner-theme--br}}
@@ -500,19 +478,19 @@
         padding: 1.7rem 5.3rem 2.1rem 1.95rem;
       }
 
-      .body--contentOneColumn { 
-        display: block;
-        padding-right: 4.45rem;
-      }
+      .body--contentOneColumn { display: block; }
 
-      .body--contentTwoColumn { display: block; }
+      .body--contentTwoColumn { 
+        display: block;
+        margin-bottom: 0.5rem;
+      }
 
       .fitBackgroundColor--white .body--contentOneColumn,
       .fitBackgroundColor--white .body--contentTwoColumn { color: var(--black); } 
 
       .headingPosition--center .body--coverPageHighlightBanner { align-items: center; }
       .headingPosition--bottom .body--coverPageHighlightBanner { align-items: flex-end; }
-      .body--backPage { padding: 2.1rem 1.65rem 1.9rem; }
+      .body--backPage { padding: 2.1rem 1.5rem 1.9rem; }
 
       .contactPosition--bottom .body { align-items: flex-end; }
 
@@ -546,10 +524,7 @@
         padding: 1.45rem 0.85rem 1.35rem 0.75rem;
       }
 
-      .logo__container--coverPageHighlightBanner {    
-        padding: 0.75rem 0.95rem 0.95rem 0.75rem;
-        padding-top: 0.75rem;
-      }
+      .logo__container--coverPageHighlightBanner { padding: 0.75rem 0.65rem 0.95rem 0.45rem; }
 
       .pageTheme--light  .logo__container,
       .dark-logo-exist .pageTheme--dark  .logo__container { 
@@ -582,14 +557,7 @@
 
       .logo {
         display: none;
-        height: 0.7rem;
-      }
-
-      .footer-alt .logo { height: 0.8rem; }
-
-      .logo--defaultLight,
-      .logo--defaultDark {
-        width: 2rem;
+        width: 2.6rem;
       }
 
       .pageTheme--light .logo--defaultLight,
@@ -607,7 +575,6 @@
       .logo--backPage,
       .logo--contentOneColumn,
       .logo--contentTwoColumn {
-        height: auto;
         width: 2.4rem;
       }
 
@@ -758,6 +725,7 @@
 
       .heading--coverPageHighlightBanner h3 {
         font-size: 0.23rem;
+        font-weight: 700;
         line-height: 1.2em;
         text-transform: uppercase;
         margin-bottom: 0.55rem;
@@ -774,10 +742,7 @@
         font-weight: 400;
       }
 
-      .heading--coverPageHighlightBanner h3 strong { 
-        color: var(--body-copy-bold-color); 
-        font-weight: 400;
-      }
+      .heading--coverPageHighlightBanner h3 strong { color: var(--body-copy-bold-color); }
 
       .heading--contentOneColumn,
       .heading--contentTwoColumn {
@@ -789,7 +754,7 @@
 
       .heading--contentOneColumn { margin-bottom: 3.2rem; }
       .heading--contentTwoColumn { margin-bottom: 0.93rem; }
-      
+
       .heading--contentOneColumn strong { color: var(--dynamic-color); }
 
       .footerBanner {
@@ -805,6 +770,8 @@
         flex: 1;
         flex-shrink: 0;
       }
+
+      .footerBannerTheme--transparent .footerBanner { padding-left: 2.35rem; }
 
       .footerBanner__item + .footerBanner__item { margin-left: 0.9rem; }
 
@@ -887,13 +854,17 @@
 
       .table__item--secondary { flex: 1; }
 
-      .table__item--tertiary { width: 1.2rem; }
+      .table__item--tertiary { 
+        margin-left: 0.3rem;
+        width: 1.2rem; 
+      }
 
       .column__container { display: flex; }
 
       .column { flex: 1; }
       .column + .column { margin-left: 0.8rem; }
 
+      .masterContainer { display: none; }
 
       /* ANY OTHER STYLES THAT NEED MUSTACHE.JS CAPABILITIES */
     </style>
@@ -906,26 +877,23 @@
         class="
                {{#BA_dark_logo--br}}dark-logo-exist{{/BA_dark_logo--br}}
                {{#BA_light_logo--br}}light-logo-exist{{/BA_light_logo--br}}    
-               {{#collection.BA_cover-page--br}}
-               {{#block.BA_cover-page-block-banner--br}}
-               dynamicColor--{{themeColour--br}}
-               {{/block.BA_cover-page-block-banner--br}}
-               {{#block.BA_cover-page-highlight-banner--br}}
-               dynamicColor--{{themeColour--br}}
-               {{/block.BA_cover-page-highlight-banner--br}}
-               {{/collection.BA_cover-page--br}}
+               themeColour--{{BA_themeColour--br}}{{^BA_themeColour--br}}red{{/BA_themeColour--br}}
                ">
     <div class="placeholderMaster" data-opacity="{{ placeholder-opacity }}">
       <div class="placeholderMaster__item" data-bg="{{ placeholder-image-1 }}"></div>
       <div class="placeholderMaster__item" data-bg="{{ placeholder-image-2 }}"></div>
       <div class="placeholderMaster__item" data-bg="{{ placeholder-image-3 }}"></div>
     </div><!-- end placeholderMaster -->
+    <div class="masterContainer">
+      <div class="js-inject-src" data-target-id="dark-logo" data-is-image="true">{{{ BA_dark_logo--br }}}</div>
+      <div class="js-inject-src" data-target-id="light-logo" data-is-image="true">{{{ BA_light_logo--br }}}</div>
+    </div><!-- masterContainer -->
 
     <!-- COVER PAGE -->
     {{#collection.BA_cover-page--br}}
     {{#block.BA_cover-page-block-banner--br}}
     <!-- COVER PAGE BLOCK BANNER -->
-    <div class="page themeColour--{{themeColour--br}}{{^themeColour--br}}red{{/themeColour--br}}">
+    <div class="page ">
 
       <div class="bleed">
 
@@ -935,14 +903,14 @@
                     bannerTransparency--{{banner-transparency--br}}{{^banner-transparency--br}}fullColour{{/banner-transparency--br}}
                     bannerPosition--{{banner-position--br}}{{^banner-position--br}}left{{/banner-position--br}}
                     ">
-          <div class="backgroundImage" style="opacity: {{image-opacity}}{{^image-opacity}}1{{/image-opacity}};">
+          <div class="backgroundImage">
             <div class="reposition-fix">{{{background-image--br}}}</div><!-- reposition-fix -->
           </div><!-- backgroundImage -->
           <div class="logo__container logo__container--coverPageBlockBanner">         
             <img src="{{{account.logos.BA_Reverse}}}" class="logo logo--defaultDark" />
             <img src="{{{account.logos.BA_Mono}}}" class="logo logo--defaultLight" />
-            <img src="{{BA_dark_logo--br}}" class="logo logo--dark js-logo" />
-            <img src="{{BA_light_logo--br}}" class="logo logo--light js-logo" />
+            <img src="#" class="logo logo--dark" data-target="dark-logo"/>
+            <img src="#" class="logo logo--light" data-target="light-logo"/>
           </div><!-- logo__container -->
           <div class="body body--coverPageBlockBanner">
             <div class="banner">
@@ -962,7 +930,7 @@
     {{/block.BA_cover-page-block-banner--br}}
     {{#block.BA_cover-page-highlight-banner--br}}
     <!-- COVER PAGE HIGHLIGHT -->
-    <div class="page themeColour--{{themeColour--br}}{{^themeColour--br}}red{{/themeColour--br}} ">
+    <div class="page">
 
       <div class="bleed">
 
@@ -971,7 +939,7 @@
                     headingPosition--{{heading-position--br}}{{^heading-position--br}}top{{/heading-position--br}}
                     footerBannerTheme--{{banner-theme--br}}{{^banner-theme--br}}colour{{/banner-theme--br}}
                     ">
-          <div class="backgroundImage" style="opacity: {{image-opacity}}{{^image-opacity}}1{{/image-opacity}};">
+          <div class="backgroundImage">
             <div class="reposition-fix">{{{background-image--br}}}</div><!-- reposition-fix -->
           </div><!-- backgroundImage -->
           <div class="body body--coverPageHighlightBanner">
@@ -979,7 +947,7 @@
               {{{cover-heading--br}}}
             </div><!-- heading -->
           </div><!-- body -->
-          <div class="footer footer--coverPageHighlightBanner js-footer">
+          <div class="footer footer--coverPageHighlightBanner">
             <div class="footerBanner">
               {{#collection.highlights--br}}
               {{#block.brochure-highlight--br}}
@@ -990,10 +958,10 @@
               {{/collection.highlights--br}}
             </div><!-- footerBanner -->
             <div class="logo__container logo__container--coverPageHighlightBanner">
-              <img src="{{{account.logos.BA_Reverse}}}" class="logo logo--defaultDark" />
-              <img src="{{{account.logos.BA_Mono}}}" class="logo logo--defaultLight" />
-              <img src="{{BA_dark_logo--br}}" class="logo logo--dark js-footer-logo" />
-              <img src="{{BA_light_logo--br}}" class="logo logo--light js-footer-logo" />
+              <img src="{{{account.logos.BA_Reverse}}}" class="logo logo--defaultDark logo--coverPageHighlightBanner" />
+              <img src="{{{account.logos.BA_Mono}}}" class="logo logo--defaultLight logo--coverPageHighlightBanner" />
+              <img src="#" class="logo logo--dark" data-target="dark-logo"/>
+              <img src="#" class="logo logo--light"data-target="light-logo" />
             </div><!-- logo__container -->
           </div><!-- footer -->
         </div><!--container fit-->
@@ -1032,8 +1000,8 @@
               <div class="table">
                 {{#spreadsheet.table-of-contents--br}}
                 <div class="table__row">
-                  <div class="table__item table__item--primary">{{column-1}}</div><!-- table__item -->
-                  <div class="table__item table__item--secondary">{{column-2}}</div><!-- table__item -->
+                  <div class="table__item table__item--primary">{{chapter-number}}</div><!-- table__item -->
+                  <div class="table__item table__item--secondary">{{chapter-name}}</div><!-- table__item -->
                 </div><!-- table__row -->
                 {{/spreadsheet.table-of-contents--br}}
               </div><!-- table -->
@@ -1070,9 +1038,9 @@
                   <div class="table table--contentTwoColumn">
                     {{#spreadsheet.chapter-contents--br}}
                     <div class="table__row table__row--contentTwoColumn">
-                      <div class="table__item table__item--primary table__item--contentTwoColumn">{{column-1}}</div><!-- table__item -->
-                      <div class="table__item table__item--secondary table__item--contentTwoColumn">{{column-2}}</div><!-- table__item -->
-                      <div class="table__item table__item--tertiary table__item--contentTwoColumn">{{column-3}}</div><!-- table__item -->
+                      <div class="table__item table__item--primary table__item--contentTwoColumn">{{chapter-number}}</div><!-- table__item -->
+                      <div class="table__item table__item--secondary table__item--contentTwoColumn">{{chapter-name}}</div><!-- table__item -->
+                      <div class="table__item table__item--tertiary table__item--contentTwoColumn">{{page-number}}</div><!-- table__item -->
                     </div><!-- table__row -->
                     {{/spreadsheet.chapter-contents--br}}
                   </div><!-- table -->
@@ -1228,27 +1196,6 @@
       TextFit.fit({
         selector: '.textFit'
       });
-
-      function footerController() {
-        const footer = document.querySelector('.js-footer');
-        const logos = document.querySelectorAll('.js-footer-logo')    
-        logos.forEach(logo => {
-          const logoStyles = window.getComputedStyle(logo);
-          if (logoStyles.getPropertyValue('display') === 'none') return;
-
-          const logoWidth = logo.offsetWidth;
-          const logoHeight = logo.offsetHeight;          
-
-          if (logoHeight * 4 >= logoWidth) footer.classList.add('footer-alt');
-
-          logo.onload = () => {
-            footerController()
-            maxHeightCheck();
-          };
-        })
-      }
-
-      footerController();
 
     </script>
 
