@@ -48,6 +48,11 @@
         --footer-banner-content: var(--black);
         --border-item-before-background: transparent;
 
+        /*Internal Pages */
+        --blank-page-background-color: var(--white);
+        --internal-pages-text-color-dynamic: var(--white);
+        --internal-pages-background-color-dynamic: var(--black);
+
         /* Back Page */
         --dynamic-color: var(--red);
       }
@@ -319,7 +324,7 @@
       .themeColour--green .footerBannerTheme--dark { --footer-banner-heading-bold: var(--green);  }
       .themeColour--yellow .footerBannerTheme--dark {  --footer-banner-heading-bold: var(--yellow);  }   
 
-      /*Banner Transparent */
+      /* Banner Transparent */
       /* Banner Dark */
       .footerBannerTheme--transparent {
         --footer-banner-background: var(--transparent);
@@ -335,7 +340,41 @@
       .themeColour--yellow .footerBannerTheme--transparent { --footer-banner-heading-bold: var(--yellow); }
       .themeColour--black .footerBannerTheme--transparent { --footer-banner-heading-bold: var(--black);  }
 
-      /*Back Page */
+      /*Internal Pages */
+
+      .blankPageBackgroundColour--red { --blank-page-background-color: var(--red); }
+      .blankPageBackgroundColour--blue { --blank-page-background-color: var(--blue); }
+      .blankPageBackgroundColour--green { --blank-page-background-color: var(--green); }
+      .blankPageBackgroundColour--yellow { --blank-page-background-color: var(--yellow); }
+      .blankPageBackgroundColour--black { --blank-page-background-color: var(--black); }
+      .blankPageBackgroundColour--white { --blank-page-background-color: var(--white); }
+
+      .themeInternalColour--red { --dynamic-color: var(--red); }
+      .themeInternalColour--blue { --dynamic-color: var(--blue); }
+      .themeInternalColour--green { --dynamic-color: var(--green); }
+      .themeInternalColour--yellow { --dynamic-color: var(--yellow); }
+      .themeInternalColour--black { --dynamic-color: var(--black); }
+      .themeInternalColour--white { --dynamic-color: var(--white); }
+
+      .pageThemeInteralColour--dark {
+        --internal-pages-text-color-dynamic: var(--white);
+        --internal-pages-background-color-dynamic: var(--black);
+      }
+
+      .pageThemeInteralColour--light {
+        --internal-pages-text-color-dynamic: var(--black);
+        --internal-pages-background-color-dynamic: var(--white);
+      }
+
+      .pageThemeInteralColour--dark.themeInternalColour--white {
+        --internal-pages-text-color-dynamic: var(--black);
+      }
+
+      .pageThemeInteralColour--light.themeInternalColour--black {
+        --internal-pages-text-color-dynamic: var(--white);
+      }
+
+      /* Back Page */
 
       /* COVER PAGE BLOCK BANNER */
       /* Banner Theme Colour */
@@ -355,16 +394,21 @@
       {{placeholder-image-3}}
       {{placeholder-toggle-new}}
       {{placeholder-validation}}
+
       {{BA_themeColour--br}}
       {{BA_document-title--br}} -- this input isnt added to pages yet
       {{BA_dark_logo--br}}
       {{BA_light_logo--br}}
+
       {{#collection.BA_cover-page--br}}
       {{#block.BA_cover-page-block-banner--br}}
       {{page-theme--br}}
+      {{gradient-colour}}
+      {{top-grad-height}}
+      {{left-grad-width}}
+      {{bottom-grad-height}}
       {{background-image--br}}
       {{banner-theme--br}}
-      {{themeColour--br}}
       {{banner-transparency--br}}
       {{banner-position--br}}
       {{cover-heading--br}}
@@ -372,14 +416,18 @@
       {{/block.BA_cover-page-block-banner--br}}
       {{#block.BA_cover-page-highlight-banner--br}}
       {{page-theme--br}}
+      {{gradient-colour}}
+      {{top-grad-height}}
+      {{left-grad-width}}
+      {{bottom-grad-height}}
       {{background-image--br}}
       {{cover-heading--br}}
       {{heading-position--br}}
       {{banner-theme--br}}
-      {{themeColour--br}}
       {{#collection.highlights--br}}{{/collection.highlights--br}}
       {{/block.BA_cover-page-highlight-banner--br}}
       {{/collection.BA_cover-page--br}}
+
       {{#collection.BA_content-page--br}}
       {{#block.BA_one-column--br}}
       {{background-color--br}}
@@ -388,6 +436,28 @@
       {{/spreadsheet.table-of-contents--br}}
       {{/block.BA_one-column--br}}
       {{/collection.BA_content-page--br}}
+
+      {{#collection.BA_internal-pages--br}} 
+      {{#block.two-pages}}
+      {{themeColour}}
+      {{page-theme}}
+      {{#collection.two-pages}}
+      {{#block.blank-page}}
+      {{background-colour}}
+      {{/block.blank-page}}
+      {{#block.full-page-image-with-quote}}
+      {{full-page-image}}
+      {{quote-block}}
+      {{quote-opacity}}
+      {{quote-position}}
+      {{/block.full-page-image-with-quote}}
+      {{#block.half-page-image-with-content}}
+      {{half-page-image}}
+      {{/block.half-page-image-with-content}}
+      {{/collection.two-pages}}
+      {{/block.two-pages}}
+      {{/collection.BA_internal-pages--br}}
+
       {{#collection.BA_back-page--br}}
       {{background-color--br}}
       {{contact-position--br}}
@@ -441,6 +511,63 @@
         height: 100% !important;
       }
 
+      /* Gradient Logic */
+
+      /* Gradient was causing issues in export mode - for that reason png gradient images are added */
+      .gradient {
+        position: absolute;
+        left: 0;
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+      }
+
+      {{#collection.BA_cover-page--br}}
+
+      {{#block.BA_cover-page-block-banner--br}}
+      .gradient--top { height: {{top-grad-height}}%; }      
+      .gradient--left { width: {{left-grad-width}}%; }
+      .gradient--bottom { height: {{bottom-grad-height}}%; }
+      {{/block.BA_cover-page-block-banner--br}}
+
+      {{#block.BA_cover-page-highlight-banner--br}}
+      .gradient--top { height: {{top-grad-height}}%; }      
+      .gradient--left { width: {{left-grad-width}}%; }
+      .gradient--bottom { height: {{bottom-grad-height}}%; }
+      {{/block.BA_cover-page-highlight-banner--br}}
+
+      {{/collection.BA_cover-page--br}}
+
+      .gradientColour--black .gradient { mix-blend-mode: multiply; }
+
+      .gradientColour--off .gradient { display: none; }
+
+      .gradient--left,
+      .gradient--top {
+        top:0;
+      }
+
+      .gradient--bottom { bottom: 0; }      
+
+      .gradient--top {
+        width:100%;
+      }
+
+      .gradientColour--white .gradient--top { background-image: url(https://files.outfit.io/media_library_items/186480/gradient-white-top-4.png); }
+      .gradientColour--black .gradient--top { background-image: url(https://files.outfit.io/media_library_items/186476/gradient-grey-top-3.png); }
+
+      .gradient--left { height:100%; }
+
+      .gradientColour--white .gradient--left { background-image: url(https://files.outfit.io/media_library_items/186481/gradient-white-left-3.png); }
+      .gradientColour--black .gradient--left { background-image: url(https://files.outfit.io/media_library_items/186477/gradient-grey-left-3.png); }
+
+      .gradient--bottom { width:100%; }
+
+      .gradientColour--white .gradient--bottom { background-image: url(https://files.outfit.io/media_library_items/186479/gradient-white-bottom-4.png); }
+      .gradientColour--black .gradient--bottom { background-image: url(https://files.outfit.io/media_library_items/186478/gradient-grey-bottom-2.png); }
+
+      .gradientColour--white .gradient { opacity: 0.9; }
+
+
       .fit { display: flex; }      
       .fit--coverPageHighlightBanner { flex-direction: column; }    
       .fitBackgroundColor--black { background: var(--black); }
@@ -453,6 +580,16 @@
       }
 
       .fit--contentTwoColumn { padding-top: 1.65rem; }
+
+      .fit--internalPage {
+        color: var(--internal-pages-text-color-dynamic);
+        background: var(--internal-pages-background-color-dynamic);
+      }
+
+      .fit--fullPageImageWithQuote { 
+        display: flex;
+        padding: 2rem 0; 
+      }
 
       .header--contentOneColumn {
         display: flex;
@@ -487,12 +624,31 @@
 
       .fitBackgroundColor--white .body--contentOneColumn,
       .fitBackgroundColor--white .body--contentTwoColumn { color: var(--black); } 
+      .fit--blankPage { background-color: var(--blank-page-background-color); }
 
       .headingPosition--center .body--coverPageHighlightBanner { align-items: center; }
       .headingPosition--bottom .body--coverPageHighlightBanner { align-items: flex-end; }
       .body--backPage { padding: 2.1rem 1.5rem 1.9rem; }
 
       .contactPosition--bottom .body { align-items: flex-end; }
+
+      .body--fullPageImageWithQuote { flex-direction: column; }
+
+      .quotePosition--top-left .body--fullPageImageWithQuote { text-align: right; }
+
+      .quotePosition--top-right .body--fullPageImageWithQuote { align-items: flex-end; }
+
+      .quotePosition--bottom-left .body--fullPageImageWithQuote { 
+        justify-content: flex-end;
+        text-align: right;
+      }
+
+      .quotePosition--bottom-right .body--fullPageImageWithQuote { 
+        justify-content: flex-end;
+        align-items: flex-end; 
+      }
+
+      .body--halfPageImageWithContent { flex-direction: column; }
 
       .footer {
         position: relative;
@@ -864,6 +1020,77 @@
       .column { flex: 1; }
       .column + .column { margin-left: 0.8rem; }
 
+      .quote__container { 
+        position: relative;
+        max-height: 8rem;
+        width: 8rem;
+        padding: 1.2rem 1rem;
+      }
+
+      .quote__overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: var(--dynamic-color);
+      }
+
+      .quoteOpacity--transparent .quote__overlay { opacity: 0.5; }
+
+      .quote { position: relative; }
+
+
+      .quote h3 {
+        position: relative;
+        display: inline-block;
+        font-size: 0.455rem;
+        line-height: 1.05em;
+        font-family: var(--font-taviraj);
+      }
+
+      .quote h3:before,
+      .quote h3:after { 
+        content: '"';
+        display: inline-block;
+        font-size: 1em;
+      }
+
+      .quote h3:before {
+        position: absolute;
+        right: 100%;
+      }
+
+      .quotePosition--top-left .quote h3:before,
+      .quotePosition--bottom-left .quote h3:before {
+        position: relative;
+        right: auto;
+      }
+
+      .quote p { font-size: 0.22rem; }
+
+      .quote h3 + p { margin-top: 0.35rem; }
+
+      .hero__container {
+        position: relative;
+        height: 10.7rem;
+      }
+
+      .content { 
+        flex: 1; 
+        background-color: var(--dynamic-color);
+      }
+
+      .hero {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+      }
+
+      .pageNumber__container--hidden { display: none; }
+
       .masterContainer { display: none; }
 
       /* ANY OTHER STYLES THAT NEED MUSTACHE.JS CAPABILITIES */
@@ -902,10 +1129,14 @@
                     bannerTheme--{{banner-theme--br}}{{^banner-theme--br}}colour{{/banner-theme--br}}
                     bannerTransparency--{{banner-transparency--br}}{{^banner-transparency--br}}fullColour{{/banner-transparency--br}}
                     bannerPosition--{{banner-position--br}}{{^banner-position--br}}left{{/banner-position--br}}
+                    gradientColour--{{{gradient-colour}}}{{^gradient-colour}}white{{/gradient-colour}}
                     ">
           <div class="backgroundImage">
             <div class="reposition-fix">{{{background-image--br}}}</div><!-- reposition-fix -->
           </div><!-- backgroundImage -->
+          <div class="gradient gradient--left"></div><!--left-grad-->
+          <div class="gradient gradient--top"></div><!--top-grad-->
+          <div class="gradient gradient--bottom"></div><!--bottom-grad-->
           <div class="logo__container logo__container--coverPageBlockBanner">         
             <img src="{{{account.logos.BA_Reverse}}}" class="logo logo--defaultDark" />
             <img src="{{{account.logos.BA_Mono}}}" class="logo logo--defaultLight" />
@@ -938,11 +1169,15 @@
                     pageTheme--{{page-theme--br}}{{^page-theme--br}}light{{/page-theme--br}}
                     headingPosition--{{heading-position--br}}{{^heading-position--br}}top{{/heading-position--br}}
                     footerBannerTheme--{{banner-theme--br}}{{^banner-theme--br}}colour{{/banner-theme--br}}
+                    gradientColour--{{{gradient-colour}}}{{^gradient-colour}}white{{/gradient-colour}}
                     ">
           <div class="backgroundImage">
             <div class="reposition-fix">{{{background-image--br}}}</div><!-- reposition-fix -->
           </div><!-- backgroundImage -->
           <div class="body body--coverPageHighlightBanner">
+            <div class="gradient gradient--left"></div><!--left-grad-->
+            <div class="gradient gradient--top"></div><!--top-grad-->
+            <div class="gradient gradient--bottom"></div><!--bottom-grad-->
             <div class="heading heading--coverPageHighlightBanner" data-max-height="css">
               {{{cover-heading--br}}}
             </div><!-- heading -->
@@ -1067,6 +1302,104 @@
     {{/block.BA_two-column--br}}
     {{/collection.BA_content-page--br}}
     <!-- CONTENT PAGE -->
+    <!-- INTERNAL PAGES COLLECTION -->
+    {{#collection.BA_internal-pages--br}}
+    {{#block.two-pages}}
+    <div class="page__container
+                themeInternalColour--{{themeColour}}
+                pageThemeInteralColour--{{page-theme}}{{^page-theme}}dark{{/page-theme}}
+                ">
+      {{#collection.two-pages}}
+      {{#block.blank-page}}
+      <div class="page">
+
+        <div class="bleed">
+
+          <div class="container 
+                      fit 
+                      fit--blankPage
+                      blankPageBackgroundColour--{{background-colour}}{{^background-colour}}white{{/background-colour}}
+                      ">
+            <div class="pageNumber__container pageNumber__container--blankPage">
+              <div class="pageNumber__square"></div><!-- pageNumber__square -->
+              <div class="pageNumber"></div><!-- pageNumber -->
+            </div>
+          </div><!--container fit-->
+
+        </div><!--bleed-->
+
+      </div><!--page-->
+      {{/block.blank-page}}
+      {{#block.full-page-image-with-quote}}
+      <div class="page">
+
+        <div class="bleed">
+
+          <div class="container 
+                      fit 
+                      fit--internalPage
+                      fit--fullPageImageWithQuote
+                      quoteOpacity--{{quote-opacity}}
+                      quotePosition--{{quote-position}}
+                      ">
+            {{#full-page-image}}
+            <div class="backgroundImage">
+              <div class="reposition-fix">{{{full-page-image}}}</div><!-- reposition-fix -->
+            </div><!-- backgroundImage -->
+            {{/full-page-image}}
+            <div class="body body--fullPageImageWithQuote">
+              {{#quote-block}}
+              <div class="quote__container" data-max-height="css">
+                <div class="quote__overlay"></div><!-- quote__overlay -->
+                <div class="quote">{{{quote-block}}}</div><!-- quote -->
+              </div><!-- quote__container -->
+              {{/quote-block}}
+            </div><!-- body -->
+            <div class="pageNumber__container pageNumber__container--hidden">
+              <div class="pageNumber__square"></div><!-- pageNumber__square -->
+              <div class="pageNumber"></div><!-- pageNumber -->
+            </div>
+          </div><!--container fit-->
+
+        </div><!--bleed-->
+
+      </div><!--page-->
+      {{/block.full-page-image-with-quote}}
+      {{#block.half-page-image-with-content}}
+      <div class="page">
+
+        <div class="bleed">
+
+          <div class="container 
+                      fit 
+                      fit--internalPage
+                      fit--halfPageImageWithContent
+                      ">
+            <div class="body body--halfPageImageWithContent">
+              <div class="hero__container">
+                {{#half-page-image}}
+                <div class="hero">
+                  <div class="reposition-fix">{{{half-page-image}}}</div><!-- reposition-fix -->
+                </div><!-- hero -->
+                {{/half-page-image}}
+              </div><!-- hero__container -->
+              <div class="content"></div><!-- content -->
+            </div><!-- body -->
+            <div class="pageNumber__container pageNumber__container--hidden">
+              <div class="pageNumber__square"></div><!-- pageNumber__square -->
+              <div class="pageNumber"></div><!-- pageNumber -->
+            </div>
+          </div><!--container fit-->
+
+        </div><!--bleed-->
+
+      </div><!--page-->
+      {{/block.half-page-image-with-content}}
+      {{/collection.two-pages}}
+      {{/block.two-pages}}
+    </div>
+    {{/collection.BA_internal-pages--br}}
+    <!-- INTERNAL PAGES COLLECTION -->
     <!-- BACK PAGE -->
     {{#collection.BA_back-page--br}}
     <div class="page">
