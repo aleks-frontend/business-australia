@@ -496,10 +496,10 @@
       function footerInject() {
         const internalPages = document.querySelectorAll('.page--internalPage');
         const lastInternalPage = {
-          page: document.querySelectorAll('.page--internalPage')[internalPages.length - 1],
-          bodyInner: document.querySelectorAll('.page--internalPage')[internalPages.length - 1].querySelector('.body__inner'),
-          infoContainer: document.querySelectorAll('.page--internalPage')[internalPages.length - 1].querySelector('.info__container')
-        }
+          page: internalPages[internalPages.length - 1],
+          bodyInner: internalPages[internalPages.length - 1].querySelector('.body__inner'),
+          infoContainer: internalPages[internalPages.length - 1].querySelector('.info__container')
+        };
 
         const infoHTML = `
           {{#BA_next-meeting-date--a}}
