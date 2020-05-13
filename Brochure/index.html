@@ -52,6 +52,7 @@
         --blank-page-background-color: var(--white);
         --internal-pages-text-color-dynamic: var(--white);
         --internal-pages-background-color-dynamic: var(--black);
+        --hero-text-colour: var(--white);
 
         /* Back Page */
         --dynamic-color: var(--red);
@@ -366,13 +367,12 @@
         --internal-pages-background-color-dynamic: var(--white);
       }
 
-      .pageThemeInteralColour--dark.themeInternalColour--white {
-        --internal-pages-text-color-dynamic: var(--black);
-      }
+      .pageThemeInteralColour--dark.themeInternalColour--white { --internal-pages-text-color-dynamic: var(--black); }
+      .pageThemeInteralColour--light.themeInternalColour--black { --internal-pages-text-color-dynamic: var(--white); }
 
-      .pageThemeInteralColour--light.themeInternalColour--black {
-        --internal-pages-text-color-dynamic: var(--white);
-      }
+      .imageTextColor--white { --hero-text-colour: var(--white); }
+      .imageTextColor--black { --hero-text-colour: var(--black); }
+
 
       /* Back Page */
 
@@ -396,7 +396,7 @@
       {{placeholder-validation}}
 
       {{BA_themeColour--br}}
-      {{BA_document-title--br}} -- this input isnt added to pages yet
+      {{BA_document-title--br}}
       {{BA_dark_logo--br}}
       {{BA_light_logo--br}}
 
@@ -453,6 +453,17 @@
       {{/block.full-page-image-with-quote}}
       {{#block.half-page-image-with-content}}
       {{half-page-image}}
+      {{image-position}}
+      {{image-text-colour}}
+      {{image-caption}}
+      {{quote-block}}
+      {{colour-block-introductory-copy}}
+      {{#collection.column-content}}
+      {{#block.column}}
+      {{icon-image}}
+      {{copy-content}}
+      {{/block.column}}
+      {{/collection.column-content}}
       {{/block.half-page-image-with-content}}
       {{/collection.two-pages}}
       {{/block.two-pages}}
@@ -649,6 +660,7 @@
       }
 
       .body--halfPageImageWithContent { flex-direction: column; }
+      .imagePosition--bottom .body--halfPageImageWithContent { flex-direction: column-reverse; }
 
       .footer {
         position: relative;
@@ -1016,9 +1028,13 @@
       }
 
       .column__container { display: flex; }
+      .column__container--halfPageImageWithContent { flex: 1; }
 
       .column { flex: 1; }
       .column + .column { margin-left: 0.8rem; }
+      .column--halfPageImageWithContent + .column { margin-left: 1rem; }
+
+      .column__inner { font-size: 0; }
 
       .quote__container { 
         position: relative;
@@ -1074,9 +1090,17 @@
       .hero__container {
         position: relative;
         height: 10.7rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: flex-end;
+        padding: 1.93rem 1.1rem 0.6rem;
+        color: var(--hero-text-colour);
       }
 
       .content { 
+        display: flex;
+        flex-direction: column;
         flex: 1; 
         background-color: var(--dynamic-color);
       }
@@ -1089,8 +1113,118 @@
         bottom: 0;
       }
 
-      .pageNumber__container--hidden { display: none; }
+      .title { 
+        position: absolute !important;
+        top: 0.76rem;
+        left: 0;
+        width: 92.5%;
+        height: 0.44rem;
+        padding-left: 1.1rem;
+        font-size: 0.185rem;
+        text-transform: uppercase;
+        text-align: right;
+        border-bottom: 0.03rem solid var(--white);
+      }
 
+      .hero__caption {
+        position: relative;
+        max-height: 1.3rem;
+        width: 2.1rem;
+        text-align: right;
+      }
+
+      .hero__caption h3 {
+        font-size: 0.32rem;
+        line-height: 1.05em;
+        font-family: var(--font-taviraj);
+      }
+
+      .hero__caption p {
+        font-size: 0.165rem;
+        line-height: 1.25em;
+      }
+
+      .hero__quote {
+        position: relative;
+        width: 6.9rem;
+        max-height: 2.6rem;
+      }
+
+      .hero__quote h3 {
+        position: relative;
+        display: inline-block;
+        font-size: 0.365rem;
+        line-height: 1.05em;
+        font-family: var(--font-taviraj);
+      }
+
+      .hero__quote h3:before,
+      .hero__quote h3:after { 
+        content: '"';
+        display: inline-block;
+        font-size: 1em;
+      }
+
+      .hero__quote h3:before {
+        position: absolute;
+        right: 100%;
+      }
+
+      .hero__quote p { font-size: 0.235rem; }
+      .hero__quote h3 + p { margin-top: 0.35rem; }
+
+      .content { padding: 0.83rem 1rem 1.5rem 2.1rem; }
+
+      .introductoryCopy {
+        margin-bottom: 0.5rem;
+        width: 5.7rem;
+        font-size: 0.3rem;
+        line-height: 1.3em;
+        font-family: var(--font-taviraj);
+      }
+
+      .icon { 
+        margin-bottom: 0.4rem;
+        width: 1.1rem;
+        height: 1.1rem;
+        object-fit: contain;
+      }
+
+
+      .copy h2,
+      .copy p,
+      .copy li {
+        margin-bottom: 0.15rem;
+        font-size: 0.2rem;
+      }
+
+      .copy h2 { font-weight: bold; }
+      .copy p { line-height: 1.3em; }
+      .copy ul { margin-left: 0.25rem; }
+
+      .copy li {
+        position: relative;
+        line-height: 1.3em;
+      }
+
+      .copy li:before {
+        content: '';
+        position: absolute;
+        top: 0.1rem;
+        right: 107%;
+        width: 0.05rem;
+        height: 0.05rem;
+        background: var(--internal-pages-text-color-dynamic);
+        border-radius: 50%;
+      }
+
+      .copy h2:last-child,
+      .copy p:last-child,
+      .copy li:last-chil {
+        margin-bottom: 0;
+      }
+
+      .pageNumber__container--hidden { display: none; }
       .masterContainer { display: none; }
 
       /* ANY OTHER STYLES THAT NEED MUSTACHE.JS CAPABILITIES */
@@ -1114,6 +1248,7 @@
     <div class="masterContainer">
       <div class="js-inject-src" data-target-id="dark-logo" data-is-image="true">{{{ BA_dark_logo--br }}}</div>
       <div class="js-inject-src" data-target-id="light-logo" data-is-image="true">{{{ BA_light_logo--br }}}</div>
+      <div class="js-inject-src" data-target-id="document-title">{{BA_document-title--br}}</div>
     </div><!-- masterContainer -->
 
     <!-- COVER PAGE -->
@@ -1374,6 +1509,8 @@
                       fit 
                       fit--internalPage
                       fit--halfPageImageWithContent
+                      imagePosition--{{image-position}}{{^image-position}}top{{/image-position}}
+                      imageTextColor--{{image-text-colour}}{{^image-text-colour}}white{{/image-text-colour}}
                       ">
             <div class="body body--halfPageImageWithContent">
               <div class="hero__container">
@@ -1382,9 +1519,34 @@
                   <div class="reposition-fix">{{{half-page-image}}}</div><!-- reposition-fix -->
                 </div><!-- hero -->
                 {{/half-page-image}}
+                <div class="hero__caption" data-max-height="css">{{{image-caption}}}</div><!-- hero__caption -->
+                {{#quote-block}}<div class="hero__quote" data-max-height="css">{{{quote-block}}}</div>{{/quote-block}}<!-- hero__quote -->
               </div><!-- hero__container -->
-              <div class="content"></div><!-- content -->
+              <div class="content">
+                {{#colour-block-introductory-copy}}
+                <div class="introductoryCopy" data-max-line="3">{{{colour-block-introductory-copy}}}</div><!-- introductoryCopy -->
+                {{/colour-block-introductory-copy}}
+                <div class="column__container column__container--halfPageImageWithContent">
+                  {{#collection.column-content}}
+                  {{#block.column}}
+                  <div class="column column--halfPageImageWithContent">
+                    <div class="column__inner" data-max-height="dynamic">
+                      {{#icon-image}}<img src="{{icon-image}}" class="icon" />{{/icon-image}}
+                      {{#copy-content}}
+                      <div class="copy">
+                        {{{copy-content}}}
+                      </div><!-- copy -->
+                      {{/copy-content}}
+                    </div><!-- column__inner -->
+                  </div><!-- column -->
+                  {{/block.column}}
+                  {{/collection.column-content}}
+                </div><!-- column__container -->
+              </div><!-- content -->
             </div><!-- body -->
+            <div class="title">
+              <div class="title__inner"  data-target="document-title" data-max-line="1"></div><!-- title__inner -->
+            </div><!-- title -->
             <div class="pageNumber__container pageNumber__container--hidden">
               <div class="pageNumber__square"></div><!-- pageNumber__square -->
               <div class="pageNumber"></div><!-- pageNumber -->
