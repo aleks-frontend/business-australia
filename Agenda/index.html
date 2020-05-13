@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html data-sign="OSM">
+  <head>
+    <title>Template title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="css/minireset.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/placeholder-controller.css">
+
+    <style>
+      /* Inputs Order
+      {{show-crop}}
+      {{placeholder-opacity-1}}
+      {{placeholder-image-2}}
+      {{placeholder-image-3}}
+      {{placeholder-toggle-new-2}}
+      {{BA_primary-logo--a}}
+      {{BA_secondary-logo--a}}
+      {{{BA_heading--a}}}
+      {{{BA_date--a}}}
+      {{{BA_time--a}}}
+      {{{BA_location--a}}}
+      {{BA_table-theme--a}}
+      {{#spreadsheet.BA_page-1-agenda-table--a}}{{/spreadsheet.BA_page-1-agenda-table--a}}
+      {{#spreadsheet.BA_contact-details--a}}{{/spreadsheet.BA_contact-details--a}}
+      */
+
+      @import url('https://fonts.googleapis.com/css?family=Archivo:400,400i,700,700i&display=swap');
+      @import url('https://outfit-assets-production.s3.amazonaws.com/fonts/arial/stylesheet.css');
+
+      :root {
+        --black: {{{account.colors.black}}};
+        --white: {{{account.colors.white}}};
+        --blue: {{account.colors.blue}};
+        --red: {{account.colors.red}};
+        --yellow: {{account.colors.yellow}};
+        --green: {{account.colors.green}};
+      }
+
+      .tableTheme--blue { 
+        --dynamic-color: var(--blue);
+        --dynamic-color-light: rgba(77, 19, 209, 0.1);
+      }
+
+      .tableTheme--red { 
+        --dynamic-color: var(--red); 
+        --dynamic-color-light: rgba(235, 11, 67, 0.1);
+      }
+
+      .tableTheme--yellow { 
+        --dynamic-color: var(--yellow);
+        --dynamic-color-light: rgba(250, 188, 30, 0.1);
+      }
+
+      .tableTheme--green { 
+        --dynamic-color: var(--green); 
+        --dynamic-color-light: rgba(10, 221, 160, 0.1);
+      }
+
+      html {
+        font-family: 'Arial';
+        font-size: 11pt;
+        color: var(--black);
+        word-break: break-word;
+      }
+
+      /* Helper classes */
+      .u-hide { display: none; }
+
+      /* Helper class for fixing Reposition tool bug */
+      .reposition-fix {
+        position: absolute;
+        overflow: hidden;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;        
+      }
+
+      .reposition-fix div {
+        top: 0 !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+      }
+
+      .fit {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .header {
+        display: flex;
+        justify-content: flex-end;
+        height: 98pt;
+        padding: 20pt 44pt 17pt;
+      }
+
+      .logo__container {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+      }
+
+      .logo {
+        max-width: 95pt;
+        height: 50pt;
+        object-fit: contain;
+      }
+
+      .logo__divider {
+        display: none;
+        width: 2pt;
+        height: 26pt;
+        margin: 0pt 11pt;
+        background: var(--black);
+      }
+
+      .hasPrimaryLogo.hasSecondaryLogo .logo__divider { display: block; }
+
+      .body {
+        flex: 1;
+        padding: 5pt 92pt 5pt 81pt;
+      }
+
+      .body--frontPage { padding: 0pt 84pt 5pt 76pt; }
+      .body--internalPage { padding: 80.3pt 86pt 30pt 76pt; }
+
+      .heading {
+        margin-bottom: 23.9pt;
+        padding-left: 5pt;
+        font-size: 26.5pt;
+        line-height: 1.2em;
+        font-weight: 900;
+        letter-spacing: -0.3pt;
+      }
+
+      .info__container {
+        margin-bottom: 32pt;
+        padding-left: 5pt;
+      }
+
+      .info__container:last-child {  margin-bottom: 0; }
+
+      .info {
+        display: flex;
+        margin-bottom: 13.7pt;
+        font-size: 11.6pt;
+        line-height: 1.2em;        
+      }
+
+      .info--internalPage { 
+        margin-bottom: 14.5pt;
+        font-size: 10pt;
+      }
+
+      .info:last-child { margin-bottom: 0; }
+
+      .info__label {
+        width: 71.4pt;
+        font-weight: bold;
+      }
+
+      .info__value { flex: 1; }
+
+      .table {
+        width: 100%;
+        margin-bottom: 43pt;
+        font-size: 0;
+      }
+
+      .table:last-child { margin-bottom: 0; }
+
+      .table, .table__cell {
+        border: 2pt solid var(--white);
+        border-collapse: collapse;
+      }
+
+      .table__row--head { background: var(--dynamic-color); }
+
+      .fit--frontPage .table__row--body:nth-child(even) { background-color: var(--dynamic-color-light); }
+      .fit--internalPage .table__row--body:nth-child(odd) { background-color: var(--dynamic-color-light); }
+
+      .table__cell {
+        padding: 1pt 4pt 6pt 2.7pt;
+        font-size: 10pt;
+        line-height: 1.2em;
+        vertical-align: top;
+      }
+
+      .table__cell--heading {
+        padding: 0.8pt 4pt 1.5pt 2.7pt;
+        font-size: 12pt;
+        font-weight: bold;
+      }
+
+      .u-table-heading .table__cell { 
+        padding-bottom: 4.5pt;
+        font-size: 11.9pt;
+        font-weight: bold;
+        text-transform: uppercase; 
+      }
+
+      .u-table-subheading .table__cell {
+        font-size: 9.9pt;
+        font-weight: bold;
+      }
+
+      .table__cell--heading:first-child { width: 43pt; }
+      .tableTheme--blue .table__cell--heading { color: var(--white);}
+
+      .footer {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 0pt 81pt 52pt;
+        font-family: 'Archivo';
+      }
+
+      .contact {
+        position: relative;
+        padding-top: 10pt;
+        font-size: 7.3pt;
+        line-height: 1.2em;
+        text-align: center;
+      }
+
+      .contact:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 50%;
+        width: 174pt;
+        height: 1pt;
+        transform: translateX(-50%);
+        background: var(--black);
+      }
+
+      .contact__row { margin-bottom: 1pt; }
+      .contact__row:last-child { margin-bottom: 0; }
+
+      .contact__row span:after {    
+        content: '';
+        top: 1pt;
+        position: relative;
+        display: inline-block;
+        height: 7pt;
+        width: 1pt;
+        margin-left: 2.4pt;
+        background: var(--black); }
+
+      .contact__row span:last-child:after { display: none; }
+
+      .abn { 
+        font-size: 15pt;
+        line-height: 1.2em;
+      }
+
+      .u-fw-b { font-weight: bold; }
+
+
+      /* ANY OTHER STYLES THAT NEED MUSTACHE.JS CAPABILITIES */
+    </style>
+  </head>
+  <body style="background: white" 
+        data-crop="{{show-crop}}" 
+        data-reduce-export-font-size-by-percent="0" 
+        data-reduce-firefox-font-size-by-percent="0" 
+        data-prevent-export-overflow="false"
+        class="tableTheme--{{{BA_table-theme--a}}}{{^BA_table-theme--a}}green{{/BA_table-theme--a}}">
+    <div class="placeholderMaster" data-opacity="{{ placeholder-opacity-1 }}">
+      <div class="placeholderMaster__item" data-bg="{{ placeholder-image-2 }}"></div>
+      <div class="placeholderMaster__item" data-bg="{{ placeholder-image-3 }}"></div>
+    </div><!-- end placeholderMaster -->
+    <div class="page">
+
+      <div class="bleed">
+
+        <div class="container fit fit--frontPage">
+
+          <div class="header">
+
+            <div class="logo__container {{#BA_primary-logo--a}}hasPrimaryLogo{{/BA_primary-logo--a}} {{#BA_secondary-logo--a}}hasSecondaryLogo{{/BA_secondary-logo--a}}">
+              <img class="logo" src="{{{BA_primary-logo--a}}}">
+              <div class="logo__divider"></div><!--logo__divider-->
+              <img class="logo" src="{{{BA_secondary-logo--a}}}">
+            </div><!--logo__container-->
+          </div><!--header-->
+          <div class="body body--frontPage">
+            <div class="body__inner" data-max-height="dynamic">
+              {{#BA_heading--a}}
+              <div class="heading" data-max-line="3">{{{BA_heading--a}}}</div><!--heading-->
+              {{/BA_heading--a}}
+              <div class="info__container">
+                {{#BA_date--a}}
+                <div class="info" data-max-line="1">
+                  <div class="info__label">Date:</div><!--info__label-->
+                  <div class="info__value">{{{BA_date--a}}}</div><!--info__value-->
+                </div><!--info-->
+                {{/BA_date--a}}
+                {{#BA_time--a}}
+                <div class="info" data-max-line="1">
+                  <div class="info__label">Time:</div><!--info__label-->
+                  <div class="info__value">{{{BA_time--a}}}</div><!--info__value-->
+                </div><!--info-->
+                {{/BA_time--a}}
+                {{#BA_location--a}}
+                <div class="info" data-max-line="1">
+                  <div class="info__label">Location:</div><!--info__label-->
+                  <div class="info__value">{{{BA_location--a}}}</div><!--info__value-->
+                </div><!--info-->
+                {{/BA_location--a}}
+              </div><!--info__container-->
+              <table class="table">
+                <tr class="table__row table__row--head">
+                  <td class="table__cell table__cell--heading"></td><!--table__cell-->
+                  <td class="table__cell table__cell--heading">Agenda Items</td><!--table__cell--heading-->
+                  <td class="table__cell table__cell--heading">Person(s)<br>Responsible</td><!--table__cell-->
+                  <td class="table__cell table__cell--heading">Action</td><!--table__cell-->
+                  <td class="table__cell table__cell--heading">Timings</td><!--table__cell-->
+                </tr><!--table__row-->
+                {{#spreadsheet.BA_page-1-agenda-table--a}}
+                <tr class="table__row table__row--body js-decimalCheck-row">
+                  <td class="table__cell js-decimalCheck-number">{{blank}}</td><!--table__cell-->
+                  <td class="table__cell">{{agenda-items}}</td><!--table__cell-->
+                  <td class="table__cell">{{persons-responsible}}</td><!--table__cell-->
+                  <td class="table__cell">{{action}}</td><!--table__cell-->
+                  <td class="table__cell">{{timings}}</td><!--table__cell-->
+                </tr><!--table__row-->
+                {{/spreadsheet.BA_page-1-agenda-table--a}}
+              </table><!--table-->
+            </div><!--body__inner-->
+          </div><!--body-->
+          <div class="footer">
+            {{#spreadsheet.BA_contact-details--a}}
+            <div class="contact" data-max-height="58">
+              <div class="contact__row"><span>{{address}}</span></div><!--contact__row-->
+              <div class="contact__row">{{#phone}}<span>{{phone}}</span>{{/phone}} {{#secondary-phone}}<span>{{secondary-phone}}</span>{{/secondary-phone}} {{#email}}<span>{{email}}</span>{{/email}}</div><!--contact__row-->
+              <div class="contact__row">{{#website}}<span>{{website}}</span>{{/website}} <span>{{{account.snippets.abn-number}}}</span></div><!--contact__row-->
+            </div><!--contact-->
+            {{/spreadsheet.BA_contact-details--a}}
+          </div><!--footer-->
+
+        </div><!--container fit-->
+
+      </div><!--bleed-->
+
+    </div><!--page-->
+
+
+    {{#collection.BA_internal-pages--a}}
+    {{#block.BA_internal-page--a}}
+    <div class="page page--internalPage">
+
+      <div class="bleed">
+
+        <div class="container fit fit--internalPage">
+
+          <div class="body body--internalPage">
+            <div class="body__inner" data-max-height="dynamic">
+              <table class="table table--internalPage">
+                {{#spreadsheet.BA_page-2-agenda-table--a}}
+                <tr class="table__row table__row--body js-decimalCheck-row">
+                  <td class="table__cell js-decimalCheck-number">{{blank}}</td><!--table__cell-->
+                  <td class="table__cell">{{agenda-items}}</td><!--table__cell-->
+                  <td class="table__cell">{{persons-responsible}}</td><!--table__cell-->
+                  <td class="table__cell">{{action}}</td><!--table__cell-->
+                  <td class="table__cell">{{timings}}</td><!--table__cell-->
+                </tr><!--table__row-->
+                {{/spreadsheet.BA_page-2-agenda-table--a}}
+              </table><!--table--internalPage-->
+              <div class="info__container" data-original-input="{{BA_attendees--a}}"></div>
+            </div><!--body__inner-->
+          </div><!--body-->
+
+        </div><!--container fit-->
+
+      </div><!--bleed-->
+
+    </div><!--page-->
+    {{/block.BA_internal-page--a}}
+    {{/collection.BA_internal-pages--a}}
+
+
+    <script>
+      window.showCrop = {{show-crop}}{{^show-crop}}true{{/show-crop}};
+    </script>
+    <script src="js/main.js"></script>   
+    <script src="js/prefixfree.js"></script>
+    <script src="js/placeholder-controller.js"></script>
+    <script src="js/char-limit.js"></script>
+    <script src="js/check-export-mode.js"></script>
+    <script src="js/max-line-check.js"></script>
+    <script src="js/max-height-check.js"></script>
+    <script src="js/hide-empty-titles.js"></script>
+    <script src="js/custom-rich-text.js"></script>
+    <script src="js/dynamic-inject.js"></script>
+    <script src="js/text-fit-min.js"></script>
+    <script src="js/fontfaceobserver.js"></script>
+    <script src="https://outfit-assets-production.s3-accelerate.amazonaws.com/scripts/textfit.0.0.4.min.js" type="text/javascript"></script>
+    <script>
+      {{ #placeholder-toggle-new-2 }}document.body.classList.add("u-placeholder-{{ placeholder-toggle-new-2 }}{{^placeholder-toggle-new-2}}hide{{/placeholder-toggle-new-2}}"); {{ /placeholder-toggle-new-2 }}
+    </script>
+    <script>
+
+      console.clear();
+
+      // Tracking text changes and firing text restriction functions (mutationObserver)
+      const overflowObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          maxLineCheck();
+          maxHeightCheck();
+          charLimit();
+          hideEmptyTitles();
+          decimalCheck();
+        });
+      });
+
+      const injectObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          injectDynamicContent();
+        });
+      });      
+
+      const injectSources = document.querySelectorAll('[data-target-id]');
+
+      overflowObserver.observe(document.body, {
+        attributes: false,
+        characterData: true,
+        childList: true,
+        subtree: true,
+        attributeOldValue: false,
+        characterDataOldValue: true
+      });
+
+      if ( injectSources.length > 0 ) {
+        injectSources.forEach(src => {
+          injectObserver.observe(src, {
+            attributes: false,
+            characterData: true,
+            childList: true,
+            subtree: true,
+            attributeOldValue: false,
+            characterDataOldValue: true
+          });            
+        });
+      }    
+
+      // Calling text size restriction functions once the fonts are loaded
+      // All external font-families need to be added to 'fonts' array
+      document.addEventListener('DOMContentLoaded', function(event) {
+        const fonts = ['Arial', 'Archivo'];
+        const fontObservers = [];
+
+        fonts.forEach(font => {
+          const obs = new FontFaceObserver(font);
+          fontObservers.push(obs.load())
+        });
+
+        Promise.all(fontObservers).then(() => {
+          maxLineCheck();
+          maxHeightCheck();
+          injectDynamicContent();
+          hideEmptyTitles();
+          decimalCheck();
+          footerInject();
+
+          document.dispatchEvent(new Event('printready'));
+        });
+      });      
+
+      // Adding custom style to heading and subheading rows in all tables
+      function decimalCheck() {
+        const rows = document.querySelectorAll('.js-decimalCheck-row');
+
+        for ( const row of rows ) {
+          const numContainer = row.querySelector('.js-decimalCheck-number');
+          if ( !numContainer ) return;
+          const number = parseFloat(numContainer.innerText);
+          // Checking if user typed in a string instead of a number
+          const isNumberCheck = !isNaN(number);
+          // Checking if the typed number is decimal
+          const isDecimalCheck = number % 1 > 0;         
+
+          if ( isNumberCheck && !isDecimalCheck ) row.classList.add('u-table-heading');
+          if ( isNumberCheck && isDecimalCheck ) row.classList.add('u-table-subheading');          
+        }
+      }
+
+      // Logic for injecting footer to the last internal page
+      function footerInject() {
+        const internalPages = document.querySelectorAll('.page--internalPage');
+        const lastInternalPage = {
+          page: document.querySelectorAll('.page--internalPage')[internalPages.length - 1],
+          bodyInner: document.querySelectorAll('.page--internalPage')[internalPages.length - 1].querySelector('.body__inner'),
+          infoContainer: document.querySelectorAll('.page--internalPage')[internalPages.length - 1].querySelector('.info__container')
+        }
+
+        const infoHTML = `
+          {{#BA_next-meeting-date--a}}
+          <div class="info info--internalPage" data-max-line="1">
+            <div class="info__label">Next Meeting:</div><!--info__label-->
+            <div class="info__value u-fw-b">{{{BA_next-meeting-date--a}}}</div><!--info__value-->
+          </div><!--info-->
+          {{/BA_next-meeting-date--a}}
+          {{#BA_attendees--a}}
+          <div class="info info--internalPage">
+            <div class="info__label">Attendees:</div><!--info__label-->
+            <div class="info__value">{{{BA_attendees--a}}}</div><!--info__value-->
+          </div><!--info-->
+          {{/BA_attendees--a}}
+          {{#BA_invitees--a}}
+          <div class="info info--internalPage">
+            <div class="info__label">Invitees:</div><!--info__label-->
+            <div class="info__value">{{{BA_invitees--a}}}</div><!--info__value-->
+          </div><!--info-->
+          {{/BA_invitees--a}}`;
+
+        // Checking if the infoContainer can't fit the last internal page
+        if ( lastInternalPage.bodyInner.classList.contains('overflow') ) {
+          // First we empty the infoContainer element on the last internal page
+          lastInternalPage.infoContainer.innerHTML = "";
+          
+          // We select the dynamic page if it was already created
+          let dynamicPage = document.querySelector('.page--dynamic');
+
+          // If dynamic page was still not created we create and append it
+          if ( !dynamicPage ) {
+            dynamicPage = lastInternalPage.page.cloneNode(true);
+            dynamicPage.classList.remove('page--internalPage');
+            dynamicPage.classList.add('page--dynamic');
+            document.body.appendChild(dynamicPage);
+          }
+
+          // In the end we inject the infoContainer into newly created dynamic element
+          dynamicPage.querySelector('.body__inner').innerHTML = `<div class="info__container">${infoHTML}</div>`;
+        } else {
+          lastInternalPage.infoContainer.innerHTML = infoHTML;
+          maxHeightCheck();
+          if ( lastInternalPage.bodyInner.classList.contains('overflow') ) {
+            footerInject();
+          }
+
+        }
+      }
+      footerInject();
+
+      placeholderController();
+      checkCrop();
+      checkExport();
+      charLimit();
+
+      // TextFit function decreases the font of the selected element to make it fit in single line (if needed, uncomment the code bellow)
+      TextFit.fit({
+        selector: '.textFit'
+      });
+
+
+    </script>
+
+
+  </body>
+</html>
