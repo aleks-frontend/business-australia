@@ -392,11 +392,12 @@
       {{placeholder-image-1}}
       {{placeholder-image-2}}
       {{placeholder-image-3}}
-      {{placeholder-toggle-new}}
+      {{placeholder-toggle-new-5}}
       {{placeholder-validation}}
 
       {{BA_themeColour--br}}
       {{BA_document-title--br}}
+      {{BA_section-heading--br}}
       {{BA_dark_logo--br}}
       {{BA_light_logo--br}}
 
@@ -465,6 +466,28 @@
       {{/block.column}}
       {{/collection.column-content}}
       {{/block.half-page-image-with-content}}
+      {{#block.single-page-layout}}
+      {{heading--br}}
+      {{subheading--br}}
+      {{#collection.body-content--br}}
+      {{#block.column--br}}
+      {{#collection.content--br}}
+      {{#block.copy--br}}
+      {{copy--br}}
+      {{/block.copy--br}}
+      {{#block.quote--br}}
+      {{quote--br}}
+      {{/block.quote--br}}
+      {{#block.image--br}}
+      {{image--br}}
+      {{image-height--br}}
+      {{caption--br}}
+      {{caption-alignment}}
+      {{/block.image--br}}
+      {{/collection.content--br}}
+      {{/block.column--br}}
+      {{/collection.body-content--br}}
+      {{/block.single-page-layout}}
       {{/collection.two-pages}}
       {{/block.two-pages}}
       {{/collection.BA_internal-pages--br}}
@@ -602,10 +625,21 @@
         padding: 2rem 0; 
       }
 
+      .fit--singlePageLayout { 
+        flex-direction: column;
+        padding: 0.7rem 0 1.5rem 1.1rem; 
+      }
+
       .header--contentOneColumn {
         display: flex;
         justify-content: flex-end;
         margin-bottom: 2.85rem;
+      }
+
+      .header--singlePageLayout {
+        margin-bottom: 3.55rem;
+        padding-bottom: 0.15rem;
+        border-bottom: 0.03rem solid var(--internal-pages-text-color-dynamic);
       }
 
       .body {
@@ -659,7 +693,12 @@
         align-items: flex-end; 
       }
 
-      .body--halfPageImageWithContent { flex-direction: column; }
+      .body--halfPageImageWithContent,
+      .body--singlePageLayout { 
+        flex-direction: column;
+      }
+
+      .body--singlePageLayout { padding-right: 1.2rem; }
       .imagePosition--bottom .body--halfPageImageWithContent { flex-direction: column-reverse; }
 
       .footer {
@@ -923,7 +962,19 @@
       .heading--contentOneColumn { margin-bottom: 3.2rem; }
       .heading--contentTwoColumn { margin-bottom: 0.93rem; }
 
-      .heading--contentOneColumn strong { color: var(--dynamic-color); }
+      .heading--contentOneColumn strong,
+      .heading--singlePageLayout strong { 
+        color: var(--dynamic-color); 
+        font-weight: 400;
+      }
+
+      .heading--singlePageLayout { 
+        margin-bottom: 1rem;
+        width: 8.6rem;
+        font-size: 1.3rem;
+        line-height: 0.95em;
+        font-family: var(--font-taviraj);
+      }
 
       .footerBanner {
         position: relative;
@@ -1028,13 +1079,15 @@
       }
 
       .column__container { display: flex; }
-      .column__container--halfPageImageWithContent { flex: 1; }
+      .column__container--halfPageImageWithContent { flex: 1; } 
+      .column__container--singlePageLayout { width: 100%; }
 
       .column { flex: 1; }
       .column + .column { margin-left: 0.8rem; }
       .column--halfPageImageWithContent + .column { margin-left: 1rem; }
+      .column--singlePageLayout + .column { margin-left: 0.4rem; }
 
-      .column__inner { font-size: 0; }
+      .column__inner--halfPageImageWithContent { font-size: 0; }
 
       .quote__container { 
         position: relative;
@@ -1055,6 +1108,7 @@
       .quoteOpacity--transparent .quote__overlay { opacity: 0.5; }
 
       .quote { position: relative; }
+      .quote--singlePageLayout { font-size: 0; }
 
 
       .quote h3 {
@@ -1124,6 +1178,7 @@
         text-transform: uppercase;
         text-align: right;
         border-bottom: 0.03rem solid var(--white);
+        color: var(--white);
       }
 
       .hero__caption {
@@ -1190,7 +1245,6 @@
         object-fit: contain;
       }
 
-
       .copy h2,
       .copy p,
       .copy li {
@@ -1202,6 +1256,8 @@
       .copy p { line-height: 1.3em; }
       .copy ul { margin-left: 0.25rem; }
 
+      .copy--singlePageLayout h2 { color: var(--dynamic-color); }
+
       .copy li {
         position: relative;
         line-height: 1.3em;
@@ -1211,7 +1267,7 @@
         content: '';
         position: absolute;
         top: 0.1rem;
-        right: 107%;
+        right: 105%;
         width: 0.05rem;
         height: 0.05rem;
         background: var(--internal-pages-text-color-dynamic);
@@ -1221,6 +1277,79 @@
       .copy h2:last-child,
       .copy p:last-child,
       .copy li:last-chil {
+        margin-bottom: 0;
+      }
+
+      .sectionHeading {
+        width: 3.5rem;
+        font-size: 0.19rem;
+        font-style: italic;
+        font-family: var(--font-taviraj);
+        font-weight: bold;
+      }
+
+      .body__content {
+        flex: 1;
+        display: flex;
+      }
+
+      .subheading {
+        margin-right: 0.5rem;
+        width: 3.6rem;
+        font-size: 0.26rem;
+        line-height: 1.3em;
+        font-family: var(--font-taviraj);
+        flex-shrink: 0;
+      }
+
+      .subheading strong {
+        color: var(--dynamic-color);
+        font-weight: 400;
+      }
+
+      .image {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        overflow: hidden;
+      }
+
+      .image__container {
+        position: relative; 
+        display: flex;
+        align-items: flex-end;
+        padding: 0 0.05rem 0.2rem;
+      }
+
+      .captionAlignment--right {
+        text-align: right;
+        justify-content: flex-end;
+      }
+
+      .captionAlignment--left { text-align: left; }
+
+      .image__caption { 
+        position: relative;
+        max-height: 1.2rem;
+        width: 2rem;
+      }
+
+      .image__caption p {
+        font-size: 0.155rem;
+        line-height: 1.3em;
+      }
+
+      .copy--singlePageLayout,
+      .image--singlePageLayout,
+      .quote--singlePageLayout {
+        margin-bottom: 0.2rem;
+      }
+
+      .copy--singlePageLayout:last-child,
+      .image--singlePageLayout:last-child,
+      .quote--singlePageLayout:last-child {
         margin-bottom: 0;
       }
 
@@ -1246,9 +1375,10 @@
       <div class="placeholderMaster__item" data-bg="{{ placeholder-image-3 }}"></div>
     </div><!-- end placeholderMaster -->
     <div class="masterContainer">
-      <div class="js-inject-src" data-target-id="dark-logo" data-is-image="true">{{{ BA_dark_logo--br }}}</div>
-      <div class="js-inject-src" data-target-id="light-logo" data-is-image="true">{{{ BA_light_logo--br }}}</div>
+      <div class="js-inject-src" data-target-id="dark-logo" data-is-image="true">{{{BA_dark_logo--br}}}</div>
+      <div class="js-inject-src" data-target-id="light-logo" data-is-image="true">{{{BA_light_logo--br}}}</div>
       <div class="js-inject-src" data-target-id="document-title">{{BA_document-title--br}}</div>
+      <div class="js-inject-src" data-target-id="section-heading">{{BA_section-heading--br}}</div>     
     </div><!-- masterContainer -->
 
     <!-- COVER PAGE -->
@@ -1446,6 +1576,7 @@
                 ">
       {{#collection.two-pages}}
       {{#block.blank-page}}
+      <!-- BLANK PAGE -->
       <div class="page">
 
         <div class="bleed">
@@ -1464,8 +1595,10 @@
         </div><!--bleed-->
 
       </div><!--page-->
+      <!-- BLANK PAGE -->
       {{/block.blank-page}}
       {{#block.full-page-image-with-quote}}
+      <!-- FULL PAGE IMAGE WITH QUOTE -->
       <div class="page">
 
         <div class="bleed">
@@ -1499,8 +1632,10 @@
         </div><!--bleed-->
 
       </div><!--page-->
+      <!-- FULL PAGE IMAGE WITH QUOTE -->
       {{/block.full-page-image-with-quote}}
       {{#block.half-page-image-with-content}}
+      <!-- HALF PAGE IMAGE WITH CONTENT -->
       <div class="page">
 
         <div class="bleed">
@@ -1530,7 +1665,7 @@
                   {{#collection.column-content}}
                   {{#block.column}}
                   <div class="column column--halfPageImageWithContent">
-                    <div class="column__inner" data-max-height="dynamic">
+                    <div class="column__inner column__inner--halfPageImageWithContent" data-max-height="dynamic">
                       {{#icon-image}}<img src="{{icon-image}}" class="icon" />{{/icon-image}}
                       {{#copy-content}}
                       <div class="copy">
@@ -1556,7 +1691,85 @@
         </div><!--bleed-->
 
       </div><!--page-->
+      <!-- HALF PAGE IMAGE WITH CONTENT -->
       {{/block.half-page-image-with-content}}
+      {{#block.single-page-layout}}
+      <!-- SINGLE PAGE LAYOUT -->
+      <div class="page">
+
+        <div class="bleed">
+
+          <div class="container 
+                      fit 
+                      fit--internalPage
+                      fit--singlePageLayout
+                      ">
+            <div class="header header--singlePageLayout">
+              <div class="sectionHeading" data-target="section-heading"></div><!-- sectionHeading -->
+            </div><!-- header -->
+            <div class="body body--singlePageLayout">
+              <div class="heading heading--singlePageLayout" data-max-line="4">{{{heading--br}}}</div><!-- heading -->
+              <div class="body__content">
+                {{#subheading--br}}
+                <div class="subheading">
+                  <div class="subheading__inner" data-max-height="dynamic">{{{subheading--br}}}</div><!-- subheading__inner -->
+                </div><!-- subheading -->
+                {{/subheading--br}}
+                <div class="column__container column__container--singlePageLayout">
+                  {{#collection.body-content--br}}
+                  {{#block.column--br}}
+                  <div class="column column--singlePageLayout js-imageHeightSetter-container" >
+                    <div class="column__inner" data-max-height="dynamic">
+                      {{#collection.content--br}}
+                      {{#block.copy--br}}
+                      {{#copy--br}}
+                      <div class="copy copy--singlePageLayout">
+                        {{{copy--br}}}
+                      </div><!-- copy -->
+                      {{/copy--br}}
+                      {{/block.copy--br}}
+                      {{#block.quote--br}}
+                      {{#quote--br}}
+                      <div class="quote quote--singlePageLayout">
+                        {{{quote--br}}}
+                      </div><!-- quote -->
+                      {{/quote--br}}
+                      {{/block.quote--br}}
+                      {{#block.image--br}}
+                      <div class="image__container 
+                                  js-imageHeightSetter-image 
+                                  image__container--singlePageLayout
+                                  captionAlignment--{{caption-alignment}}{{^caption-alignment}}right{{/caption-alignment}}" 
+                           data-image-height="{{image-height--br}}">
+                        {{#image--br}}
+                        <div class="image">
+                          <div class="reposition-fix">{{{image--br}}}</div><!-- reposition-fix -->
+                        </div><!-- image -->
+                        {{/image--br}}
+                        {{#caption--br}}
+                        <div class="image__caption" data-max-height="css">{{{caption--br}}}</div><!-- image__caption -->
+                        {{/caption--br}}
+                      </div><!-- image__container -->
+                      {{/block.image--br}}
+                      {{/collection.content--br}}
+                    </div><!-- column__inner -->
+                  </div><!-- column -->
+                  {{/block.column--br}}
+                  {{/collection.body-content--br}}
+                </div><!-- column__container -->
+              </div><!-- body__content -->
+            </div><!-- body -->
+            <div class="pageNumber__container pageNumber__container--hidden">
+              <div class="pageNumber__square"></div><!-- pageNumber__square -->
+              <div class="pageNumber"></div><!-- pageNumber -->
+            </div>
+          </div><!--container fit-->
+
+        </div><!--bleed-->
+
+      </div><!--page-->
+      <!-- SINGLE PAGE LAYOUT -->
+      {{/block.single-page-layout}}
       {{/collection.two-pages}}
       {{/block.two-pages}}
     </div>
@@ -1614,7 +1827,7 @@
     <script src="js/fontfaceobserver.js"></script>
     <script src="https://outfit-assets-production.s3-accelerate.amazonaws.com/scripts/textfit.0.0.4.min.js" type="text/javascript"></script>
     <script>
-      {{ #placeholder-toggle-new }}document.body.classList.add("u-placeholder-{{ placeholder-toggle-new }}{{^placeholder-toggle-new}}hide{{/placeholder-toggle-new}}"); {{ /placeholder-toggle-new }}
+      {{ #placeholder-toggle-new-5 }}document.body.classList.add("u-placeholder-{{ placeholder-toggle-new-5 }}{{^placeholder-toggle-new-5}}hide{{/placeholder-toggle-new-5}}"); {{ /placeholder-toggle-new-5 }}
       {{ #placeholder-validation }}document.body.classList.add("placeholder__validation--{{placeholder-validation}}"){{ /placeholder-validation }}
     </script>
     <script>
@@ -1660,6 +1873,23 @@
           });            
         });
       }    
+
+      function imageHeightSetter() {
+        const colContainers = document.querySelectorAll('.js-imageHeightSetter-container');
+
+        colContainers.forEach(colContainer => {
+          const colContainerHeight = colContainer.offsetHeight;
+          const imageBlocks = colContainer.querySelectorAll('.js-imageHeightSetter-image');
+
+          imageBlocks.forEach(image => {
+            const setHeight = image.dataset.imageHeight || 30;
+
+            image.style.height = `${( colContainerHeight / 100 ) * setHeight - 1}px`;
+          });          
+        })
+      }
+
+      imageHeightSetter();
 
       // Calling text size restriction functions once the fonts are loaded
       // All external font-families need to be added to 'fonts' array
