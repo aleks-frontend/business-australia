@@ -389,7 +389,7 @@
       Input Order
       {{show-crop}}
       {{placeholder-opacity}}
-      {{placeholder-image-1}}
+      {{placeholder-image-11}}
       {{placeholder-image-2}}
       {{placeholder-image-3}}
       {{placeholder-toggle-new-5}}
@@ -508,7 +508,25 @@
       {{/collection.content--br}}
       {{/block.column--br}}
       {{/collection.body-content--br}}
+      {{feature-image--br}}
+      {{feature-image-position--br}}
       {{/block.flexi-page}}
+      {{#block.stats-page}}
+      {{heading--br}}
+      {{#collection.body-content--br}}
+      {{#block.testimonial--br}}
+      {{headshot}}
+      {{testimonial-copy--br}}
+      {{/block.testimonial--br}}
+      {{#block.column-content--br}}
+      {{#collection.column-content--br}}
+      {{#block.column--br}}
+      {{copy--br}}
+      {{/block.column--br}}
+      {{/collection.column-content--br}}
+      {{/block.column-content--br}}
+      {{/collection.body-content--br}}
+      {{/block.stats-page}}
       {{/collection.two-pages}}
       {{/block.two-pages}}
       {{/collection.BA_internal-pages--br}}
@@ -652,9 +670,15 @@
       }
 
       .fit--flexiPage {
-        padding: 0.7rem 0 1.5rem 1.1rem;
+        padding: 0.7rem 0 2.5rem 1.1rem;
         flex-direction: column;
       }
+
+      .fit--statsPage {
+        flex-direction: column;
+        padding: 0.7rem 0 1.5rem 1rem;
+      }
+
 
       .header--contentOneColumn {
         display: flex;
@@ -663,14 +687,19 @@
       }
 
       .header--singlePageLayout,
-      .header--flexiPage {
+      .header--flexiPage,
+      .header--statsPage {
         margin-bottom: 3.55rem;
         padding-bottom: 0.15rem;
         border-bottom: 0.03rem solid var(--internal-pages-text-color-dynamic);
       }
 
       .header--singlePageLayout { margin-bottom: 3.55rem; }
-      .header--flexiPage { margin-bottom: 2.05rem; }
+
+      .header--flexiPage,
+      .header--statsPage { 
+        margin-bottom: 2.05rem; 
+      }
 
       .body {
         position: relative;
@@ -731,7 +760,20 @@
       .body--singlePageLayout { padding-right: 1.2rem; }
       .imagePosition--bottom .body--halfPageImageWithContent { flex-direction: column-reverse; }
 
-      .body--flexiPage { flex-direction: column; }
+      .body--flexiPage { 
+        flex-direction: column;        
+        padding-right: 1.2rem;
+      }
+
+      .featureImagePosition--top-left .body--flexiPage,
+      .featureImagePosition--top-right .body--flexiPage {
+        flex-direction: column-reverse; 
+      }
+
+      .body--statsPage {
+        flex-direction: column;
+        padding: 0 0.9rem;
+      }
 
       .footer {
         position: relative;
@@ -994,23 +1036,29 @@
       .heading--contentOneColumn { margin-bottom: 3.2rem; }
       .heading--contentTwoColumn { margin-bottom: 0.93rem; }
 
-      .heading--flexiPage { 
-        margin-bottom: 0.65rem;
-        max-height: 6.5rem;
-      }
+      .heading--flexiPage { max-height: 6.5rem; }
+      .feature-image-exist .heading--flexiPage { max-height: 5rem; }
+
 
       .heading--contentOneColumn strong,
       .heading--singlePageLayout strong,
-      .heading--flexiPage h1 strong { 
+      .heading--flexiPage h1 strong,
+      .heading--statsPage strong { 
         color: var(--dynamic-color); 
         font-weight: 400;
       }
 
       .heading--singlePageLayout,
-      .heading--flexiPage h1 {
+      .heading--flexiPage h1,
+      .heading--statsPage {
         font-size: 1.3rem;
         line-height: 0.95em;
         font-family: var(--font-taviraj);
+      }
+
+      .heading--statsPage {
+        margin-bottom: 0.8rem;
+        margin-right: 2rem; 
       }
 
       .heading--singlePageLayout { 
@@ -1138,6 +1186,8 @@
       .column__container--singlePageLayout { width: 100%; }
       .column__container--flexiPage { flex: 1; }
 
+      .heading--flexiPage + .column__container--flexiPage { margin-top: 0.65rem; }
+
       .column { flex: 1; }
       .column + .column { margin-left: 0.8rem; }
       .column--halfPageImageWithContent + .column { margin-left: 1rem; }
@@ -1174,7 +1224,8 @@
         font-size: 0;
       }
 
-      .quote h3 {
+      .quote h3,
+      .testimonial__content h3 {
         position: relative;
         display: inline-block;
         font-size: 0.455rem;
@@ -1183,8 +1234,12 @@
         color: var(--dynamic-color);
       }
 
+
+
       .quote h3:before,
-      .quote h3:after { 
+      .quote h3:after,
+      .testimonial__content h3:before,
+      .testimonial__content h3:after { 
         content: '"';
         display: inline-block;
         font-size: 1em;
@@ -1221,6 +1276,10 @@
         display: flex;
         flex-direction: column;
         flex: 1; 
+      }
+
+      .content--halfPageImageWithContent {
+        padding: 0.83rem 1rem 1.5rem 2.1rem;
         background-color: var(--dynamic-color);
       }
 
@@ -1293,8 +1352,6 @@
       .hero__quote p { font-size: 0.235rem; }
       .hero__quote h3 + p { margin-top: 0.35rem; }
 
-      .content { padding: 0.83rem 1rem 1.5rem 2.1rem; }
-
       .introductoryCopy {
         margin-bottom: 0.5rem;
         width: 5.7rem;
@@ -1312,30 +1369,46 @@
 
       .copy h2,
       .copy p,
-      .copy li {
+      .copy li,
+      .testimonial__content h2,
+      .testimonial__content p,
+      .testimonial__content li {
         margin-bottom: 0.15rem;
         font-size: 0.2rem;
       }
 
-      .copy h2 { font-weight: bold; }
-      .copy p { line-height: 1.3em; }
+      .copy h2,
+      .testimonial__content h2 { 
+        font-weight: bold;
+      }
 
-      .copy ul { 
+      .copy p,
+      .testimonial__content p { 
+        line-height: 1.3em; 
+      }
+
+      .copy ul,
+      .testimonial__content ul { 
         margin-left: 0.25rem;
         margin-bottom: 0.2rem;
       }
 
+      .testimonial__content ul  { margin-left: 0.35rem; }
+
       .copy--singlePageLayout h2,
-      .copy--flexiPage h2 { 
+      .copy--flexiPage h2,
+      .testimonial__content h2 { 
         color: var(--dynamic-color);
       }
 
-      .copy li {
+      .copy li,
+      .testimonial__content li {
         position: relative;
         line-height: 1.3em;
       }
 
-      .copy li:before {
+      .copy li:before,
+      .testimonial__content li:before {
         content: '';
         position: absolute;
         top: 0.1rem;
@@ -1349,7 +1422,11 @@
       .copy h2:last-child,
       .copy p:last-child,
       .copy li:last-child,
-      .copy ul:last-child {
+      .copy ul:last-child,
+      .testimonial__content h2:last-child,
+      .testimonial__content p:last-child,
+      .testimonial__content li:last-child,
+      .testimonial__content ul {
         margin-bottom: 0;
       }
 
@@ -1366,10 +1443,7 @@
         display: flex;
       }
 
-      .body__content--flexiPage { 
-        flex-direction: column;
-        padding-right: 1.2rem;
-      }
+      .body__content--flexiPage { flex-direction: column; }
 
       .subheading {
         margin-right: 0.5rem;
@@ -1437,6 +1511,68 @@
         margin-bottom: 0;
       }
 
+      .featureImage__container {
+        position: relative;
+        height: 8.7rem;
+      }
+
+      .featureImagePosition--top-left .featureImage__container,
+      .featureImagePosition--top-right .featureImage__container { 
+        margin-bottom: 0.6rem;
+      }
+
+      .featureImagePosition--bottom-left .featureImage__container,
+      .featureImagePosition--bottom-right .featureImage__container { 
+        margin-top: 0.6rem;
+      }
+
+      .featureImage { 
+        position: absolute;
+        top: 0;
+        bottom: 0;
+      }
+
+      .featureImagePosition--top-right .featureImage,
+      .featureImagePosition--bottom-right .featureImage { 
+        left: 0;
+        right: -1rem;
+      }
+
+      .featureImagePosition--top-left .featureImage,
+      .featureImagePosition--bottom-left .featureImage { 
+        right: 0;
+        left: -1rem;
+      }
+
+      .testimonial { 
+        margin-bottom: 0.9rem;
+        height: 3rem;
+        display: flex;
+        padding-right: 2.1rem;
+        font-size: 0;
+      }
+
+      .testimonial:last-child { margin-bottom: 0; }
+
+      .testimonial__image {
+        position: relative;
+        margin-right: 0.3rem;
+        height: 100%;
+        width: 3rem;
+        overflow: hidden;
+      }
+
+      .testimonial__content { flex: 1; }
+
+      .text__container { 
+        display: flex;        
+        height: 1rem;
+        padding-right: 0.5rem;
+      }
+      
+      .text__column { flex: 1; }
+      .text__column + .text__column { margin-left: 0.5rem; }
+
       .pageNumber__container {
         position: absolute;
         bottom: 0.59rem;
@@ -1457,6 +1593,9 @@
         width: 0.3rem;
         height: 100%;
       }
+
+      .pageNumber__square--defualtBackgroundColor { background: var(--internal-pages-text-color-dynamic); }
+
 
       .pageNumber {
         margin: 0 0.12rem;
@@ -1490,7 +1629,7 @@
                themeColour--{{BA_themeColour--br}}{{^BA_themeColour--br}}red{{/BA_themeColour--br}}
                ">
     <div class="placeholderMaster" data-opacity="{{ placeholder-opacity }}">
-      <div class="placeholderMaster__item" data-bg="{{ placeholder-image-1 }}"></div>
+      <div class="placeholderMaster__item" data-bg="{{ placeholder-image-11 }}"></div>
       <div class="placeholderMaster__item" data-bg="{{ placeholder-image-2 }}"></div>
       <div class="placeholderMaster__item" data-bg="{{ placeholder-image-3 }}"></div>
     </div><!-- end placeholderMaster -->
@@ -1777,7 +1916,7 @@
                 <div class="hero__caption" data-max-height="css">{{{image-caption}}}</div><!-- hero__caption -->
                 {{#quote-block}}<div class="hero__quote" data-max-height="css">{{{quote-block}}}</div>{{/quote-block}}<!-- hero__quote -->
               </div><!-- hero__container -->
-              <div class="content">
+              <div class="content content--halfPageImageWithContent">
                 {{#colour-block-introductory-copy}}
                 <div class="introductoryCopy" data-max-line="3">{{{colour-block-introductory-copy}}}</div><!-- introductoryCopy -->
                 {{/colour-block-introductory-copy}}
@@ -1803,7 +1942,7 @@
               <div class="title__inner"  data-target="document-title" data-max-line="1"></div><!-- title__inner -->
             </div><!-- title -->
             <div class="pageNumber__container js-page-number-container">
-              <div class="pageNumber__square"></div><!-- pageNumber__square -->
+              <div class="pageNumber__square pageNumber__square--defualtBackgroundColor"></div><!-- pageNumber__square -->
               <div class="pageNumber js-page-number"></div><!-- pageNumber -->
             </div>
           </div><!--container fit-->
@@ -1900,6 +2039,8 @@
                       fit 
                       fit--internalPage
                       fit--flexiPage
+                      featureImagePosition--{{feature-image-position--br}}{{^feature-image-position--br}}bottom-right{{/feature-image-position--br}}
+                      {{#feature-image--br}}feature-image-exist{{/feature-image--br}}
                       ">
             <div class="header header--flexiPage">
               <div class="sectionHeading" data-target="section-heading"></div><!-- sectionHeading -->
@@ -1911,6 +2052,7 @@
                   {{{heading--br}}}
                 </div><!-- heading -->
                 {{/heading--br}}
+                {{#collection.body-content--br.length}}
                 <div class="column__container column__container--flexiPage">
                   {{#collection.body-content--br}}
                   {{#block.column--br}}
@@ -1953,7 +2095,15 @@
                   {{/block.column--br}}
                   {{/collection.body-content--br}}
                 </div><!-- column__container -->
+                {{/collection.body-content--br.length}}
               </div><!-- body__content -->
+              {{#feature-image--br}}
+              <div class="featureImage__container">
+                <div class="featureImage">
+                  <div class="reposition-fix">{{{feature-image--br}}}</div><!-- reposition-fix -->
+                </div><!-- featureImage -->
+              </div><!-- featureImage__container -->
+              {{/feature-image--br}}
             </div><!-- body -->
             <div class="pageNumber__container js-page-number-container">
               <div class="pageNumber__square"></div><!-- pageNumber__square -->
@@ -1966,6 +2116,65 @@
       </div><!--page-->
       <!-- FLEXI PAGE -->
       {{/block.flexi-page}}
+      {{#block.stats-page}}
+      <!-- STATS PAGE -->
+      <div class="page">
+
+        <div class="bleed">
+
+          <div class="container 
+                      fit 
+                      fit--internalPage
+                      fit--statsPage
+                      ">
+            <div class="header header--statsPage">
+              <div class="sectionHeading" data-target="section-heading"></div><!-- sectionHeading -->
+            </div><!-- header -->
+            <div class="body body--statsPage">
+              {{#heading--br}}
+              <div class="heading heading--statsPage">{{{heading--br}}}</div><!-- heading--flexiPage -->
+              {{/heading--br}}
+              <div class="content content--statsPage">
+                <div class="content__inner" data-max-height="dynamic">
+                  {{#collection.body-content--br}}
+                  {{#block.testimonial--br}}
+                  <div class="testimonial">
+                    {{#headshot}}
+                    <div class="testimonial__image">
+                      <div class="reposition-fix">{{{headshot}}}</div><!-- reposition-fix -->
+                    </div><!-- testimonial__image -->
+                    {{/headshot}}
+                    <div class="testimonial__content">
+                      <div class="testimonial__contentInner" data-max-height="dynamic">
+                        {{{testimonial-copy--br}}}
+                      </div><!-- testimonial__contentInner -->
+                    </div><!-- testimonial__content -->
+                  </div><!-- testimonial -->
+                  {{/block.testimonial--br}}
+                  {{#block.column-content--br}}
+                  <div class="text__container">
+                    {{#collection.column-content--br}}
+                    {{#block.column--br}}
+                    <div class="text__column copy">{{{copy--br}}}</div><!-- text__column -->
+                    {{/block.column--br}}
+                    {{/collection.column-content--br}}
+                  </div><!-- text__container -->
+                  {{/block.column-content--br}}
+                  {{/collection.body-content--br}}
+                </div><!-- content__inner -->
+              </div><!-- contents--statsPage -->
+            </div><!-- body -->
+            <div class="pageNumber__container js-page-number-container">
+              <div class="pageNumber__square"></div><!-- pageNumber__square -->
+              <div class="pageNumber js-page-number"></div><!-- pageNumber -->
+            </div><!-- pageNumber__container -->
+          </div><!--container fit-->
+
+        </div><!--bleed-->
+
+      </div><!--page-->
+      <!-- STATS PAGE -->
+      {{/block.stats-page}}
       {{/collection.two-pages}}
       {{/block.two-pages}}
     </div>
