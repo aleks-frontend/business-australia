@@ -525,6 +525,15 @@
       {{/block.column--br}}
       {{/collection.column-content--br}}
       {{/block.column-content--br}}
+      {{#block.stats--br}}
+      {{stats-alignment--br}}
+      {{#collection.stat--br}}
+      {{#block.stats--br}}
+      {{stat-number--br}}
+      {{stat-title--br}}
+      {{/block.stats--br}}
+      {{/collection.stat--br}}
+      {{/block.stats--br}}
       {{/collection.body-content--br}}
       {{/block.stats-page}}
       {{/collection.two-pages}}
@@ -1225,7 +1234,8 @@
       }
 
       .quote h3,
-      .testimonial__content h3 {
+      .testimonial__content h3,
+      .copy--statsPage h3 {
         position: relative;
         display: inline-block;
         font-size: 0.455rem;
@@ -1239,7 +1249,9 @@
       .quote h3:before,
       .quote h3:after,
       .testimonial__content h3:before,
-      .testimonial__content h3:after { 
+      .testimonial__content h3:after,
+      .copy--statsPage h3:before,
+      .copy--statsPage h3:after { 
         content: '"';
         display: inline-block;
         font-size: 1em;
@@ -1393,11 +1405,15 @@
         margin-bottom: 0.2rem;
       }
 
-      .testimonial__content ul  { margin-left: 0.35rem; }
+      .testimonial__content ul,
+      .copy--statsPage ul { 
+        margin-left: 0.35rem; 
+      }
 
       .copy--singlePageLayout h2,
       .copy--flexiPage h2,
-      .testimonial__content h2 { 
+      .testimonial__content h2,
+      .copy--statsPage h2 { 
         color: var(--dynamic-color);
       }
 
@@ -1565,13 +1581,61 @@
       .testimonial__content { flex: 1; }
 
       .text__container { 
+        margin-bottom: 0.9rem;
         display: flex;        
-        height: 1rem;
         padding-right: 0.5rem;
       }
-      
-      .text__column { flex: 1; }
-      .text__column + .text__column { margin-left: 0.5rem; }
+
+      .text__column {
+        flex: 1;
+        max-height: 3.3rem;
+      }
+
+      .text__column + .text__column { margin-left: 0.5rem; }      
+      .text__container:last-child { margin-bottom: 0.9rem; }
+
+      .stats { 
+        margin-bottom: 0.9rem;
+        display: flex;
+        height: 2.2rem;
+        padding: 0.65rem 0.1rem 0;
+        border-top: 0.03rem solid var(--internal-pages-text-color-dynamic);
+      }
+
+      .statsAlignment--center { justify-content: center; }
+      .statsAlignment--right { justify-content: flex-end; }
+
+      .stats:last-child { margin-bottom: 0; }
+
+      .stats__item {
+        max-width: 2.1rem;
+        height: 1.5rem;
+      }
+
+      .stats__item + .stats__item { margin-left: 0.9rem; }
+
+      .stats__number {
+        margin-bottom: 0.14rem;
+        height: 0.8rem;
+        font-size: 1rem;
+        line-height: 0.9em;
+        font-family: var(--font-taviraj);
+        color: var(--dynamic-color);
+      }
+
+      .stats__number.overflow:hover:after { font-size: 0.3em; }
+      .stats__number.overflow::before { font-size: 0.4em; }
+
+      .stats__title {
+        padding: 0 0.05rem;
+        font-size: 0.25rem;
+        text-transform: uppercase;
+      }
+
+      .stats__title p {
+        font-size: 1em;
+        line-height: 1.1em;
+      }
 
       .pageNumber__container {
         position: absolute;
@@ -2155,11 +2219,23 @@
                   <div class="text__container">
                     {{#collection.column-content--br}}
                     {{#block.column--br}}
-                    <div class="text__column copy">{{{copy--br}}}</div><!-- text__column -->
+                    <div class="text__column copy copy--statsPage" data-max-height="css">{{{copy--br}}}</div><!-- text__column -->
                     {{/block.column--br}}
                     {{/collection.column-content--br}}
                   </div><!-- text__container -->
                   {{/block.column-content--br}}
+                  {{#block.stats--br}}
+                  <div class="stats statsAlignment--{{stats-alignment--br}}{{^stats-alignment--br}}left{{/stats-alignment--br}}">
+                    {{#collection.stat--br}}
+                    {{#block.stats--br}}
+                    <div class="stats__item">
+                      <div class="stats__number" data-char-limit="3">{{{stat-number--br}}}</div><!-- stats__number -->
+                      <div class="stats__title" data-max-line="2">{{{stat-title--br}}}</div><!-- stats__title -->
+                    </div><!-- stats__item -->
+                    {{/block.stats--br}}
+                    {{/collection.stat--br}}
+                  </div><!-- stats -->
+                  {{/block.stats--br}}
                   {{/collection.body-content--br}}
                 </div><!-- content__inner -->
               </div><!-- contents--statsPage -->
