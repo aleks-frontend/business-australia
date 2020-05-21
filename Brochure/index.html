@@ -404,6 +404,7 @@
       {{#collection.BA_cover-page--br}}
       {{#block.BA_cover-page-block-banner--br}}
       {{page-theme--br}}
+      {{gradient-opacity--br}}
       {{gradient-colour}}
       {{top-grad-height}}
       {{left-grad-width}}
@@ -417,6 +418,7 @@
       {{/block.BA_cover-page-block-banner--br}}
       {{#block.BA_cover-page-highlight-banner--br}}
       {{page-theme--br}}
+      {{gradient-opacity--br}}
       {{gradient-colour}}
       {{top-grad-height}}
       {{left-grad-width}}
@@ -467,6 +469,7 @@
       {{/collection.column-content}}
       {{/block.half-page-image-with-content}}
       {{#block.single-page-layout}}
+      {{heading-font-size-br}}
       {{heading--br}}
       {{subheading--br}}
       {{#collection.body-content--br}}
@@ -606,12 +609,14 @@
       {{#collection.BA_cover-page--br}}
 
       {{#block.BA_cover-page-block-banner--br}}
+      .gradient { opacity: {{gradient-opacity--br}}{{^gradient-opacity--br}}1{{/gradient-opacity--br}}; }
       .gradient--top { height: {{top-grad-height}}%; }      
       .gradient--left { width: {{left-grad-width}}%; }
       .gradient--bottom { height: {{bottom-grad-height}}%; }
       {{/block.BA_cover-page-block-banner--br}}
 
       {{#block.BA_cover-page-highlight-banner--br}}
+      .gradient { opacity: {{gradient-opacity--br}}{{^gradient-opacity--br}}1{{/gradient-opacity--br}}; }
       .gradient--top { height: {{top-grad-height}}%; }      
       .gradient--left { width: {{left-grad-width}}%; }
       .gradient--bottom { height: {{bottom-grad-height}}%; }
@@ -648,6 +653,11 @@
       .gradientColour--black .gradient--bottom { background-image: url(https://files.outfit.io/media_library_items/186478/gradient-grey-bottom-2.png); }
 
       .gradientColour--white .gradient { opacity: 0.9; }
+
+      .footerBannerTheme--transparent .gradient--hero,
+      .footerBannerTheme--transparent .gradient--fit { display: none; }
+
+      .footerBannerTheme--transparent .gradient--fit { display: block; }
 
 
       .fit { display: flex; }      
@@ -710,6 +720,11 @@
         margin-bottom: 2.05rem; 
       }
 
+      .header--flexiPage { 
+        display: flex;
+        padding-right: 1.2rem;
+      }
+
       .body {
         position: relative;
         display: flex;
@@ -726,6 +741,7 @@
       .body--coverPageHighlightBanner {
         align-items: flex-start;
         padding: 1.7rem 5.3rem 2.1rem 1.95rem;
+        z-index: 1;
       }
 
       .body--contentOneColumn { display: block; }
@@ -792,6 +808,7 @@
       .footer--coverPageHighlightBanner { 
         display: flex;
         background: var(--footer-banner-background);
+        z-index: 1;
       }
 
       .footer--contentTwoColumn {
@@ -1194,6 +1211,30 @@
       .column__container--halfPageImageWithContent { flex: 1; } 
       .column__container--singlePageLayout { width: 100%; }
       .column__container--flexiPage { flex: 1; }
+      
+      /* Showing error popup if subheading is set and more than two columns are added */
+      .alertPopup {
+        display: none;
+        position: absolute;
+        align-items: center;
+        top: 50%;
+        left: 50%;
+        width: 50%;
+        min-height: 4rem;
+        background: #fff;
+        color: red;
+        transform: translate(-50%, -50%);
+        z-index: 999;
+        text-align: center;
+        justify-content: center;
+        border: 2px solid red;
+        border-radius: 2px;
+        font-size: 0.6rem;
+        line-height: 1.2em;
+        padding: 1em;
+      }
+      
+      .subheading + .column__container--singlePageLayout .column:nth-child(3) + .alertPopup { display: flex; }
 
       .heading--flexiPage + .column__container--flexiPage { margin-top: 0.65rem; }
 
@@ -1205,6 +1246,8 @@
       .column--flexiPage + .column { 
         margin-left: 0.4rem;
       }
+      
+      .subheading + .column__container--singlePageLayout .column:nth-child(3) { display: none; }
 
       .column__inner--halfPageImageWithContent { font-size: 0; }
 
@@ -1243,6 +1286,8 @@
         font-family: var(--font-taviraj);
         color: var(--dynamic-color);
       }
+
+      .quote--fullPageImageWithQuote h3 { color: var(--internal-pages-text-color-dynamic); }
 
 
 
@@ -1315,6 +1360,20 @@
         text-align: right;
         border-bottom: 0.03rem solid var(--white);
         color: var(--white);
+
+      }
+
+      .title--statsPage {
+        position: relative !important;
+        left: unset;
+        top: unset;
+        width: auto;
+        height: auto;
+        margin-left: 1rem;
+        flex: 1;
+        padding-left: 0;
+        border-bottom: none;
+        color: var(--internal-pages-text-color-dynamic);
       }
 
       .hero__caption {
@@ -1457,6 +1516,7 @@
       .body__content {
         flex: 1;
         display: flex;
+        position: relative;
       }
 
       .body__content--flexiPage { flex-direction: column; }
@@ -1763,8 +1823,8 @@
             <div class="reposition-fix">{{{background-image--br}}}</div><!-- reposition-fix -->
           </div><!-- backgroundImage -->
           <div class="body body--coverPageHighlightBanner">
-            <div class="gradient gradient--left"></div><!--left-grad-->
-            <div class="gradient gradient--top"></div><!--top-grad-->
+            <div class="gradient gradient--left gradient--hero"></div><!--left-grad-->
+            <div class="gradient gradient--top gradient--hero"></div><!--top-grad-->
             <div class="gradient gradient--bottom"></div><!--bottom-grad-->
             <div class="heading heading--coverPageHighlightBanner" data-max-height="css">
               {{{cover-heading--br}}}
@@ -1787,6 +1847,8 @@
               <img src="#" class="logo logo--light"data-target="light-logo" />
             </div><!-- logo__container -->
           </div><!-- footer -->
+          <div class="gradient gradient--left gradient--fit"></div><!--left-grad-->
+          <div class="gradient gradient--bottom gradient--fit"></div><!--top-grad-->
         </div><!--container fit-->
 
       </div><!--bleed-->
@@ -1942,7 +2004,7 @@
               {{#quote-block}}
               <div class="quote__container" data-max-height="css">
                 <div class="quote__overlay"></div><!-- quote__overlay -->
-                <div class="quote">{{{quote-block}}}</div><!-- quote -->
+                <div class="quote quote--fullPageImageWithQuote">{{{quote-block}}}</div><!-- quote -->
               </div><!-- quote__container -->
               {{/quote-block}}
             </div><!-- body -->
@@ -2028,10 +2090,14 @@
                       fit--singlePageLayout
                       ">
             <div class="header header--singlePageLayout">
-              <div class="sectionHeading" data-target="section-heading"></div><!-- sectionHeading -->
+              <div class="sectionHeading" data-target="section-heading" data-max-line="1"></div><!-- sectionHeading -->
             </div><!-- header -->
             <div class="body body--singlePageLayout">
-              <div class="heading heading--singlePageLayout" data-max-line="4">{{{heading--br}}}</div><!-- heading -->
+              <div class="heading heading--singlePageLayout">
+                <div class="heading__inner" style="font-size: {{heading-font-size-br}}{{^heading-font-size-br}}100{{/heading-font-size-br}}%; line-height: 1em;"  data-max-line="4">
+                  {{{heading--br}}}
+                </div><!-- heading__inner -->
+              </div><!-- heading -->
               <div class="body__content">
                 {{#subheading--br}}
                 <div class="subheading">
@@ -2079,6 +2145,7 @@
                   </div><!-- column -->
                   {{/block.column--br}}
                   {{/collection.body-content--br}}
+                  <div class="alertPopup">Third column is not allowed if Subheading input is set.</div>
                 </div><!-- column__container -->
               </div><!-- body__content -->
             </div><!-- body -->
@@ -2107,7 +2174,8 @@
                       {{#feature-image--br}}feature-image-exist{{/feature-image--br}}
                       ">
             <div class="header header--flexiPage">
-              <div class="sectionHeading" data-target="section-heading"></div><!-- sectionHeading -->
+              <div class="sectionHeading" data-target="section-heading" data-max-line="1"></div><!-- sectionHeading -->
+              <div class="title title--statsPage" data-target="document-title" data-max-line="1"></div><!-- title -->
             </div><!-- header -->
             <div class="body body--flexiPage">
               <div class="body__content body__content--flexiPage">
@@ -2117,7 +2185,7 @@
                 </div><!-- heading -->
                 {{/heading--br}}
                 {{#collection.body-content--br.length}}
-                <div class="column__container column__container--flexiPage">
+                <div class="column__container column__container--flexiPage" data-first-column-width="{{first-column-width}}{{^first-column-width}}50{{/first-column-width}}">
                   {{#collection.body-content--br}}
                   {{#block.column--br}}
                   <div class="column column--flexiPage js-imageHeightSetter-container" >
@@ -2192,7 +2260,7 @@
                       fit--statsPage
                       ">
             <div class="header header--statsPage">
-              <div class="sectionHeading" data-target="section-heading"></div><!-- sectionHeading -->
+              <div class="sectionHeading" data-target="section-heading" data-max-line="1"></div><!-- sectionHeading -->
             </div><!-- header -->
             <div class="body body--statsPage">
               {{#heading--br}}
@@ -2402,6 +2470,19 @@
       TextFit.fit({
         selector: '.textFit'
       });
+      
+      function setFirstColumnWidth() {
+        const colContainers = document.querySelectorAll('[data-first-column-width]');
+        
+        for ( const container of colContainers ) {
+          const firstColWidth = container.dataset.firstColumnWidth;
+          const columns = container.querySelectorAll('.column');
+
+          if ( columns.length > 1 ) columns[0].style.cssText = `flex: unset; width: ${firstColWidth}%`;
+        }
+      }
+      
+      setFirstColumnWidth();
 
       function pageNumberInject() {
         const pageNumberContainer = document.querySelectorAll('.js-page-number-container');
