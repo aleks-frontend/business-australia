@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html data-sign="OS?">
+
+<head>
+  <title>Outfit</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" type="text/css" href="./css/minireset.css">
+  <link rel="stylesheet" type="text/css" href="./css/main.css">
+
+  <style>
+    @import url('https://fonts.googleapis.com/css?family=Archivo:400,400i,700,700i&display=swap');
+    @import url('https://fonts.googleapis.com/css?family=Taviraj&display=swap');
+    
+    /* 
+    {{#show-crop}}{{/show-crop}}
+    {{#mr-type}}{{/mr-type}}
+    {{#show-back-page}}{{/show-back-page}}    
+    {{#mr-light-logo}}{{/mr-light-logo}}
+    {{#mr-dark-logo}}{{/mr-dark-logo}}
+    {{#BA_logo-height}}{{/BA_logo-height}}
+    */
+
+    :root {
+      --red: {{account.colors.red}};
+      --green: {{account.colors.green}};
+      --blue: {{account.colors.blue}};
+      --yellow: {{account.colors.yellow}};
+      --white: {{account.colors.white}};
+      --black: {{account.colors.black}};
+    }
+
+    body {
+      font-family: 'Archivo';
+      font-size: 11pt;
+      color: var(--black);
+      word-break: break-word;
+    }
+
+    .backgroundImage {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      overflow: hidden;
+    }
+
+    .backgroundImage div {
+      width: auto !important;
+      height: auto !important;
+      right: 0;
+      bottom: 0;
+    }
+
+    /* Helper classes */
+    .u-hide {
+      display: none;
+    }
+
+    /* Helper class for fixing Reposition tool bug */
+    .reposition-fix {
+      position: absolute;
+      overflow: hidden;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+    }
+
+    .reposition-fix div {
+      top: 0 !important;
+      bottom: 0 !important;
+      left: 0 !important;
+      right: 0 !important;
+      width: 100% !important;
+      height: 100% !important;
+    }
+
+    /* ANY OTHER STYLES THAT NEED MUSTACHE.JS CAPABILITIES */
+    .wrapper {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+    }
+
+    h1 {
+      font-size: 19pt;
+      font-weight: bold;
+      line-height: 1.2em;
+    }
+
+    h2 {
+      font-size: 17pt;
+      font-weight: bold;
+      line-height: 1.2em;
+    }
+
+    h3 {
+      font-size: 14pt;
+      font-weight: bold;
+      line-height: 1.2em;
+    }
+
+    p {
+      font-size: 12pt;
+      font-weight: normal;
+      line-height: 1.2em;
+      text-align: justify;
+      margin-bottom: 1.2em;
+    }
+
+    p:last-child {
+      margin-bottom: 0;
+    }
+
+    .header {
+      width: 100%;
+      height: 44mm;
+      padding: calc(3mm + 10pt) calc(3mm + 60pt) 10pt calc(3mm + 70pt);
+      background: var(--black);
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .release-type h1 {
+      font-size: 21pt;
+      font-weight: bold;
+      line-height: 1em;
+      text-transform: uppercase;
+      color: var(--white);
+    }
+
+    .release-type h2 {
+      font-size: 12pt;
+      font-weight: bold;
+      line-height: 1em;
+      text-transform: uppercase;
+      color: var(--white);
+    }
+    
+    .page:not(.page-media-alert) .media-alert,
+    .page:not(.page-immediate-media-release) .immediate-media-release,
+    .page:not(.page-embargoed-media-release) .embargoed-media-release {
+      display: none;
+    }
+
+    .logo img {
+      height: calc(32pt * (0.56 * ({{{BA_logo-height}}}{{^BA_logo-height}}2{{/BA_logo-height}}) - 0.12));
+      width: auto;
+    }
+
+    .main {
+      flex: 1;
+      width: 100%;
+      padding: 50pt calc(3mm + 70pt) calc(3mm + 30pt);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+    }
+    
+    .back .main{
+      padding-top: 10pt;
+    }
+
+    .headings {
+      width: 100%;
+      text-align: center;
+      margin-bottom: 25pt;
+    }
+
+    .headings h1 {
+      font-size: 19pt;
+      font-weight: bold;
+      line-height: 1.2em;
+      text-transform: uppercase;
+    }
+
+    .headings h2 {
+      font-size: 17pt;
+      font-weight: bold;
+      line-height: 1.2em;
+    }
+    
+    .copy {
+      font-size: 12pt;
+      font-weight: normal;
+      line-height: 1.2em;
+      text-align: justify;
+    }
+
+    .back .copy {
+      max-height: 465pt;
+    }
+
+    .copy p,
+    .copy ul,
+    .copy ol {
+      font-size: 12pt;
+      font-weight: normal;
+      line-height: 1.2em;
+      text-align: justify;
+      margin-top: 1.2em;
+      margin-bottom: 1.2em;
+    }
+
+    .copy ul,
+    .copy ol {
+      list-style: unset;
+      padding-left: 2.5em;
+    }
+
+    .copy li+li {
+      margin-top: 0.4em;
+    }
+
+    .copy p:last-child,
+    .copy ul:last-child,
+    .copy ol:last-child {
+      margin-bottom: 0;
+    }
+
+    ul ul {
+      margin-top: 0.4em !important;
+    }
+
+    .copy .date {
+      font-size: 12pt;
+      font-weight: bold;
+      line-height: 1.2em;
+      text-transform: uppercase;
+      margin-right: 0.5em;
+    }
+    
+    .page-embargoed-media-release .copy .date {
+      color: var(--red);
+    }
+    
+    .page:not(.page-embargoed-media-release) .date .until {
+      display: none;
+    }
+    
+    .copy .date + p,
+    .copy p:first-child {
+      display: inline;      
+    }
+    
+    .copy {
+      max-height: 345pt;
+    }
+    
+    .page.show-back-page .copy {
+      max-height: 520pt;
+    }
+
+    .ending {
+      font-size: 13pt;
+      font-weight: bold;
+      text-transform: uppercase;
+      text-align: center;
+      margin: 25pt 0;
+    }
+
+    .media-enquiries {
+      margin-bottom: 20pt;
+      width: 100%;
+    }
+
+    .media-enquiries h3 {
+      margin-bottom: 0.5em;
+    }
+
+    .enquiries {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      justify-content: flex-start;
+    }
+
+    .enquiry {
+      flex: 1;
+    }
+
+    .enquiry p {
+      text-align: left;
+    }
+
+    .footer-area {
+      flex: 1;
+      width: 100%;
+      position: relative;
+    }
+
+    .footer {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+    }
+
+    .footer h3 {
+      margin-bottom: 0.5em;
+    }
+    
+    .page.show-back-page .ending,
+    .page.show-back-page .media-enquiries,
+    .page.show-back-page .footer-area {
+      display: none;
+    }
+    
+    .page.back .header {
+      background: transparent;
+    }
+    
+    .page.back .release-type h1,
+    .page.back .release-type h2 {
+      color: var(--black);
+    }
+    
+    .dateError.overflow:hover:after{
+      font-size: 0.25rem;
+      content: "The date is in the wrong format";
+    }
+    
+    .emptyDate.overflow:hover:after {
+      font-size: 0.25rem;
+      content: "Please add a date";
+      width: 2rem;
+    }
+  </style>
+</head>
+
+<body style="background: white" data-crop="{{show-crop}}">
+  <div class="page page-{{{mr-type}}}{{^mr-type}}media-alert{{/mr-type}} {{{show-back-page}}}{{^show-back-page}}hide{{/show-back-page}}-back-page">
+
+    <div class="bleed">
+
+      <div class="container fit">
+        <div class="wrapper">
+          <div class="header">
+            <div class="release-type media-alert">
+              <h1>Media Alert</h1>
+              <h2>&nbsp;</h2>
+            </div>
+            <div class="release-type immediate-media-release">
+              <h1>Media Release</h1>
+              <h2>For Immediate Release</h2>
+            </div>
+            <div class="release-type embargoed-media-release">
+              <h1>Media Release</h1>
+              <h2>Embargoed</h2>
+            </div>
+            <div class="logo">
+              {{#mr-light-logo}}<img src="{{{mr-light-logo}}}" />{{/mr-light-logo}}
+            </div><!-- {{#mr-dark-logo}}{{/mr-dark-logo}} -->
+          </div>
+          <div class="main">
+            <div class="headings">
+              <h1 data-max-line="2">{{{heading}}}</h1>
+              <h2 data-max-line="2">{{{subheading}}}</h2>
+            </div>
+            <div class="copy" data-max-height="css">
+              <span class="date"><span class="until">EMBARGOED UNTIL </span><span class="dateValidation">{{{date-custom}}}</span></span>{{{mr-front-copy}}}
+            </div><!-- {{#mr-back-copy}}{{/mr-back-copy}} -->
+            <div class="ending">
+              &mdash; ENDS &mdash;
+            </div>
+            <div class="media-enquiries">
+              <h3>Media enquiries</h3>
+              <div class="enquiries">
+                {{#mr-media-enquiries-left}}
+                <div class="enquiry enquiry-left" data-max-line="4">
+                  <p>{{{mr-media-enquiries-left}}}</p>
+                </div>
+                {{/mr-media-enquiries-left}}
+                {{#mr-media-enquiries-right}}
+                <div class="enquiry enquiry-right" data-max-line="4">
+                  <p>{{{mr-media-enquiries-right}}}</p>
+                </div>
+                {{/mr-media-enquiries-right}}
+              </div>
+            </div>
+            <div class="footer-area">
+              {{#mr-footer-copy}}
+              <div class="footer">
+                <div data-max-height="dynamic">
+                  {{{mr-footer-copy}}}
+                </div>
+              </div>
+              {{/mr-footer-copy}}
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--container fit-->
+
+    </div>
+    <!--bleed-->
+
+  </div>
+  <!--page-->
+  
+  <div class="page back page-{{{mr-type}}}{{^mr-type}}media-alert{{/mr-type}} u-{{{show-back-page}}}{{^show-back-page}}hide{{/show-back-page}}">
+
+    <div class="bleed">
+
+      <div class="container fit">
+        <div class="wrapper">
+          <div class="header">
+            <div class="release-type media-alert">
+              <h1>Media Alert</h1>
+              <h2>&nbsp;</h2>
+            </div>
+            <div class="release-type immediate-media-release">
+              <h1>Media Release</h1>
+              <h2>For Immediate Release</h2>
+            </div>
+            <div class="release-type embargoed-media-release">
+              <h1>Media Release</h1>
+              <h2>Embargoed</h2>
+            </div>
+            <div class="logo">
+              {{#mr-dark-logo}}<img src="{{{mr-dark-logo}}}" />{{/mr-dark-logo}}
+            </div>
+          </div>
+          <div class="main">            
+            <div class="copy" data-max-height="css">
+              {{{mr-back-copy}}}
+            </div>
+            <div class="ending">
+              &mdash; ENDS &mdash;
+            </div>
+            <div class="media-enquiries">
+              <h3>Media enquiries</h3>
+              <div class="enquiries">
+                {{#mr-media-enquiries-left}}
+                <div class="enquiry enquiry-left">
+                  <p>
+                    {{{mr-media-enquiries-left}}}
+                  </p>
+                </div>
+                {{/mr-media-enquiries-left}}
+                {{#mr-media-enquiries-right}}
+                <div class="enquiry enquiry-right">
+                  <p>
+                    {{{mr-media-enquiries-right}}}
+                  </p>
+                </div>
+                {{/mr-media-enquiries-right}}
+              </div>
+            </div>
+            <div class="footer-area">
+              {{#mr-footer-copy}}
+              <div class="footer">
+                <div data-max-height="dynamic">
+                  {{{mr-footer-copy}}}
+                </div>
+              </div>
+              {{/mr-footer-copy}}
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--container fit-->
+
+    </div>
+    <!--bleed-->
+
+  </div>
+  <!--page-->
+
+  <script>
+    window.showCrop = {{show-crop}}{{^show-crop}}true{{/show-crop}};
+  </script>
+  <script src="js/main.js"></script>
+  <script src="js/prefixfree.js"></script>
+  <script src="js/check-export-mode.js"></script>
+  <script src="js/dynamic-inject.js"></script>
+  <script src="js/char-limit.js"></script>
+  <script src="js/max-line-check.js"></script>
+  <script src="js/max-height-check.js"></script>
+  <script src="js/textfit.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="https://momentjs.com/downloads/moment.js"></script>
+  <script src="https://outfit-assets-production.s3.amazonaws.com/scripts/pandora/helper/helperFunctions-1.1.js"></script>
+  <script src="https://outfit-assets-production.s3.amazonaws.com/scripts/pandora/dateInput/dateInput.js"></script>
+  
+  <script>
+    //setupDateInput("Date", "{{{date-custom}}}");
+    //setupObserver(getParent(), { childList: true, subtree: true, }, setupDateInput, ["Date", "{{{date-custom}}}"]);
+ 
+    function mediaEnquiryCheck(){
+      if(("{{{mr-media-enquiries-left}}}" == "" && "{{{mr-media-enquiries-right}}}" == "") ||
+         ("{{{mr-media-enquiries-left}}}" == " " && "{{{mr-media-enquiries-right}}}" == " ") ||
+         ("{{{mr-media-enquiries-left}}}" == null && "{{{mr-media-enquiries-right}}}" == null) ||
+         ("{{{mr-media-enquiries-left}}}" == undefined && "{{{mr-media-enquiries-right}}}" == undefined)){
+        var mediaEnquiries = document.querySelectorAll(".media-enquiries");
+        mediaEnquiries.forEach(el => {
+          el.style.display = "none";
+        })
+      }
+    }
+
+    /*function addDateCharLimit(){
+      if("{{{mr-type}}}" === "media-alert" || "{{{mr-type}}}" === "immediate-media-release"){
+        var dateEl = document.querySelector(".dateValidation");
+        if (dateEl == null) return;
+
+        dateEl.setAttribute("data-max-char", 10);
+        console.log(dateEl.innerText.length);
+        if(dateEl.innerText.length > 10){
+          dateEl.classList.add("overflow");
+        }
+      }
+    }*/
+
+    // Tracking text changes and firing text restriction functions (mutationObserver)
+    const overflowObserver = new MutationObserver(function (mutations) {
+      mutations.forEach(function (mutation) {
+        maxLineCheck();
+        maxHeightCheck();
+        mediaEnquiryCheck();
+        //dateValidation();
+        //addDateCharLimit();
+      });
+    });
+
+    const injectObserver = new MutationObserver(function (mutations) {
+      mutations.forEach(function (mutation) {
+        injectDynamicContent();
+      });
+    });
+
+    const injectSources = document.querySelectorAll('[data-target-id]');
+
+    overflowObserver.observe(document.body, {
+      attributes: false,
+      characterData: true,
+      childList: true,
+      subtree: true,
+      attributeOldValue: false,
+      characterDataOldValue: true
+    });
+
+    if (injectSources.length > 0) {
+      injectSources.forEach(src => {
+        injectObserver.observe(src, {
+          attributes: false,
+          characterData: true,
+          childList: true,
+          subtree: true,
+          attributeOldValue: false,
+          characterDataOldValue: true
+        });
+      });
+    }
+
+    // Calling text size restriction functions once the fonts are loaded
+    document.fonts.ready.then(() => {
+      maxLineCheck();
+      maxHeightCheck();
+      injectDynamicContent();
+      mediaEnquiryCheck();
+      //dateValidation();
+      //addDateCharLimit();
+    });
+
+    checkCrop();
+    checkExport();
+
+    // TextFit function decreases the font of the selected element to make it fit in single line (if needed, uncomment the code bellow)
+    TextFit.fit({
+      selector: '.lockup',
+      alignItems: 'center',
+    });
+    //addDate();
+    function addDate(){
+      var dateOutput = document.querySelector(".dateValidation");
+      var month= ["January","February","March","April","May","June","July","August","September","October","November","December"];
+      if(dateOutput != null){
+        const date = new Date("{{{date-custom}}}");
+        if("{{{mr-type}}}" == "embargoed-media-release"){
+          dateOutput.innerText = {{#date-custom}}date.getDate()+" "+(month[date.getMonth()])+" "+date.getFullYear() + ": "{{/date-custom}}{{^date-custom}}"Add Date Here"{{/date-custom}};
+        } else{
+          dateOutput.innerText = {{#date-custom}}date.getDate()+"/"+(date.getMonth()+1)+"/"+date.getFullYear();{{/date-custom}}{{^date-custom}}"D/M/Y"{{/date-custom}};
+        }
+      }
+    }
+
+    
+    /*function dateValidation(){
+      let date = document.querySelector(".dateValidation");
+      if (date != null || date != undefined || date != ""){
+        let text = date.innerText;
+        if(date.innerText == ""){
+          date.classList.add("emptyDate");
+          date.classList.add("overflow");
+          return;
+        }
+        
+        if("{{{mr-type}}}" == "embargoed-media-release"){
+          if(!moment(text, "h.mma D MMMM YYYY", true).isValid()){
+            date.classList.add("dateError");
+            date.classList.add("overflow");
+            return;
+          }
+        }
+        
+      }
+      
+      date.classList.remove("overflow");
+      date.classList.remove("emptyDate");
+      date.classList.remove("dateError");
+    }*/
+  </script>
+</body>
+
+</html>
