@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html data-sign="OS?">
+
+<head>
+  <title>Outfit</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" type="text/css" href="./css/minireset.css">
+  <link rel="stylesheet" type="text/css" href="./css/main.css">
+
+  <style>
+    @import url('https://fonts.googleapis.com/css?family=Archivo+Black&display=swap');
+    @import url('https://fonts.googleapis.com/css?family=Archivo:400,400i,700,700i&display=swap');
+    @import url('https://fonts.googleapis.com/css?family=Taviraj&display=swap');
+    
+    /* 
+    {{#show-crop}}{{/show-crop}}
+    {{#logo-primary}}{{/logo-primary}}
+    {{#BA_logo-height-primary}}{{/BA_logo-height-primary}}
+    {{#logo-partner}}{{/logo-partner}}
+    {{#BA_logo-height-partner}}{{/BA_logo-height-partner}}
+    */
+
+    :root {
+      --red: {{account.colors.red}};
+      --green: {{account.colors.green}};
+      --blue: {{account.colors.blue}};
+      --yellow: {{account.colors.yellow}};
+      --white: {{account.colors.white}};
+      --black: {{account.colors.black}};
+    }
+
+    body {
+      font-family: "Archivo Black";
+      font-size: 11pt;
+      color: var(--black);
+      word-break: break-word;
+    }
+
+    .backgroundImage {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      overflow: hidden;
+    }
+
+    .backgroundImage div {
+      width: auto !important;
+      height: auto !important;
+      right: 0;
+      bottom: 0;
+    }
+
+    /* Helper classes */
+    .u-hide {
+      display: none;
+    }
+
+    /* Helper class for fixing Reposition tool bug */
+    .reposition-fix {
+      position: absolute;
+      overflow: hidden;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+    }
+
+    .reposition-fix div {
+      top: 0 !important;
+      bottom: 0 !important;
+      left: 0 !important;
+      right: 0 !important;
+      width: 100% !important;
+      height: 100% !important;
+    }
+
+    /* ANY OTHER STYLES THAT NEED MUSTACHE.JS CAPABILITIES */
+    .wrapper {
+      position: absolute;
+      top: 3mm;
+      right: 3mm;
+      bottom: 3mm;
+      left: 3mm;
+    }
+
+    .heading {
+      position: absolute;
+      top: 22.68pt;
+      right: 22.68pt;
+      left: 22.68pt;
+    }
+
+    .heading h1 {
+      font-weight: normal;
+      font-size: 16pt;
+      text-transform: uppercase;
+    }
+    
+    .heading h2 {
+      font-family: 'Taviraj';
+      font-weight: normal;
+      font-size: 12.11pt;  
+    }
+    
+    .heading h3 {
+      font-weight: normal;
+      font-size: 8.15pt;      
+    }
+    
+    .heading h1:not(:last-child) {
+      margin-bottom: 0.15em;
+    }
+    
+    .heading h2:not(:last-child),
+    .heading h3:not(:last-child) {
+      margin-bottom: 0.25em;
+    }
+    
+    .contact {
+      position: absolute;
+      bottom: 22.68pt;
+      left: 22.68pt;
+      width: 35%;
+    }
+    
+    .contact p {
+      font-family: "Archivo";
+      font-weight: 'normal';
+      font-size: 7pt;
+      line-height: 1.2em;
+      margin: 0;
+    }
+
+    .logos {
+      position: absolute;
+      right: 22.68pt;
+      bottom: 22.68pt;
+      width: 55%;
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-end;
+      align-items: stretch;
+    }
+
+    .logo {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .logo-primary img {
+      height: calc(26pt * (0.56 * ({{{BA_logo-height-primary}}}{{^BA_logo-height-primary}}2{{/BA_logo-height-primary}}) - 0.12));
+    }
+
+    .logo-partner img {
+      height: calc(26pt * (0.56 * ({{{BA_logo-height-partner}}}{{^BA_logo-height-partner}}2{{/BA_logo-height-partner}}) - 0.12));
+    }
+
+    .logo:not(:last-child) {
+      padding-right: 12pt;
+      margin-right: 12pt;
+      border-right: solid 1.5pt var(--black);
+    }
+  </style>
+</head>
+
+<body style="background: white" data-crop="{{show-crop}}">
+  <div class="page page-front">
+
+    <div class="bleed">
+
+      <div class="container fit">
+        <div class="backgroundImage reposition-fix"></div>
+        <div class="wrapper">
+          <div class="heading">
+            <h2 data-max-line="1">{{{cmp-subheading}}}</h2>
+            <h1 data-max-line="1">{{{cmp-heading}}}</h1>
+            <h3 data-max-line="1">{{{cmp-job-title}}}</h3>
+          </div>
+          <div class="contact">
+            {{#cmp-a}}<p><strong>a:</strong> {{{cmp-a}}}</p>{{/cmp-a}}
+            {{#cmp-p}}<p><strong>p:</strong> {{{cmp-p}}}</p>{{/cmp-p}}
+            {{#cmp-t}}<p><strong>t:</strong> {{{cmp-t}}}</p>{{/cmp-t}}
+          </div>
+          <!-- Logos{{#logo-primary}}{{/logo-primary}} -->
+          <div class="logos">
+            {{#logo-partner}}
+            <div class="logo logo-partner">
+              <img src="{{{logo-partner}}}" />
+            </div>
+            {{/logo-partner}}
+            {{#logo-primary}}
+            <div class="logo logo-primary">
+              <img src="{{{logo-primary}}}" />
+            </div>
+            {{/logo-primary}}
+          </div>
+        </div>
+      </div>
+      <!--container fit-->
+
+    </div>
+    <!--bleed-->
+
+  </div>
+  <!--page-->
+
+  <script>
+    window.showCrop = {{show-crop}}{{^show-crop}}true{{/show-crop}};
+  </script>
+  <script src="js/main.js"></script>
+  <script src="js/prefixfree.js"></script>
+  <script src="js/check-export-mode.js"></script>
+  <script src="js/dynamic-inject.js"></script>
+  <script src="js/char-limit.js"></script>
+  <script src="js/max-line-check.js"></script>
+  <script src="js/max-height-check.js"></script>
+  <script src="js/textfit.js"></script>
+  <script src="js/utils.js"></script>
+  <script>
+
+    console.clear();
+
+    // Tracking text changes and firing text restriction functions (mutationObserver)
+    const overflowObserver = new MutationObserver(function (mutations) {
+      mutations.forEach(function (mutation) {
+        maxLineCheck();
+        maxHeightCheck();
+      });
+    });
+
+    const injectObserver = new MutationObserver(function (mutations) {
+      mutations.forEach(function (mutation) {
+        injectDynamicContent();
+      });
+    });
+
+    const injectSources = document.querySelectorAll('[data-target-id]');
+
+    overflowObserver.observe(document.body, {
+      attributes: false,
+      characterData: true,
+      childList: true,
+      subtree: true,
+      attributeOldValue: false,
+      characterDataOldValue: true
+    });
+
+    if (injectSources.length > 0) {
+      injectSources.forEach(src => {
+        injectObserver.observe(src, {
+          attributes: false,
+          characterData: true,
+          childList: true,
+          subtree: true,
+          attributeOldValue: false,
+          characterDataOldValue: true
+        });
+      });
+    }
+
+    // Calling text size restriction functions once the fonts are loaded
+    document.fonts.ready.then(() => {
+      maxLineCheck();
+      maxHeightCheck();
+      injectDynamicContent();
+    });
+
+    checkCrop();
+    checkExport();
+
+    // TextFit function decreases the font of the selected element to make it fit in single line (if needed, uncomment the code bellow)
+    TextFit.fit({
+      selector: '.lockup',
+      alignItems: 'center',
+    });
+
+  </script>
+</body>
+
+</html>
