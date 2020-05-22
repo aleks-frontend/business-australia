@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html data-sign="OS?">
+
+  <head>
+    <title>Outfit</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="./css/minireset.css">
+    <link rel="stylesheet" type="text/css" href="./css/main.css">
+
+    <style>
+      @import url('https://fonts.googleapis.com/css?family=Archivo:400,400i,700,700i&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap');
+
+      /* 
+      {{{background-image}}}
+      {{{BA_logo--p}}}
+      {{#BA_logo-height}}{{/BA_logo-height}}    
+      {{logo-filter-override}}
+      {{{social-icon}}}
+      {{{theme-option-full}}}
+      {{{theme-colour-full}}}
+      {{{social-text}}}
+      {{#social-text-bottom}}{{/social-text-bottom}}    
+      {{{social-text-position}}}
+      {{{social-content-position}}}    
+      */
+
+
+
+      body {
+        font-family: 'Archivo', sans-serif;
+        font-size: 11pt;
+        color: var(--white);
+        word-break: break-word;
+      }
+
+      .backgroundImage {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        overflow: hidden;
+      }
+
+      .backgroundImage div {
+        width: auto !important;
+        height: auto !important;
+        right: 0;
+        bottom: 0;
+      }
+
+      /* Helper classes - 25.4W + 14.82 */
+      .u-hide {
+        display: none;
+      }
+
+      /* Helper class for fixing Reposition tool bug */
+      .reposition-fix {
+        position: absolute;
+        overflow: hidden;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+      }
+
+      .reposition-fix div {
+        top: 0 !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+      }
+
+      /* ANY OTHER STYLES THAT NEED MUSTACHE.JS CAPABILITIES */
+
+      .wrapper {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        padding: 3mm;
+      }
+
+      .content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        position: relative;
+        z-index: 2;
+      }
+
+      .logo {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        top: calc(3mm + 36px);
+        right: calc(3mm + 36px);
+      }
+
+      .logo img {
+        width: auto;
+        height: calc(83px * (0.56 * {{{BA_logo-height}}}{{^BA_logo-height}}2{{/BA_logo-height}} - 0.12));
+      }
+
+      .icon {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 56px;
+      }
+
+      .icon img {
+        width: calc(168px * ({{{social-content-size}}}{{^social-content-size}}100{{/social-content-size}}/100));
+        height: auto;
+      }
+
+      .text {
+        font-weight: 700;
+        font-size: 60px;
+        line-height: 70px;
+        max-height: 370px;
+        word-break: break-word;
+      }
+
+      .text .inner{
+        font-size: {{{social-content-size}}}{{^social-content-size}}100{{/social-content-size}}%;
+      }
+
+      .page:not(.page-feature-image) .bg-image,
+      .page:not(.page-icon):not(.page-icon-expanded) .icon {
+        display: none;
+      }
+      
+      .page-feature-image.text-vertical-half-small .text{
+        font-weight: 700;
+        font-size: 50px;
+        line-height: 50px;
+        max-height: 370px;
+      }
+
+      /* With Featured Image */
+      /* Vertical Haft */
+      .page-feature-image.text-vertical-half .wrapper {
+        left: calc(3mm + 60%);
+        padding-left: 0;
+      }
+
+      .page-feature-image.text-vertical-half .content {
+        padding: 190px 57px 42px;
+        height: 100%;
+      }
+
+      /* Bottom Left */
+      .page-feature-image.text-bottom-left .wrapper {
+        padding-right: 0;
+        padding-top: 0;
+        right: calc(3mm + 595px);
+        top: auto;
+      }
+
+      .page-feature-image.text-bottom-left .content {
+        min-height: 306px;
+        padding: 25px 68px 33px;
+      }
+
+      .page-feature-image.text-bottom-left .text {
+        font-size: 52px;
+        line-height: 62px;
+      }
+
+      /* Bottom Right */
+      .page-feature-image.text-bottom-right .wrapper {
+        padding-left: 0;
+        padding-top: 0;
+        left: calc(3mm + 595px);
+        top: auto;
+      }
+
+      .page-feature-image.text-bottom-right .content {
+        min-height: 306px;
+        padding: 25px 57px 33px;
+      }
+
+      .page-feature-image.text-bottom-right .text {
+        font-size: 52px;
+        line-height: 62px;
+      }
+
+      /* Bottom Right Long */
+      .page-feature-image.text-bottom-right-long .wrapper {
+        padding-left: 0;
+        padding-top: 0;
+        left: calc(3mm + 595px);
+        top: calc(3mm + 273px);
+      }
+
+      .page-feature-image.text-bottom-right-long .content {
+        padding: 57px 57px 46px;
+        height: 100%;
+      }
+
+      .page-feature-image.text-bottom-right-long .text {
+        font-size: 52px;
+        line-height: 62px;
+      }
+
+      /* Full Bottom */
+      .page-feature-image.text-full-bottom .wrapper {
+        padding-top: 0;
+        top: auto;
+      }
+
+      .page-feature-image.text-full-bottom .content {
+        min-height: 306px;
+        padding: 25px 72px 33px;
+      }
+
+      .page-feature-image.text-full-bottom .text {
+        font-size: 52px;
+        line-height: 62px;
+      }
+
+      /* With Icon */
+      .page-icon.content-center .content,
+      .page-icon-expanded.content-center .content {
+        height: 100%;
+        padding: 64px 180px 108px;
+        align-items: center;
+      }
+
+      .page-icon.content-center .text,
+      .page-icon-expanded.content-center .text {
+        font-size: 62px;
+        line-height: 72px;
+        text-align: center;      
+      }
+
+      .page-icon.content-left .content,
+      .page-icon-expanded.content-left .content {
+        height: 100%;
+        padding: 52px 250px 52px 68px;
+        justify-content: flex-end;
+      }
+
+      .page-icon.content-left .icon,
+      .page-icon-expanded.content-left .icon {
+        margin-bottom: 57px;
+      }
+
+      .page-icon.content-left .icon img,
+      .page-icon-expanded.content-left .icon img {
+        width: calc(122px * ({{{social-content-size}}}{{^social-content-size}}100{{/social-content-size}}/100));
+      }
+
+      .page-icon.content-left .text,
+      .page-icon-expanded.content-left .text {
+        font-size: 100px;
+        line-height: 120px;
+      }
+
+      /*Expanded*/
+      .text-separator {
+        background: var(--heading-color);
+        width: 100%;
+        height: 10px;
+        flex: 0 0 10px;
+        margin: 30px 0;
+      }
+
+      .page-icon-expanded .text,
+      .page-icon-expanded .text strong {
+        font-family: 'Archivo Black';
+        font-weight: normal;      
+      }
+
+      .page-icon-expanded.content-center .social-id {
+        font-family: 'Archivo';
+        font-weight: 700;
+      }
+
+
+      /*  640 x 420px Size */
+      @media (width: 640px) and (height: 420px) {
+
+        .page-icon.content-center .content {
+          height: 100%;
+          padding: 15px 30px;
+          align-items: center;
+          max-height: none;
+        }
+        .page-icon.content-left .content { padding: 30px 165px 30px 30px; }
+
+        .icon { margin-bottom: 22px; }    
+        .page-icon.content-left .icon { margin-bottom: 20px; }
+
+        .icon img { width: calc(100px * (100.0/100)); }
+        .page-icon.content-left .icon img { width: calc(74px * (100.0/100)); }
+
+        .page-icon.content-center .text {
+          font-size: 25px;
+          line-height: 1.3em;
+          max-height: 160px;
+        }
+        .page-icon.content-left .text {
+          font-size: 20px;
+          line-height: 1.2em;
+          max-height: 160px;
+        }
+
+        .logo {
+          top: calc(3mm + 29px);
+          right: calc(3mm + 29px);
+        }
+
+        .logo img { height: calc(30px * (0.56 * 2 - 0.12)); }
+        
+        /*
+        .plac {
+        position: absolute;
+        top: 3mm;
+        left: 3mm;
+        right: 3mm;
+        bottom: 3mm;
+        background-image: url(https://files.outfit.io/media_library_items/182857/new_placeholder_for_640_x_420px.png);
+        background-repeat: no-repeat;
+        background-size: contain;
+        opacity: 0;
+        pointer-events: none;
+        z-index: 123;
+      }
+        */
+      }
+
+      /*Instagram Variation Size*/
+      @media (width: 1080px) and (height: 1080px){
+        .page-icon.content-center .content {
+          padding: 150px 100px;
+        }           
+
+        .logo img {
+          height: calc(90px * (0.56 * {{{BA_logo-height}}}{{^BA_logo-height}}2{{/BA_logo-height}} - 0.12));
+      }            
+
+      .icon img {
+        width: calc(250px * ({{{social-content-size}}}{{^social-content-size}}100{{/social-content-size}}/100));
+      }            
+
+      .text{
+        max-height: 440px;
+      }
+
+      /*Expanded*/          
+      .page-icon-expanded.content-center .content {
+        padding: 150px 215px 100px;
+      }
+
+      .page-icon-expanded .logo {
+        top: calc(3mm + 60px);
+        right: calc(3mm + 75px);
+      }
+
+      .page-icon-expanded .logo img {
+        height: calc(54px * (0.56 * {{{BA_logo-height}}}{{^BA_logo-height}}2{{/BA_logo-height}} - 0.12));
+      }
+
+      .page-icon-expanded .icon img {
+        width: auto;
+        height: calc(225px * ({{{social-content-size}}}{{^social-content-size}}100{{/social-content-size}}/100));
+      }
+
+      .page-icon-expanded.content-center .text {
+        font-size: 50px;
+        line-height: 60px;
+      }
+
+      .page-icon-expanded.content-center .social-id {
+        font-size: 32px;
+        line-height: 38px;
+        margin-top: 80px;
+      }
+
+      .page-icon-expanded .text {
+        max-height: 132px;
+      }
+
+      {{^social-text-bottom}}
+      .page-icon-expanded .text {
+        max-height: 312px;
+      }
+      {{/social-text-bottom}}
+
+      .page-icon-expanded .social-id {
+        max-height: 46px;
+      }
+      }
+
+
+      /*Twitter*/
+      @media (width: 1500px) and (height: 500px){
+        .page-icon.content-center .content,
+        .page-icon-expanded.content-center .content {
+          padding: 65px 100px 50px;
+        }
+
+        .icon img {
+          width: calc(125px * ({{{social-content-size}}}{{^social-content-size}}100{{/social-content-size}}/100));
+        }
+
+        .logo img {
+          height: calc(75px * (0.56 * {{{BA_logo-height}}}{{^BA_logo-height}}2{{/BA_logo-height}} - 0.12));
+      }
+
+      .page-icon.content-center .text,
+      .page-icon-expanded.content-center .text {
+        font-size: 50px;
+        line-height: 55px;
+      }
+
+      .text{
+        max-height: 215px;
+        font-size: 45px;
+        line-height: 1;
+      }
+      } 
+
+      /*Facebook*/
+      @media (width: 1200px) and (height: 900px){
+        .page-icon.content-center .content {
+          padding: 80px 125px 80px;
+        }
+
+        .text{
+          max-height: 370px;
+        }
+
+        /*Expanded*/    
+        .page-icon-expanded.content-center .content {
+          padding: 150px 240px 100px;
+        }
+
+        .page-icon-expanded .logo {
+          top: calc(3mm + 60px);
+          right: calc(3mm + 75px);
+        }
+
+        .page-icon-expanded .logo img {
+          height: calc(54px * (0.56 * {{{BA_logo-height}}}{{^BA_logo-height}}2{{/BA_logo-height}} - 0.12));
+      }
+
+      .page-icon-expanded .icon img {
+        width: auto;
+        height: calc(185px * ({{{social-content-size}}}{{^social-content-size}}100{{/social-content-size}}/100));
+      }
+
+      .page-icon-expanded.content-center .text {
+        font-size: 42px;
+        line-height: 52px;
+      }
+
+      .page-icon-expanded.content-center .social-id {
+        font-size: 27px;
+        line-height: 34px;
+        margin-top: 60px;
+      }
+
+      .page-icon-expanded .text {
+        max-height: 115px;
+      }
+
+      {{^social-text-bottom}}
+      .page-icon-expanded .text {
+        max-height: 272px;
+      }
+      {{/social-text-bottom}}
+
+      .page-icon-expanded .social-id {
+        max-height: 42px;
+      }
+      }
+
+      /*LinkedIn Advert*/
+      @media (width: 300px) and (height: 250px) {
+        .page-icon.content-center .content {
+          padding: 20px;
+        }
+
+        .icon {
+          margin-bottom: 14px;
+        }
+
+        .icon img {
+          width: calc(44px * (100.0/100));
+        }
+
+        .text {
+          font-size: 14px;
+          line-height: 16px;
+          max-height: 84px;
+        }
+
+        .logo {
+          top: calc(3mm + 10px);
+          right: calc(3mm + 10px);
+        }
+
+        .logo img {
+          height: calc(15px * (0.56 * {{{BA_logo-height}}}{{^BA_logo-height}}2{{/BA_logo-height}} - 0.12));
+      }           
+
+
+      /* With Featured Image */
+      /* Vertical Haft */
+      .page-feature-image.text-vertical-half .wrapper {
+        left: calc(3mm + 150px);
+        padding-left: 0;
+      }
+
+      .page-feature-image.text-vertical-half .content {
+        padding: 55px 15px 15px;
+        height: 100%;
+      }
+
+      /* Bottom Left */
+      .page-feature-image.text-bottom-left .wrapper {
+        padding-right: 0;
+        padding-top: 0;
+        right: calc(3mm + 150px);
+        top: auto;
+      }
+
+      .page-feature-image.text-bottom-left .content {
+        min-height: 80px;
+        padding: 10px 15px;
+      }
+
+      .page-feature-image.text-bottom-left .text {
+        font-size: 13px;
+        line-height: 15px;
+        max-height: 63px;
+      }
+
+      /* Bottom Right */
+      .page-feature-image.text-bottom-right .wrapper {
+        padding-left: 0;
+        padding-top: 0;
+        left: calc(3mm + 150px);
+        top: auto;
+      }
+
+      .page-feature-image.text-bottom-right .content {
+        min-height: 80px;
+        padding: 10px 15px;
+      }
+
+      .page-feature-image.text-bottom-right .text {
+        font-size: 13px;
+        line-height: 15px;
+        max-height: 63px;
+      }
+
+      /* Bottom Right Long */
+      .page-feature-image.text-bottom-right-long .wrapper {
+        padding-left: 0;
+        padding-top: 0;
+        left: calc(3mm + 150px);
+        top: calc(3mm + 75px);
+      }
+
+      .page-feature-image.text-bottom-right-long .content {
+        padding: 15px;
+        height: 100%;
+      }
+
+      .page-feature-image.text-bottom-right-long .text {
+        font-size: 13px;
+        line-height: 15px;
+        max-height: 93px;
+      }
+
+      /* Full Bottom */
+      .page-feature-image.text-full-bottom .wrapper {
+        padding-top: 0;
+        top: auto;
+      }
+
+      .page-feature-image.text-full-bottom .content {
+        min-height: 80px;
+        padding: 10px 25px;
+      }
+
+      .page-feature-image.text-full-bottom .text {
+        font-size: 13px;
+        line-height: 15px;
+        max-height: 93px;
+      }
+
+      /* With Icon */
+      .page-icon.content-center .content,
+      .page-icon-expanded.content-center .content {
+        height: 100%;
+        padding: 15px 30px;
+        align-items: center;
+      }
+
+      .page-icon.content-center .text,
+      .page-icon-expanded.content-center .text {
+        font-size: 16px;
+        line-height: 18px;
+        max-height: 94px;
+      }
+
+      .page-icon.content-left .content,
+      .page-icon-expanded.content-left .content {
+        height: 100%;
+        padding: 15px 65px 15px 15px;
+        justify-content: flex-end;
+      }
+
+      .page-icon.content-left .icon,
+      .page-icon-expanded.content-left .icon {
+        margin-bottom: 15px;
+      }
+
+      .page-icon.content-left .icon img,
+      .page-icon-expanded.content-left .icon img {
+        width: calc(32px * ({{{social-content-size}}}{{^social-content-size}}100{{/social-content-size}}/100));
+      }
+
+      .page-icon.content-left .text,
+      .page-icon-expanded.content-left .text {
+        font-size: 14px;
+        line-height: 16px;
+        max-height: 84px;
+      }
+
+      /*Expanded*/    
+      .page-icon-expanded.content-center .content {
+        padding: 20px 60px;
+      }
+
+      .page-icon-expanded .logo {
+        top: calc(3mm + 10px);
+        right: calc(3mm + 10px);
+      }
+
+      .page-icon-expanded .logo img {
+        height: calc(15px * (0.56 * {{{BA_logo-height}}}{{^BA_logo-height}}2{{/BA_logo-height}} - 0.12));
+      }
+
+      .page-icon-expanded .icon img {
+        width: auto;
+        height: calc(50px * ({{{social-content-size}}}{{^social-content-size}}100{{/social-content-size}}/100));
+      }
+
+      .text-separator {
+        background: var(--heading-color);
+        width: 100%;
+        height: 3px;
+        flex: 0 0 3px;
+        margin: 10px 0;
+      }
+
+      .page-icon-expanded.content-center .text {
+        font-size: 12px;
+        line-height: 14px;
+      }
+
+      .page-icon-expanded.content-center .social-id {
+        font-size: 7px;
+        line-height: 9px;
+        margin-top: 14px;
+      }
+
+      .page-icon-expanded .text {
+        max-height: 31px;
+      }
+
+      {{^social-text-bottom}}
+      .page-icon-expanded .text {
+        max-height: 73px;
+      }
+      {{/social-text-bottom}}
+
+      .page-icon-expanded .social-id {
+        max-height: 11px;
+      }
+      }
+
+      .inner-background{
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        opacity: {{{content-opacity}}}{{^content-opacity}}1{{/content-opacity}}
+      }
+      
+      /* With Featured Image */
+      /* Vertical Half Small */
+      .page-feature-image.text-vertical-half-small .wrapper {
+        left: calc(3mm + 73%);
+        padding-left: 0;
+      }
+
+      .page-feature-image.text-vertical-half-small .content {
+        padding: 190px 57px 42px;
+        height: 100%;
+      }
+      
+      @media (width: 1200px) and (height: 628px){
+        .icon img {
+          width: calc(125px * ({{{social-content-size}}}{{^social-content-size}}100{{/social-content-size}}/100));
+        }
+
+        .logo img {
+          height: calc(75px * (0.56 * {{{BA_logo-height}}}{{^BA_logo-height}}2{{/BA_logo-height}} - 0.12));
+      	}
+      
+        .page-feature-image.text-vertical-half-small .wrapper{
+          left: calc(3mm + 68%);
+        }
+      }
+
+      @media (width: 1080px) and (height: 1080px){
+        .page-feature-image.text-vertical-half-small .wrapper{
+          left: calc(3mm + 59%);
+        }
+        
+        .page-feature-image.text-vertical-half .wrapper {
+          left: calc(3mm + 58%);
+        }
+      }
+
+      @media (width: 1200px) and (height: 900px){
+        .page-feature-image.text-vertical-half-small .wrapper{
+          left: calc(3mm + 65%);
+        }
+      }
+      
+      @media (width: 300px) and (height: 250px){
+        .page-feature-image.text-vertical-half-small .wrapper{
+          left: calc(3mm + 69%);
+        }
+        
+        .page-feature-image.text-vertical-half-small .text {
+          font-weight: 700;
+          font-size: 15px;
+          line-height: 17px;
+          max-height: 370px;
+        }
+        
+        .page-feature-image.text-vertical-half-small .content {
+          padding: 47px 16px 21px;
+        }
+      }
+
+      :root {
+        --red: {{account.colors.red}};
+        --green: {{account.colors.green}};
+        --blue: {{account.colors.blue}};
+        --yellow: {{account.colors.yellow}};
+        --white: {{account.colors.white}};
+        --black: {{account.colors.black}};
+      }
+
+      {{{account.snippets.color_matrix_image_with_content_box}}}
+
+      .content-background, .inner-background { background-color: var(--content-background); }
+      .text	{	color: var(--heading-color); }
+      .text strong	{	color: var(--heading-pop-color); }
+      {{^logo-filter-override}}.logo img{	filter: var(--logo-filter);	}{{/logo-filter-override}}
+      /*.logo img{ {{logo-filter-override}} }*/
+    </style>
+  </head>
+
+  <body style="background: white" data-crop="{{show-crop}}">
+    <div class="page page-{{{social-variation}}}{{^social-variation}}feature-image{{/social-variation}} theme-{{{social-theme}}}{{^social-theme}}green-and-white{{/social-theme}} text-{{{social-text-position}}}{{^social-text-position}}vertical-half{{/social-text-position}} content-{{{social-content-position}}}{{^social-content-position}}center{{/social-content-position}} {{{theme-option-full}}}{{^theme-option-full}}light-theme{{/theme-option-full}} {{{theme-colour-full}}}{{^theme-colour-full}}blue{{/theme-colour-full}}">
+
+      <div class="bleed">
+
+        <div class="container fit background">
+
+          <div class="plac"></div>
+
+          <div class="backgroundImage reposition-fix">{{{background-image}}}</div>
+          <div class="wrapper background">
+            <div class="inner-background"></div>
+            <div class="content">
+              <div class="icon">
+                <img src="{{{social-icon}}}" />
+              </div>
+              <div class="text" data-max-height="css">
+                <div class="inner">
+                  {{{social-text}}}{{^social-text}}Add text here.{{/social-text}}
+                </div>
+              </div>
+              {{#social-text-bottom}}
+              <div class="text-separator"></div>
+              <div class="text text-bottom" data-max-height="css">
+                <div class="inner">
+                  {{{social-text-bottom}}}
+                </div>
+              </div>
+              {{/social-text-bottom}}
+              {{#social-id}}
+              <div class="text social-id" data-max-height="css">
+                <div class="inner">@{{social-id}}</div>
+              </div>
+              {{/social-id}}
+            </div>
+          </div>
+          <div class="logo">
+            {{^logo-filter-override}}<img src="{{{BA_logo--p}}}" />{{/logo-filter-override}}
+            <img src="{{{logo-filter-override}}}" />
+          </div>
+        </div>
+        <!--container fit-->
+
+      </div>
+      <!--bleed-->
+
+    </div>
+    <!--page-->
+
+    <script>
+      window.showCrop = {{show-crop}}{{^show-crop}}true{{/show-crop}};
+    </script>
+    <script src="js/main.js"></script>
+    <script src="js/prefixfree.js"></script>
+    <script src="js/check-export-mode.js"></script>
+    <script src="js/dynamic-inject.js"></script>
+    <script src="js/char-limit.js"></script>
+    <script src="js/max-line-check.js"></script>
+    <script src="js/max-height-check.js"></script>
+    <script src="js/textfit.js"></script>
+    <script src="js/utils.js"></script>
+    <script>
+
+      console.clear();
+
+      // Tracking text changes and firing text restriction functions (mutationObserver)
+      const overflowObserver = new MutationObserver(function (mutations) {
+        mutations.forEach(function (mutation) {
+          maxLineCheck();
+          maxHeightCheck();
+        });
+      });
+
+      const injectObserver = new MutationObserver(function (mutations) {
+        mutations.forEach(function (mutation) {
+          injectDynamicContent();
+        });
+      });
+
+      const injectSources = document.querySelectorAll('[data-target-id]');
+
+      overflowObserver.observe(document.body, {
+        attributes: false,
+        characterData: true,
+        childList: true,
+        subtree: true,
+        attributeOldValue: false,
+        characterDataOldValue: true
+      });
+
+      if (injectSources.length > 0) {
+        injectSources.forEach(src => {
+          injectObserver.observe(src, {
+            attributes: false,
+            characterData: true,
+            childList: true,
+            subtree: true,
+            attributeOldValue: false,
+            characterDataOldValue: true
+          });
+        });
+      }
+
+      // Calling text size restriction functions once the fonts are loaded
+      document.fonts.ready.then(() => {
+        maxLineCheck();
+        maxHeightCheck();
+        injectDynamicContent();
+      });
+
+      checkCrop();
+      checkExport();
+
+      // TextFit function decreases the font of the selected element to make it fit in single line (if needed, uncomment the code bellow)
+      TextFit.fit({
+        selector: '.lockup',
+        alignItems: 'center',
+      });
+
+    </script>
+    <script>
+      var logo = document.querySelector(".logo img");
+      var logoNaturalHeight = logo.naturalHeight;
+      console.log(logo);
+      console.log(logoNaturalHeight);
+
+    </script>
+  </body>
+
+</html>
