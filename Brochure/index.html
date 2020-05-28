@@ -8,6 +8,7 @@
     <link rel="stylesheet" type="text/css" href="css/minireset.css">
     <link rel="stylesheet" type="text/css" href="css/main.css">
     <link rel="stylesheet" type="text/css" href="css/placeholder-controller.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.js"></script>
 
     <style>
       @import url('https://fonts.googleapis.com/css?family=Archivo+Black&display=swap');
@@ -25,6 +26,7 @@
         --yellow: {{account.colors.yellow}};
         --white: {{{account.colors.white}}};
         --black: {{{account.colors.black}}};
+        --transparent: transparent;
 
         /* Cover Page Block Banner */
         --banner-background-color: var(--red);
@@ -357,6 +359,24 @@
       .themeInternalColour--black { --dynamic-color: var(--black); }
       .themeInternalColour--white { --dynamic-color: var(--white); }
 
+      .themeInternalColour--black.pageThemeInteralColour--dark { --dynamic-color: var(--white); }
+      .themeInternalColour--white.pageThemeInteralColour--light { --dynamic-color: var(--black); }
+
+      .themeInternalColour--white.pageThemeInteralColour--dark .fit--halfPageImageWithContent { --internal-pages-text-color-dynamic: var(--black); }
+      .themeInternalColour--black.pageThemeInteralColour--dark .fit--halfPageImageWithContent { --dynamic-color: var(--black); }
+      .themeInternalColour--white.pageThemeInteralColour--light .fit--halfPageImageWithContent { --dynamic-color: var(--white); }
+      .themeInternalColour--black.pageThemeInteralColour--light .fit--halfPageImageWithContent { --internal-pages-text-color-dynamic: var(--white); }
+
+      .themeInternalColour--white.pageThemeInteralColour--dark .fit--fullPageImageWithQuote,
+      .themeInternalColour--black.pageThemeInteralColour--dark .fit--fullPageImageWithQuote { 
+        --internal-pages-text-color-dynamic: var(--black); 
+      }
+
+      .themeInternalColour--white.pageThemeInteralColour--light .fit--fullPageImageWithQuote,
+      .themeInternalColour--black.pageThemeInteralColour--light .fit--fullPageImageWithQuote { 
+        --internal-pages-text-color-dynamic: var(--white); 
+      }
+
       .pageThemeInteralColour--dark {
         --internal-pages-text-color-dynamic: var(--white);
         --internal-pages-background-color-dynamic: var(--black);
@@ -367,8 +387,7 @@
         --internal-pages-background-color-dynamic: var(--white);
       }
 
-      .pageThemeInteralColour--dark.themeInternalColour--white { --internal-pages-text-color-dynamic: var(--black); }
-      .pageThemeInteralColour--light.themeInternalColour--black { --internal-pages-text-color-dynamic: var(--white); }
+      .pageThemeInteralColour--dark.themeInternalColour--white { --internal-pages-text-color-dynamic: var(--white); }
 
       .imageTextColor--white { --hero-text-colour: var(--white); }
       .imageTextColor--black { --hero-text-colour: var(--black); }
@@ -398,6 +417,7 @@
       {{BA_themeColour--br}}
       {{BA_document-title--br}}
       {{BA_section-heading--br}}
+      {{BA_date--br}}
       {{BA_dark_logo--br}}
       {{BA_light_logo--br}}
 
@@ -689,7 +709,7 @@
       }
 
       .fit--flexiPage {
-        padding: 0.7rem 0 2.5rem 1.1rem;
+        padding: 0.7rem 0 2.5rem 0;
         flex-direction: column;
       }
 
@@ -788,6 +808,7 @@
       .body--flexiPage { 
         flex-direction: column;        
         padding-right: 1.2rem;
+        overflow: hidden;
       }
 
       .featureImagePosition--top-left .body--flexiPage,
@@ -829,6 +850,7 @@
         top: 0;
         right: 0;
         padding: 1.45rem 0.85rem 1.35rem 0.75rem;
+        z-index: 1;
       }
 
       .logo__container--coverPageHighlightBanner { padding: 0.75rem 0.65rem 0.95rem 0.45rem; }
@@ -860,7 +882,6 @@
       .logo__container--contentTwoColumn {
         background: transparent;
       }
-
 
       .logo {
         display: none;
@@ -1126,6 +1147,7 @@
       .footer-alt .footerBanner__item:nth-child(3) { display: none; }
 
       .footerBanner__item:before {
+        display: none;
         content: '';
         position: absolute;
         right: 110%;
@@ -1133,6 +1155,8 @@
         height: 100%;
         border-left: 1pt solid var(--border-item-before-background);
       }
+
+      .footerBannerTheme--transparent .footerBanner__item:before { display: block; }
 
       .footerBanner__item h3 {
         font-size: 0.25rem;
@@ -1210,8 +1234,12 @@
       .column__container { display: flex; }
       .column__container--halfPageImageWithContent { flex: 1; } 
       .column__container--singlePageLayout { width: 100%; }
-      .column__container--flexiPage { flex: 1; }
       
+      .column__container--flexiPage { 
+        flex: 1;
+        overflow: hidden;
+      }
+
       /* Showing error popup if subheading is set and more than two columns are added */
       .alertPopup {
         display: none;
@@ -1233,7 +1261,7 @@
         line-height: 1.2em;
         padding: 1em;
       }
-      
+
       .subheading + .column__container--singlePageLayout .column:nth-child(3) + .alertPopup { display: flex; }
 
       .heading--flexiPage + .column__container--flexiPage { margin-top: 0.65rem; }
@@ -1246,10 +1274,13 @@
       .column--flexiPage + .column { 
         margin-left: 0.4rem;
       }
-      
+
       .subheading + .column__container--singlePageLayout .column:nth-child(3) { display: none; }
 
-      .column__inner--halfPageImageWithContent { font-size: 0; }
+      .column__inner--halfPageImageWithContent {
+        max-height: 5.9rem;
+        font-size: 0; 
+      }
 
       .quote__container { 
         position: relative;
@@ -1320,7 +1351,7 @@
 
       .hero__container {
         position: relative;
-        height: 10.7rem;
+        flex: 1;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
@@ -1336,9 +1367,12 @@
       }
 
       .content--halfPageImageWithContent {
+        flex: unset;
         padding: 0.83rem 1rem 1.5rem 2.1rem;
         background-color: var(--dynamic-color);
       }
+
+      .imagePosition--bottom .content--halfPageImageWithContent { padding-top: 1.5rem; }
 
       .hero {
         position: absolute;
@@ -1363,7 +1397,8 @@
 
       }
 
-      .title--statsPage {
+      .title--statsPage,
+      .title--flexiPage {
         position: relative !important;
         left: unset;
         top: unset;
@@ -1374,6 +1409,19 @@
         padding-left: 0;
         border-bottom: none;
         color: var(--internal-pages-text-color-dynamic);
+      }
+
+      .title--flexiPage,
+      .title--halfPageImageWithContent {
+        display: flex;
+        justify-content: flex-end;
+      }  
+
+      .title--flexiPage { display: none; }
+
+      .title--halfPageImageWithContent {
+        border-bottom: 0.03rem solid var(--hero-text-colour);
+        color: var(--hero-text-colour);
       }
 
       .hero__caption {
@@ -1460,13 +1508,8 @@
 
       .copy ul,
       .testimonial__content ul { 
-        margin-left: 0.25rem;
+        margin-left: 0.35rem;
         margin-bottom: 0.2rem;
-      }
-
-      .testimonial__content ul,
-      .copy--statsPage ul { 
-        margin-left: 0.35rem; 
       }
 
       .copy--singlePageLayout h2,
@@ -1487,7 +1530,7 @@
         content: '';
         position: absolute;
         top: 0.1rem;
-        right: 105%;
+        right: 103.3%;
         width: 0.05rem;
         height: 0.05rem;
         background: var(--internal-pages-text-color-dynamic);
@@ -1505,6 +1548,7 @@
         margin-bottom: 0;
       }
 
+
       .sectionHeading {
         width: 3.5rem;
         font-size: 0.19rem;
@@ -1513,13 +1557,19 @@
         font-weight: bold;
       }
 
+      .sectionHeading--flexiPage { display: none; }
+
       .body__content {
         flex: 1;
         display: flex;
         position: relative;
       }
 
-      .body__content--flexiPage { flex-direction: column; }
+      .body__content--flexiPage { 
+        flex-direction: column;
+        margin-left: 1.1rem;
+        overflow: hidden;
+      }
 
       .subheading {
         margin-right: 0.5rem;
@@ -1560,7 +1610,7 @@
 
       .image__caption { 
         position: relative;
-        max-height: 1.2rem;
+        max-height: 1.3rem;
         width: 2rem;
       }
 
@@ -1568,6 +1618,8 @@
         font-size: 0.155rem;
         line-height: 1.3em;
       }
+
+      .image__caption--flexiPage { max-height: 0.75rem; }
 
       .copy--singlePageLayout,
       .image--singlePageLayout,
@@ -1590,6 +1642,7 @@
       .featureImage__container {
         position: relative;
         height: 8.7rem;
+        flex-shrink: 0;
       }
 
       .featureImagePosition--top-left .featureImage__container,
@@ -1622,7 +1675,7 @@
 
       .testimonial { 
         margin-bottom: 0.9rem;
-        height: 3rem;
+        height: 3.1rem;
         display: flex;
         padding-right: 2.1rem;
         font-size: 0;
@@ -1648,7 +1701,6 @@
 
       .text__column {
         flex: 1;
-        max-height: 3.3rem;
       }
 
       .text__column + .text__column { margin-left: 0.5rem; }      
@@ -1697,6 +1749,13 @@
         line-height: 1.1em;
       }
 
+      .date { 
+        margin-left: 0.1rem;
+        font-weight: bold;
+      }
+
+      .date.overflow:hover:after { content: 'This does not use correct syntax!'; }
+
       .pageNumber__container {
         position: absolute;
         bottom: 0.59rem;
@@ -1738,6 +1797,8 @@
 
       .pageNumber__container--hidden { display: none; }
       .masterContainer { display: none; }
+      .u-block { display: block; }
+      .u-flex { display: flex; }
 
       /* ANY OTHER STYLES THAT NEED MUSTACHE.JS CAPABILITIES */
     </style>
@@ -1762,6 +1823,7 @@
       <div class="js-inject-src" data-target-id="light-logo" data-is-image="true">{{{BA_light_logo--br}}}</div>
       <div class="js-inject-src" data-target-id="document-title">{{BA_document-title--br}}</div>
       <div class="js-inject-src" data-target-id="section-heading">{{BA_section-heading--br}}</div>     
+      <div class="js-inject-src" data-target-id="date">{{BA_date--br}}</div>  
     </div><!-- masterContainer -->
 
     <!-- COVER PAGE -->
@@ -1962,7 +2024,7 @@
       {{#collection.two-pages}}
       {{#block.blank-page}}
       <!-- BLANK PAGE -->
-      <div class="page">
+      <div class="page js-page">
 
         <div class="bleed">
 
@@ -1984,7 +2046,7 @@
       {{/block.blank-page}}
       {{#block.full-page-image-with-quote}}
       <!-- FULL PAGE IMAGE WITH QUOTE -->
-      <div class="page">
+      <div class="page js-page">
 
         <div class="bleed">
 
@@ -2021,7 +2083,7 @@
       {{/block.full-page-image-with-quote}}
       {{#block.half-page-image-with-content}}
       <!-- HALF PAGE IMAGE WITH CONTENT -->
-      <div class="page">
+      <div class="page js-page">
 
         <div class="bleed">
 
@@ -2033,9 +2095,9 @@
                       imageTextColor--{{image-text-colour}}{{^image-text-colour}}white{{/image-text-colour}}
                       ">
             <div class="body body--halfPageImageWithContent">
-              <div class="hero__container">
+              <div class="hero__container hero__container--halfPageImageWithContent">
                 {{#half-page-image}}
-                <div class="hero">
+                <div class="hero hero">
                   <div class="reposition-fix">{{{half-page-image}}}</div><!-- reposition-fix -->
                 </div><!-- hero -->
                 {{/half-page-image}}
@@ -2050,7 +2112,7 @@
                   {{#collection.column-content}}
                   {{#block.column}}
                   <div class="column column--halfPageImageWithContent">
-                    <div class="column__inner column__inner--halfPageImageWithContent" data-max-height="dynamic">
+                    <div class="column__inner column__inner--halfPageImageWithContent" data-max-height="css">
                       {{#icon-image}}<img src="{{icon-image}}" class="icon" />{{/icon-image}}
                       {{#copy-content}}
                       <div class="copy">
@@ -2064,8 +2126,9 @@
                 </div><!-- column__container -->
               </div><!-- content -->
             </div><!-- body -->
-            <div class="title">
+            <div class="title title--halfPageImageWithContent">
               <div class="title__inner"  data-target="document-title" data-max-line="1"></div><!-- title__inner -->
+              <div class="date dateValidation" data-target="date"></div>
             </div><!-- title -->
             <div class="pageNumber__container js-page-number-container">
               <div class="pageNumber__square pageNumber__square--defualtBackgroundColor"></div><!-- pageNumber__square -->
@@ -2080,7 +2143,7 @@
       {{/block.half-page-image-with-content}}
       {{#block.single-page-layout}}
       <!-- SINGLE PAGE LAYOUT -->
-      <div class="page">
+      <div class="page js-page">
 
         <div class="bleed">
 
@@ -2162,7 +2225,7 @@
       {{/block.single-page-layout}}
       {{#block.flexi-page}}
       <!-- FLEXI PAGE -->
-      <div class="page">
+      <div class="page js-page js-page-flexi">
 
         <div class="bleed">
 
@@ -2174,8 +2237,11 @@
                       {{#feature-image--br}}feature-image-exist{{/feature-image--br}}
                       ">
             <div class="header header--flexiPage">
-              <div class="sectionHeading" data-target="section-heading" data-max-line="1"></div><!-- sectionHeading -->
-              <div class="title title--statsPage" data-target="document-title" data-max-line="1"></div><!-- title -->
+              <div class="sectionHeading sectionHeading--flexiPage" data-target="section-heading" data-max-line="1"></div><!-- sectionHeading -->
+              <div class="title title--flexiPage" data-max-line="1">
+                <div class="title__inner" data-target="document-title"></div>
+                <div class="date dateValidation" data-target="date"></div>
+              </div><!-- title -->
             </div><!-- header -->
             <div class="body body--flexiPage">
               <div class="body__content body__content--flexiPage">
@@ -2250,7 +2316,7 @@
       {{/block.flexi-page}}
       {{#block.stats-page}}
       <!-- STATS PAGE -->
-      <div class="page">
+      <div class="page js-page">
 
         <div class="bleed">
 
@@ -2287,7 +2353,7 @@
                   <div class="text__container">
                     {{#collection.column-content--br}}
                     {{#block.column--br}}
-                    <div class="text__column copy copy--statsPage" data-max-height="css">{{{copy--br}}}</div><!-- text__column -->
+                    <div class="text__column copy copy--statsPage">{{{copy--br}}}</div><!-- text__column -->
                     {{/block.column--br}}
                     {{/collection.column-content--br}}
                   </div><!-- text__container -->
@@ -2381,7 +2447,7 @@
     </script>
     <script>
 
-      //console.clear();
+      console.clear();
 
       // Tracking text changes and firing text restriction functions (mutationObserver)
       const overflowObserver = new MutationObserver(function(mutations) {
@@ -2396,6 +2462,7 @@
       const injectObserver = new MutationObserver(function(mutations) {
         mutations.forEach(function(mutation) {
           injectDynamicContent();
+          dateUtil();
         });
       });      
 
@@ -2438,7 +2505,22 @@
         })
       }
 
-      imageHeightSetter();
+      function dateUtil(){
+        var dates = document.querySelectorAll(".dateValidation");
+        var date = "{{BA_date--br}}";
+        dates.forEach(function(date){
+          var dateFormat = 'MM YY';
+          var dateValue = date.innerText;
+          const m = moment(dateValue , dateFormat, true);
+          const a = m.isValid();
+
+          if(a != true) {
+            date.classList.add("overflow");
+          } else {
+            date.classList.remove("overflow");
+          }
+        });
+      }
 
       // Calling text size restriction functions once the fonts are loaded
       // All external font-families need to be added to 'fonts' array
@@ -2455,7 +2537,9 @@
           maxLineCheck();
           maxHeightCheck();
           injectDynamicContent();
+          dateUtil();
           hideEmptyTitles();
+          imageHeightSetter();
 
           document.dispatchEvent(new Event('printready'));
         });
@@ -2470,10 +2554,10 @@
       TextFit.fit({
         selector: '.textFit'
       });
-      
+
       function setFirstColumnWidth() {
         const colContainers = document.querySelectorAll('[data-first-column-width]');
-        
+
         for ( const container of colContainers ) {
           const firstColWidth = container.dataset.firstColumnWidth;
           const columns = container.querySelectorAll('.column');
@@ -2481,7 +2565,7 @@
           if ( columns.length > 1 ) columns[0].style.cssText = `flex: unset; width: ${firstColWidth}%`;
         }
       }
-      
+
       setFirstColumnWidth();
 
       function pageNumberInject() {
@@ -2497,7 +2581,24 @@
         })
       }
 
-      pageNumberInject()
+      pageNumberInject();
+
+      function displayHeaderText() {
+        const pages = document.querySelectorAll('.js-page');
+
+        pages.forEach((page, index)  => {
+          if(page.classList.contains('js-page-flexi') !== true) return;
+
+          if(page % 2 !== 0 ) {
+            page.querySelector('.title--flexiPage').classList.add('u-flex');
+          }else {
+            page.querySelector('.sectionHeading--flexiPage').classList.add('u-block');
+          }
+        })
+      }
+
+      displayHeaderText();
+
 
     </script>
 
