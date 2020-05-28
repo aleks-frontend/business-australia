@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html data-sign="OS?">
+
+  <head>
+    <title>Outfit</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="./css/minireset.css">
+    <link rel="stylesheet" type="text/css" href="./css/main.css">
+
+    <style>
+      @import url('https://fonts.googleapis.com/css?family=Archivo:400,400i,700,700i&display=swap');
+      @import url('https://fonts.googleapis.com/css?family=Taviraj&display=swap');
+      
+      /* 
+      {{#show-crop}}{{/show-crop}}
+      {{#logo}}{{/logo}}
+      {{#BA_logo-height}}{{/BA_logo-height}}
+      {{#logo-partner}}{{/logo-partner}}
+      {{#BA_logo-height-partner}}{{/BA_logo-height-partner}}
+      */
+
+      :root {
+        --red: {{account.colors.red}};
+        --green: {{account.colors.green}};
+        --blue: {{account.colors.blue}};
+        --yellow: {{account.colors.yellow}};
+        --white: {{account.colors.white}};
+        --black: {{account.colors.black}};
+      }
+
+      body {
+        font-family: 'Archivo';
+        font-size: 11pt;
+        color: var(--black);
+        word-break: break-word;
+      }
+
+      .backgroundImage {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        overflow: hidden;
+      }
+
+      .backgroundImage div {
+        width: auto !important;
+        height: auto !important;
+        right: 0;
+        bottom: 0;
+      }
+
+      /* Helper classes */
+      .u-hide {
+        display: none !important;
+      }
+
+      .overflow::after {
+        font-size: 0.3rem;
+      }
+      
+      .overflow.invalid-date:hover::after {
+        content: 'Date is invalid';
+      }
+
+      .overflow.invalid-phone:hover::after {
+        content: 'Phone number is invalid';
+      }
+
+      .overflow.invalid-email:hover::after {
+        content: 'Email is invalid';
+      }
+
+      .overflow.invalid-website:hover::after {
+        content: 'Website is invalid';
+      }
+
+      /* Helper class for fixing Reposition tool bug */
+      .reposition-fix {
+        position: absolute;
+        overflow: hidden;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+      }
+
+      .reposition-fix div {
+        top: 0 !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+      }
+
+      /* ANY OTHER STYLES THAT NEED MUSTACHE.JS CAPABILITIES */
+      .wrapper {
+        position: absolute;
+        top: 3mm;
+        right: 3mm;
+        bottom: 3mm;
+        left: 3mm;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        padding: 26pt 70pt;
+      }
+      
+      .logos {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-end;
+        justify-content: center;        
+      }
+
+      .logo {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .logo img {
+        height: calc(36pt * (0.56 * ({{{BA_logo-height}}}{{^BA_logo-height}}2{{/BA_logo-height}}) - 0.12));
+        width: auto;
+      }
+      
+      .logo.logo-partner img {
+        height: calc(36pt * (0.56 * ({{{BA_logo-height-partner}}}{{^BA_logo-height-partner}}2{{/BA_logo-height-partner}}) - 0.12));
+      }
+      
+      .logo:not(:last-child) {
+        padding-right: 12pt;
+        margin-right: 12pt;
+        border-right: solid 1.5pt var(--black);
+      }
+
+      .main {
+        flex: 1;
+        width: 100%;
+        position: relative;
+      }
+      
+      .address-details {
+        margin-bottom: 32pt;
+      }
+      
+      .address-details p.date:last-child,
+      .address-details p.info {
+        margin-bottom: 0;
+      }
+
+      .copy {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+      }
+
+      .copy-inner {
+        max-height: 100%;
+      }
+
+      .copy h2, .copy h3, .copy h4{
+        line-height: 1.2;
+        margin: 0 0 0.3em;
+      }
+
+      .copy h2{
+        font-size: 25pt;
+      }
+
+      .copy h3{
+        font-size: 18pt;
+      }
+
+      .copy h4{
+        font-size: 12pt;
+      }
+
+      .copy p, .copy ul {
+        font-size: 10pt;
+        line-height: 1.2em;
+        margin: 0 0 1em;
+      }
+
+      .copy ul, .copy ol{
+        padding-left: 2em;
+        margin: 0 0 1em;
+      }
+
+      .copy ul{
+        list-style: disc;
+      }
+
+      a {
+        color: var(--black);
+      }
+
+      .copy li{
+        padding-left: 0.3em;
+      }
+
+      .copy p:last-child {
+        margin-bottom: 0;
+      }
+
+      .footer {
+        width: 100%;
+        padding-top: 40pt;
+        text-align: center;
+      }
+
+      .footer p {
+        font-size: 8pt;
+        line-height: 1.2em;
+      }
+
+      .footer::before {
+        content: "";
+        display: block;
+        margin: 0 auto 10pt;
+        height: 1pt;
+        width: 162pt;
+        border-bottom: solid 1pt var(--black);
+      }
+
+      .contact span + span:before {
+        content: " | ";
+      }
+      
+      /*Signature*/
+      .signature {
+        margin: 10pt 0 0;        
+        width: 100%;
+      }
+      
+      .signature-image {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-end;
+        height: 52pt;
+      }
+      
+      .signature-image img {
+        height: 100%;
+        width: auto;
+        max-width: 100%;
+      }
+      
+      .signature-text {
+        font-size: 10pt;
+        line-height: 1.2em;
+        margin-top: 1em;
+      }
+      
+      /*
+      [data-asset-id="body-copy"].u-hide + .signature,
+      .no-copy + .signature, */
+      .page:not(.last):not(:last-of-type) .signature {
+        display: none !important;
+      }
+
+      /*Front*/
+      .page-front .logo {
+        margin-top: 75pt;
+        margin-bottom: 60pt;
+      }
+
+      /*Back*/
+      .page-internal .logos {
+        align-self: flex-end;
+      }
+        
+      .page-internal .logo {
+        align-self: flex-end;
+        margin-top: 20pt;
+        margin-bottom: 34pt;
+      }
+
+      .page-internal .logo img {
+        height: calc(18pt * (0.56 * ({{{BA_logo-height}}}{{^BA_logo-height}}2{{/BA_logo-height}}) - 0.12));
+        width: auto;
+      }
+      
+      .page-internal .logo.logo-partner img {
+        height: calc(18pt * (0.56 * ({{{BA_logo-height-partner}}}{{^BA_logo-height-partner}}2{{/BA_logo-height-partner}}) - 0.12));
+      }
+    </style>
+  </head>
+
+  <body style="background: white" data-crop="{{show-crop}}">    
+    <div class="u-hide">
+      <!-- Logos{{#logo}}{{/logo}} -->
+      {{#logo-partner}}
+      <div id="logo-partner">
+        <img src="{{{logo-partner}}}" />
+      </div>
+      {{/logo-partner}}
+      {{#logo}}
+      <div id="logo-primary">
+        <img src="{{{logo}}}" />
+      </div>
+      {{/logo}}
+      {{#lh-body-copy}}<div id="body-copy">{{{lh-body-copy}}}</div>{{/lh-body-copy}}
+      <div id="address">{{{address}}}</div>
+      <div id="contact">
+        {{#phone-number}}<span class="tel">Tel <span class="phone">{{{phone-number}}}</span></span>{{/phone-number}}
+        {{#email}}<span class="email">{{{email}}}</span>{{/email}}
+        {{#website}}<span class="website">{{{website}}}</span>{{/website}}
+      </div>
+      <div id="signature-image">
+        {{#signature-image}}<img src="{{{signature-image}}}" />{{/signature-image}}
+      </div>
+      {{#signature-text}}
+      <div id="signature-text">
+        {{{signature-text}}}
+      </div>
+      {{/signature-text}}
+      <div id="abn-number">{{{account.snippets.abn-number}}}</div>
+    </div>
+    
+    
+    {{#spreadsheet.lh-contact}}
+    <div class="page page-front">
+
+      <div class="bleed">
+
+        <div class="container fit">
+          <div class="backgroundImage reposition-fix"></div>
+          <div class="wrapper">
+            <div id="logos" class="logos">
+              <div class="logo logo-partner" data-asset-id="logo-partner"></div>
+              <div class="logo logo-primary" data-asset-id="logo-primary"></div>
+            </div>
+            <div class="main">
+              <div class="copy">                
+                <div class="copy-inner" data-max-height="dynamic">                  
+                  <div class="address-details">
+                    {{#date}}<p class="date"><strong>{{{date}}}</strong></p>{{/date}}
+                    <p class="info {{^first-name}}{{^last-name}}u-hide{{/last-name}}{{/first-name}}">
+                      {{{first-name}}}
+                      {{{last-name}}}
+                    </p>
+                    {{#company}}<p class="info">{{{company}}}</p>{{/company}}
+                    {{#address-line-1}}<p class="info">{{{address-line-1}}}</p>{{/address-line-1}}
+                    {{#address-line-2}}<p class="info">{{{address-line-2}}}</p>{{/address-line-2}}                    
+                  </div>                  
+                  <div data-asset-id="body-copy" data-firstname="{{first-name}}" data-lastname="{{last-name}}"></div> 
+                  <div class="signature">
+                    <div class="signature-image" data-asset-id="signature-image"></div>
+                    <div class="signature-text" data-max-line="3" data-asset-id="signature-text"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="footer">
+              <div class="footer-content">
+                <p class="address" data-max-line="1" data-asset-id="address"></p>
+                <p class="contact" data-max-line="1" data-asset-id="contact"></p>
+                <p class="abn-number" data-asset-id="abn-number"></p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--container fit-->
+
+      </div>
+      <!--bleed-->
+
+    </div>
+    <!--page-->    
+    {{/spreadsheet.lh-contact}}
+    {{^spreadsheet.lh-contact}}
+    <div class="page page-front">
+
+      <div class="bleed">
+
+        <div class="container fit">
+          <div class="backgroundImage reposition-fix"></div>
+          <div class="wrapper">
+            <div id="logos" class="logos">
+              <div class="logo logo-partner" data-asset-id="logo-partner"></div>
+              <div class="logo logo-primary" data-asset-id="logo-primary"></div>
+            </div>
+            <div class="main">
+              <div class="copy">                
+                <div class="copy-inner" data-max-height="dynamic">                  
+                  <div data-asset-id="body-copy" data-firstname="" data-lastname=""></div> 
+                  <div class="signature">
+                    <div class="signature-image" data-asset-id="signature-image"></div>
+                    <div class="signature-text" data-max-line="3" data-asset-id="signature-text"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="footer">
+              <div class="footer-content">
+                <p class="address" data-max-line="1" data-asset-id="address"></p>
+                <p class="contact" data-max-line="1" data-asset-id="contact"></p>
+                <p class="abn-number" data-asset-id="abn-number"></p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--container fit-->
+
+      </div>
+      <!--bleed-->
+
+    </div>
+    <!--page-->
+    {{/spreadsheet.lh-contact}}
+    
+    {{#collection.lh-internal-pages}}
+    <div class="page page-internal">
+
+      <div class="bleed">
+
+        <div class="container fit">
+          <div class="backgroundImage reposition-fix"></div>
+          <div class="wrapper">
+            <div class="logos" data-asset-id="logos"></div>
+            <div class="main">
+              <div class="copy" data-max-height="dynamic">
+                <div class="copy-inner">
+                  {{#block.internal-page}}
+                  {{{lh-copy}}}{{^lh-copy}}<div class="no-copy"></div>{{/lh-copy}}
+                  {{/block.internal-page}}
+                  <div class="signature">
+                    <div class="signature-image" data-asset-id="signature-image"></div>
+                    <div class="signature-text" data-max-line="3" data-asset-id="signature-text"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="footer">
+              <div class="footer-content">
+                <p class="address" data-max-line="1" data-asset-id="address"></p>
+                <p class="contact" data-max-line="1" data-asset-id="contact"></p>
+                <p class="abn-number" data-asset-id="abn-number"></p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--container fit-->
+
+      </div>
+      <!--bleed-->
+
+    </div>
+    <!--page-->
+    {{/collection.lh-internal-pages}}
+
+    <script>
+      window.showCrop = {{show-crop}}{{^show-crop}}true{{/show-crop}};
+    </script>
+    <script src="js/main.js"></script>
+    <script src="js/prefixfree.js"></script>
+    <script src="js/check-export-mode.js"></script>
+    <script src="js/dynamic-inject.js"></script>
+    <script src="js/char-limit.js"></script>
+    <script src="js/max-line-check.js"></script>
+    <script src="js/max-height-check.js"></script>
+    <script src="js/textfit.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/moment.js"></script>
+    <script>
+
+      console.clear();
+
+      function templating() {
+        const els = document.querySelectorAll('[data-asset-id]');
+
+        if (els.length > 0) {
+          els.forEach(el => {
+            const id = el.dataset.assetId;
+            const src = document.getElementById(id);
+            if (!src) {
+              el.classList.add('u-hide');
+            } else {
+              let newHtml = src.innerHTML;
+              
+              switch(id) {
+                case 'body-copy':               
+                  newHtml = src.innerHTML
+                    .replace(/{first-name}/g, el.dataset.firstname)
+                    .replace(/{last-name}/g, el.dataset.lastname);
+                  break;
+              }
+              
+              if (newHtml !== el.innerHTML) {
+                el.innerHTML = newHtml;
+              }
+              
+              el.classList.remove('u-hide');
+            }
+          });
+        }               
+      }
+      
+      function paging() {
+        const frontPages = document.querySelectorAll('.page-front');
+        const internalPages = document.querySelectorAll('.page-internal');
+
+        if (frontPages.length) {          
+          frontPages.forEach((el, index) => {
+            if (!internalPages.length) {
+              el.classList.add('last');
+            } else {
+              el.classList.remove('last');
+
+              if (index < frontPages.length - 1) {
+                Array.prototype.slice.call(internalPages).reverse().forEach((obj, objIndex) => {
+                  if (!objIndex) {
+                    obj.classList.add('last');
+                  } else {
+                    obj.classList.remove('last');
+                  }
+
+                  el.insertAdjacentHTML('afterend', obj.outerHTML);
+                });
+              }
+            }                       
+          });
+        }
+      };
+
+      function validation() {
+        const el = document.querySelector(".footer-content");
+        if (el) {
+          const phoneEl = document.querySelector(".contact .phone");
+          const phone = phoneEl ? phoneEl.innerText : '';
+          
+          const emaileEl = document.querySelector(".contact .email");
+          const email = emaileEl ? emaileEl.innerText : '';
+          
+          const websiteEl = document.querySelector(".contact .website");
+          const website = websiteEl ? websiteEl.innerText : '';
+
+          const phoneRegex = /^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/;
+          if (phone && !phoneRegex.test(phone)) {
+            el.classList.add("overflow", "invalid-phone");
+            return;
+          }
+
+          const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+          if (email && !emailRegex.test(email)) {
+            el.classList.add("overflow", "invalid-email");
+            return;
+          }
+
+          const websiteRegex = /^(https?:\/\/)?(www\.)?([a-zA-Z0-9]+(-?[a-zA-Z0-9])*\.)+[\w]{2,}(\/\S*)?$/;
+          if (website && !websiteRegex.test(website)) {
+            el.classList.add("overflow", "invalid-website");
+            return;
+          }
+          
+          el.classList.remove("overflow", "invalid-phone", "invalid-email", "invalid-website");
+        }        
+      }
+      
+      function validation2() {
+        const el = document.querySelector(".address-details");
+        if (el) {
+          const dateEl = document.querySelector(".address-details .date");
+          const date = dateEl ? dateEl.innerText : '';
+
+          if (date && !moment(date.toLowerCase(), "DD MMMM YYYY", true).isValid()) {
+            el.classList.add("overflow", "invalid-date");
+          } else {
+            el.classList.remove("overflow", "invalid-date");
+          }
+        }      
+      }
+
+      // Tracking text changes and firing text restriction functions (mutationObserver)
+      const overflowObserver = new MutationObserver(function (mutations) {
+        mutations.forEach(function (mutation) {
+          maxLineCheck();
+          maxHeightCheck();        
+          templating();
+          validation();
+          validation2();
+        });
+      });
+
+      const injectObserver = new MutationObserver(function (mutations) {
+        mutations.forEach(function (mutation) {
+          injectDynamicContent();
+        });
+      });
+
+      const injectSources = document.querySelectorAll('[data-target-id]');
+
+      overflowObserver.observe(document.body, {
+        attributes: false,
+        characterData: true,
+        childList: true,
+        subtree: true,
+        attributeOldValue: false,
+        characterDataOldValue: true
+      });
+
+      if (injectSources.length > 0) {
+        injectSources.forEach(src => {
+          injectObserver.observe(src, {
+            attributes: false,
+            characterData: true,
+            childList: true,
+            subtree: true,
+            attributeOldValue: false,
+            characterDataOldValue: true
+          });
+        });
+      }
+
+      // Calling text size restriction functions once the fonts are loaded
+      document.fonts.ready.then(() => {
+        maxLineCheck();
+        maxHeightCheck();
+        injectDynamicContent();
+        paging();
+        templating();
+        validation();
+        validation2();
+      });
+
+      checkCrop();
+      checkExport();
+
+      // TextFit function decreases the font of the selected element to make it fit in single line (if needed, uncomment the code bellow)
+      TextFit.fit({
+        selector: '.lockup',
+        alignItems: 'center',
+      });
+
+    </script>
+  </body>
+
+</html>

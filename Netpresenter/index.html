@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html data-sign="OSL">
+  <head>
+    <title>Template title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="css/minireset.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/placeholder-controller.css">
+
+    <style>
+      /* Inputs Order
+      {{show-crop}}
+
+      {{placeholder-validation}}{{ placeholder-opacity }}{{ placeholder-image-1 }}{{ placeholder-toggle-new }}
+
+
+      {{{BA_variation--n}}}
+      {{{BA_theme--n}}}
+      {{{BA_theme-colour--n}}}
+      {{{BA_background-image--n}}}
+      {{BA_logo--p}}
+      {{#BA_logo-height}}{{/BA_logo-height}}
+      {{{BA_background-opacity--n}}}
+      {{{BA_overlay-position--n}}}
+      {{{BA_copy--n}}}
+      {{{BA_cta-title--n}}}
+      {{BA_icon--n}} 
+      */
+
+      @import url('https://fonts.googleapis.com/css?family=Archivo+Black&display=swap');
+      @import url('https://fonts.googleapis.com/css?family=Archivo:400,700&display=swap');
+
+
+      :root {
+        --red: {{account.colors.red}};
+        --green: {{account.colors.green}};
+        --blue: {{account.colors.blue}};
+        --yellow: {{account.colors.yellow}};
+        --white: {{account.colors.white}};
+        --black: {{account.colors.black}};
+      }
+
+      /* background-color*/
+
+      /*light*/     
+      .theme--light {
+        --dynamic-background-color: var(--white);
+        --dynamic-heading-color: var(--black);
+        --dynamic-content-color: var(--black);
+        --dynamic-pop-color: var(--black);
+        --dynamic-cta-text-color: var(--black);
+        --dynamic-cta-background-color: var(--white);
+      }
+
+      .theme--light.themeColor--blue { --dynamic-pop-color: var(--blue); }
+      .theme--light.themeColor--red { --dynamic-pop-color: var(--red); }
+
+
+      /*dark*/
+      .theme--dark { 
+        --dynamic-background-color: var(--black);
+        --dynamic-heading-color: var(--white);
+        --dynamic-content-color: var(--white); 
+        --dynamic-pop-color: var(--white);
+        --dynamic-cta-text-color: var(--white);
+        --dynamic-cta-background-color: var(--black);
+      }
+
+      .theme--dark.themeColor--red { --dynamic-pop-color: var(--red); }
+      .theme--dark.themeColor--yellow { --dynamic-pop-color: var(--yellow); }
+      .theme--dark.themeColor--green { --dynamic-pop-color: var(--green); }
+
+      /*coloured*/
+
+      .theme--coloured.themeColor--blue {
+        --dynamic-background-color: var(--blue);
+        --dynamic-heading-color: var(--white);
+        --dynamic-content-color: var(--white);
+        --dynamic-pop-color: var(--white); 
+        --dynamic-cta-text-color: var(--white);
+        --dynamic-cta-background-color: var(--blue);
+      }
+
+      .theme--coloured.themeColor--red {
+        --dynamic-background-color: var(--red);
+        --dynamic-heading-color: var(--black);
+        --dynamic-content-color: var(--white);
+        --dynamic-pop-color: var(--white); 
+        --dynamic-cta-text-color: var(--black);
+        --dynamic-cta-background-color: var(--red);
+      }
+
+      .theme--coloured.themeColor--yellow {
+        --dynamic-background-color: var(--yellow);
+        --dynamic-heading-color: var(--black);
+        --dynamic-content-color: var(--black);
+        --dynamic-pop-color: var(--black); 
+        --dynamic-cta-text-color: var(--black);
+        --dynamic-cta-background-color: var(--yellow);
+      }
+
+      .theme--coloured.themeColor--green {
+        --dynamic-background-color: var(--green);
+        --dynamic-heading-color: var(--black);
+        --dynamic-content-color: var(--black);
+        --dynamic-pop-color: var(--black); 
+        --dynamic-cta-text-color: var(--black);
+        --dynamic-cta-background-color: var(--green);
+      }
+
+      .theme--coloured.themeColor--white {
+        --dynamic-background-color: var(--white);
+        --dynamic-heading-color: var(--black);
+        --dynamic-content-color: var(--black);
+        --dynamic-pop-color: var(--black);
+        --dynamic-cta-text-color: var(--black);
+        --dynamic-cta-background-color: var(--white);
+      }
+
+      .theme--coloured.themeColor--black {
+        --dynamic-background-color: var(--black);
+        --dynamic-heading-color: var(--white);
+        --dynamic-content-color: var(--white);
+        --dynamic-pop-color: var(--white); 
+        --dynamic-cta-text-color: var(--white);
+        --dynamic-cta-background-color: var(--black);
+      }
+
+      html {
+        font-family: "Archivo";
+        font-size: 11pt;
+        color: #000;
+        word-break: break-word;
+      }
+
+      .backgroundImage {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        overflow: hidden;
+      }
+
+      .backgroundImage div {
+        width: auto !important;
+        height: auto !important;
+        right: 0;
+        bottom: 0;
+      }
+
+      /* Helper classes */
+      .u-hide { display: none; }
+
+      /* Helper class for fixing Reposition tool bug */
+      .reposition-fix {
+        position: absolute;
+        overflow: hidden;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;        
+      }
+
+      .reposition-fix div {
+        top: 0 !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+      }
+
+      .fit {
+        display: flex;
+        top: 3mm;
+        left: 3mm;
+        bottom: 3mm;
+        right: 3mm;
+        background-color: var(--dynamic-background-color); 
+      }
+
+      .overlayPosition--right-half .fit { justify-content: flex-end; }
+      .overlayPosition--left-half .fit { align-items: flex-start; }
+      .overlayPosition--left-bottom .fit { align-items: flex-end; }
+      .overlayPosition--right-bottom .fit {
+        justify-content: flex-end;
+        align-items: flex-end;
+      }
+      .overlayPosition--full-bottom .fit { align-items: flex-end; }
+      .overlayPosition--center .fit {   
+        justify-content: center;
+        align-items: flex-end;
+      }
+
+      .logo {
+        position: absolute;
+        top: 89pt;
+        right: 141pt;
+        width: auto;
+        height: calc(158.5pt * (0.56 * ({{{BA_logo-height}}}{{^BA_logo-height}}2{{/BA_logo-height}}) - 0.12));
+        object-fit: contain;
+        object-position: top right;
+      }
+
+      .icon {
+        position: relative;
+        width: 488pt;
+        max-height: 560pt;
+        object-fit: contain;
+        object-position: bottom;
+        margin: 0 auto 102pt;
+      }
+
+      .variation--netpresenter-with-icon .icon {
+        display: block;
+      }
+
+      .contentBox {  
+        position: relative;
+        display: flex;
+        flex-direction: column;  
+      }
+
+      .overlayPosition--right-half .contentBox,
+      .overlayPosition--left-half .contentBox {
+        justify-content: flex-end;
+        align-items: flex-start;   
+        height: 100%;
+        width: 50%;
+      }
+      .overlayPosition--right-half .contentBox { padding: 400pt 249pt 172pt 190pt;}
+      .overlayPosition--left-half .contentBox { padding: 400pt 190pt 172pt 249pt;}
+
+      .overlayPosition--left-bottom .contentBox,
+      .overlayPosition--right-bottom .contentBox {
+        height: 63%;
+        width: 40%; 
+        padding: 175pt 194pt 100pt;
+      }
+
+      .overlayPosition--center .contentBox {
+        height: 1268pt;
+        width: 3656pt;
+        padding: 185pt 268pt 70pt;
+        text-align: center;
+      }
+
+      .overlayPosition--center.variation--netpresenter-with-icon .contentBox  {
+        justify-content: flex-end;
+        width: 2040pt;
+        height: 100%; 
+        padding: 420pt 0pt 145pt;
+      }
+
+      .contentBox__inner {    
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center; 
+        width: 100%;
+      }
+
+      .overlayPosition--right-half .contentBox__inner,
+      .overlayPosition--left-half .contentBox__inner {
+        align-items: flex-start;
+      }
+
+      .overlayPosition--left-bottom .contentBox__inner,
+      .overlayPosition--right-bottom .contentBox__inner {
+        align-items: flex-start; 
+      }
+
+      .overlayPosition--center.variation--netpresenter-with-icon  .contentBox__inner {
+        display: block;
+      }
+
+      .overlayColor {
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;  
+        background-color: var(--dynamic-background-color); 
+        opacity: {{{BA_background-opacity--n}}};
+      }
+
+      .copy {
+        margin-bottom: 176pt;
+      }
+
+      .variation--netpresenter-with-icon .copy {
+        margin-bottom: 120pt;
+      }
+
+      .copy:last-of-type {
+        margin-bottom: 0 !important;
+      }
+
+      .copy h1 {
+        color: var(--dynamic-heading-color);
+        font-family: 'Archivo Black';
+        font-size: 157pt;
+        line-height: 1.2em;
+        margin-bottom: 111pt;     
+      }
+
+      .overlayPosition--right-half .copy h1,
+      .overlayPosition--left-half .copy h1 {
+        margin-bottom: 111pt;
+      }
+
+      .overlayPosition--left-bottom .copy h1,
+      .overlayPosition--right-bottom .copy h1 {
+        margin-bottom: 178pt;
+      }
+
+      .overlayPosition--center .copy h1 { margin-bottom: 0.7em; }
+
+      .overlayPosition--center.variation--netpresenter-with-icon .copy h1 {
+        margin-bottom: 90pt;
+      }
+      
+      .copy h1 strong { font-weight: normal; }
+
+      .copy p {
+        margin-bottom: 74pt;
+        font-size: 75.3pt;
+        line-height: 1.4em;
+        font-weight: 700;    
+        color: var(--dynamic-content-color);
+      }
+
+      .overlayPosition--center .copy p {
+        margin-bottom: 0.7em;
+      }
+
+      .copy h1:last-child,
+      .copy p:last-child {
+        margin-bottom: 0 !important;
+      }     
+
+      .copy h1 strong,
+      .copy p strong {
+        color: var(--dynamic-pop-color);
+      }
+
+      .cta {
+        display: inline-block;
+        position: relative;
+        padding: 62pt 145pt;
+        font-size: 74pt;
+        background: var(--dynamic-cta-background-color);
+        color: var(--dynamic-cta-text-color);
+        border: 0.15em solid var(--dynamic-cta-text-color);
+      }
+
+      .overlayPosition--right-half .cta,
+      .overlayPosition--left-half .cta {
+        padding: 62pt 145pt;
+      }
+
+      .overlayPosition--left-bottom .cta,
+      .overlayPosition--right-bottom .cta {
+        padding: 62pt 107pt;
+      }
+
+      .cta__text {
+        font-size: 1em;
+        line-height: 1.2em;
+        font-weight: 700;
+      }
+
+      /* ANY OTHER STYLES THAT NEED MUSTACHE.JS CAPABILITIES */
+    </style>
+  </head>
+  <body style="background: white" data-crop="{{show-crop}}" data-reduce-export-font-size-by-percent="0" data-reduce-firefox-font-size-by-percent="0" data-prevent-export-overflow="false"
+        class="variation--{{BA_variation--n}}{{^BA_variation--n}}netpresenter{{/BA_variation--n}}
+               theme--{{BA_theme--n}}{{^BA_theme--n}}coloured{{/BA_theme--n}}            
+               themeColor--{{BA_theme-colour--n}}{{^BA_theme-colour--n}}red{{/BA_theme-colour--n}}
+               overlayPosition--{{BA_overlay-position--n}}{{^BA_overlay-position--n}}right-half{{/BA_overlay-position--n}}">
+
+    <div class="placeholderMaster" data-opacity="{{ placeholder-opacity }}">
+      <div class="placeholderMaster__item" data-bg="{{ placeholder-image-1 }}"></div>
+    </div><!-- end placeholderMaster -->
+
+    <div class="page">
+
+      <div class="bleed">
+
+        <div class="container fit">
+
+          <div class="backgroundImage">
+            <div class="reposition-fix">
+              {{{BA_background-image--n}}}
+            </div><!--reposition-fix-->
+          </div><!--backgroundImage-->
+          <div class="contentBox">
+            <div class="overlayColor"></div><!--overlayColor-->     
+            <div class="contentBox__inner" data-max-height="dynamic">
+              {{#BA_icon--n}}
+              <img class="icon" src="{{BA_icon--n}}"><!--logo-->
+              {{/BA_icon--n}}
+              {{#BA_copy--n}} 
+              <div class="copy">{{{BA_copy--n}}}</div><!--copy-->
+              {{/BA_copy--n}}
+              {{#BA_cta-title--n}}
+              <div class="cta">
+                <div class="cta__text" data-max-height="160">{{{BA_cta-title--n}}}</div><!--cta__text-->
+              </div><!--cta-->
+              {{/BA_cta-title--n}}
+            </div>  <!--contentBox__inner-->
+          </div><!--contentBox-->
+          <img class="logo" src="{{BA_logo--p}}"><!--logo-->
+
+        </div><!--container fit-->
+
+      </div><!--bleed-->
+
+    </div><!--page-->
+
+
+    <script>
+      window.showCrop = {{show-crop}}{{^show-crop}}true{{/show-crop}};
+    </script>
+    <script src="js/main.js"></script>   
+    <script src="js/prefixfree.js"></script>
+    <script src="js/placeholder-controller.js"></script>
+    <script src="js/char-limit.js"></script>
+    <script src="js/check-export-mode.js"></script>
+    <script src="js/max-line-check.js"></script>
+    <script src="js/max-height-check.js"></script>
+    <script src="js/hide-empty-titles.js"></script>
+    <script src="js/custom-rich-text.js"></script>
+    <script src="js/dynamic-inject.js"></script>
+    <script src="js/text-fit-min.js"></script>
+    <script src="js/fontfaceobserver.js"></script>
+    <script src="https://outfit-assets-production.s3-accelerate.amazonaws.com/scripts/textfit.0.0.4.min.js" type="text/javascript"></script>
+
+    <script>
+      {{ #placeholder-toggle-new }}document.body.classList.add("u-placeholder-{{ placeholder-toggle-new }}{{^placeholder-toggle-new}}hide{{/placeholder-toggle-new}}"); {{ /placeholder-toggle-new }}
+      {{ #placeholder-validation }}document.body.classList.add("placeholder__validation--{{placeholder-validation}}"){{ /placeholder-validation }}
+    </script>
+
+    <script>
+
+      console.clear();
+
+      // Tracking text changes and firing text restriction functions (mutationObserver)
+      const overflowObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          maxLineCheck();
+          maxHeightCheck();
+          charLimit();
+          hideEmptyTitles();
+        });
+      });
+
+      const injectObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          injectDynamicContent();
+        });
+      });      
+
+      const injectSources = document.querySelectorAll('[data-target-id]');
+
+      overflowObserver.observe(document.body, {
+        attributes: false,
+        characterData: true,
+        childList: true,
+        subtree: true,
+        attributeOldValue: false,
+        characterDataOldValue: true
+      });
+
+      if ( injectSources.length > 0 ) {
+        injectSources.forEach(src => {
+          injectObserver.observe(src, {
+            attributes: false,
+            characterData: true,
+            childList: true,
+            subtree: true,
+            attributeOldValue: false,
+            characterDataOldValue: true
+          });            
+        });
+      }    
+
+      // Calling text size restriction functions once the fonts are loaded
+      // All external font-families need to be added to 'fonts' array
+      document.addEventListener('DOMContentLoaded', function(event) {
+        const fonts = ['Archivo', 'Archivo Black'];
+        const fontObservers = [];
+
+        fonts.forEach(font => {
+          const obs = new FontFaceObserver(font);
+          fontObservers.push(obs.load())
+        });
+
+        Promise.all(fontObservers).then(() => {
+          maxLineCheck();
+          maxHeightCheck();
+          injectDynamicContent();
+          hideEmptyTitles();
+
+          document.dispatchEvent(new Event('printready'));
+        });
+      });      
+
+      placeholderController();
+      checkCrop();
+      checkExport();
+      charLimit();
+
+      // TextFit function decreases the font of the selected element to make it fit in single line (if needed, uncomment the code bellow)
+      TextFit.fit({
+        selector: '.textFit'
+      });
+
+      // Triggering maxHeightCheck() again when icon image is loaded 
+      // and container's height is increased
+      const icon = document.querySelector('img.icon');      
+      icon.onload = () => maxHeightCheck();
+
+
+    </script>
+
+
+  </body>
+</html>
