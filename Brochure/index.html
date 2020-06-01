@@ -51,13 +51,13 @@
         --border-item-before-background: transparent;
 
         /*Internal Pages */
+        --dynamic-color: var(--red);
         --blank-page-background-color: var(--white);
-        --internal-pages-text-color-dynamic: var(--white);
+        --internal-pages-text-color-dynamic: var(--white);   
+        --internal-pages-text-colour-bold: var(--dynamic-color);
+        --internal-pages-coloured-section-text-color-dynamic: var(--black);
         --internal-pages-background-color-dynamic: var(--black);
         --hero-text-colour: var(--white);
-
-        /* Back Page */
-        --dynamic-color: var(--red);
       }
 
       /* COVER PAGE BLOCK BANNER */
@@ -352,20 +352,12 @@
       .blankPageBackgroundColour--black { --blank-page-background-color: var(--black); }
       .blankPageBackgroundColour--white { --blank-page-background-color: var(--white); }
 
-      .themeInternalColour--red { --dynamic-color: var(--red); }
-      .themeInternalColour--blue { --dynamic-color: var(--blue); }
-      .themeInternalColour--green { --dynamic-color: var(--green); }
-      .themeInternalColour--yellow { --dynamic-color: var(--yellow); }
-      .themeInternalColour--black { --dynamic-color: var(--black); }
-      .themeInternalColour--white { --dynamic-color: var(--white); }
-
-      .themeInternalColour--black.pageThemeInteralColour--dark { --dynamic-color: var(--white); }
-      .themeInternalColour--white.pageThemeInteralColour--light { --dynamic-color: var(--black); }
-
-      .themeInternalColour--white.pageThemeInteralColour--dark .fit--halfPageImageWithContent { --internal-pages-text-color-dynamic: var(--black); }
-      .themeInternalColour--black.pageThemeInteralColour--dark .fit--halfPageImageWithContent { --dynamic-color: var(--black); }
-      .themeInternalColour--white.pageThemeInteralColour--light .fit--halfPageImageWithContent { --dynamic-color: var(--white); }
-      .themeInternalColour--black.pageThemeInteralColour--light .fit--halfPageImageWithContent { --internal-pages-text-color-dynamic: var(--white); }
+      .themeInternalColour--red .fit { --dynamic-color: var(--red); --internal-pages-text-colour-bold: var(--dynamic-color); }
+      .themeInternalColour--blue .fit { --dynamic-color: var(--blue); --internal-pages-text-colour-bold: var(--dynamic-color); }
+      .themeInternalColour--green .fit { --dynamic-color: var(--green); --internal-pages-text-colour-bold: var(--dynamic-color); }
+      .themeInternalColour--yellow .fit { --dynamic-color: var(--yellow); --internal-pages-text-colour-bold: var(--dynamic-color);  }
+      .themeInternalColour--black .fit { --dynamic-color: var(--black); --internal-pages-text-colour-bold: var(--dynamic-color); }
+      .themeInternalColour--white .fit { --dynamic-color: var(--white); --internal-pages-text-colour-bold: var(--dynamic-color); } 
 
       .themeInternalColour--white.pageThemeInteralColour--dark .fit--fullPageImageWithQuote,
       .themeInternalColour--black.pageThemeInteralColour--dark .fit--fullPageImageWithQuote { 
@@ -392,17 +384,87 @@
       .imageTextColor--white { --hero-text-colour: var(--white); }
       .imageTextColor--black { --hero-text-colour: var(--black); }
 
-
-      /* Back Page */
-
       /* COVER PAGE BLOCK BANNER */
       /* Banner Theme Colour */
-      .themeColour--red { --dynamic-color: var(--red); }
-      .themeColour--blue { --dynamic-color: var(--blue); }
-      .themeColour--green { --dynamic-color: var(--green); }
-      .themeColour--yellow { --dynamic-color: var(--yellow); }
-      .themeColour--black { --dynamic-color: var(--black); }
-      .themeColour--white { --dynamic-color: var(--white); }
+      .themeColour--red { --dynamic-color: var(--red);  --internal-pages-text-colour-bold: var(--dynamic-color); }
+      .themeColour--blue { --dynamic-color: var(--blue);  --internal-pages-text-colour-bold: var(--dynamic-color); }
+      .themeColour--green { --dynamic-color: var(--green); --internal-pages-text-colour-bold: var(--dynamic-color); }
+      .themeColour--yellow { --dynamic-color: var(--yellow); --internal-pages-text-colour-bold: var(--dynamic-color); }
+      .themeColour--black { --dynamic-color: var(--black); --internal-pages-text-colour-bold: var(--dynamic-color); }
+      .themeColour--white { --dynamic-color: var(--white); --internal-pages-text-colour-bold: var(--dynamic-color); }
+
+
+      /* Table of Contents  */
+      .themeColour--blue .fitBackgroundColor--black,
+      .themeColour--white .fitBackgroundColor--black,
+      .themeColour--black .fitBackgroundColor--black { 
+        --internal-pages-text-colour-bold: var(--white);
+      }
+
+      .themeColour--yellow .fitBackgroundColor--white,
+      .themeColour--green .fitBackgroundColor--white,
+      .themeColour--white .fitBackgroundColor--white,
+      .themeColour--black .fitBackgroundColor--white{ 
+        --internal-pages-text-colour-bold: var(--black);
+      }
+
+      /* Internal Pages */
+
+      .themeColour--blue .pageThemeInteralColour--dark,
+      .themeColour--white .pageThemeInteralColour--dark,
+      .themeColour--black .pageThemeInteralColour--dark  {
+        --internal-pages-text-colour-bold: var(--white);
+      }
+
+      .themeColour--yellow .pageThemeInteralColour--light,
+      .themeColour--green .pageThemeInteralColour--light,
+      .themeColour--white .pageThemeInteralColour--light,
+      .themeColour--black .pageThemeInteralColour--light {
+        --internal-pages-text-colour-bold: var(--black);
+      }
+
+      .themeInternalColour--blue.pageThemeInteralColour--dark .fit,
+      .themeInternalColour--white.pageThemeInteralColour--dark .fit, 
+      .themeInternalColour--black.pageThemeInteralColour--dark .fit {
+        --internal-pages-text-colour-bold: var(--white);
+      }
+
+      .themeInternalColour--yellow.pageThemeInteralColour--light .fit, 
+      .themeInternalColour--green.pageThemeInteralColour--light .fit,
+      .themeInternalColour--white.pageThemeInteralColour--light .fit,
+      .themeInternalColour--black.pageThemeInteralColour--light .fit {
+        --internal-pages-text-colour-bold: var(--black);
+      }
+
+      /* Definition for text which has coloured background */
+      /* Themes which come from main theme */
+
+      .themeColour--blue .colouredSection,
+      .themeColour--black .colouredSection {
+        --internal-pages-coloured-section-text-color-dynamic: var(--white); 
+      }
+
+      .themeColour--red .colouredSection,
+      .themeColour--yellow .colouredSection,
+      .themeColour--green .colouredSection,
+      .themeColour--white .colouredSection {
+        --internal-pages-coloured-section-text-color-dynamic: var(--black); 
+      }
+
+      /* Internal Themes */
+
+      .themeInternalColour--blue .colouredSection .fit,
+      .themeInternalColour--black  .colouredSection .fit {
+        --internal-pages-coloured-section-text-color-dynamic: var(--white);
+      }
+
+      .themeInternalColour--yellow .colouredSection .fit,
+      .themeInternalColour--green .colouredSection .fit,
+      .themeInternalColour--red .colouredSection .fit,
+      .themeInternalColour--white .colouredSection  .fit {
+        --internal-pages-coloured-section-text-color-dynamic: var(--black); 
+      }
+
 
       /* 
       Input Order
@@ -1085,13 +1147,13 @@
 
       .heading--flexiPage { max-height: 6.5rem; }
       .feature-image-exist .heading--flexiPage { max-height: 5rem; }
-
+      .heading--statsPage { max-height: 6.5rem; }
 
       .heading--contentOneColumn strong,
       .heading--singlePageLayout strong,
       .heading--flexiPage h1 strong,
       .heading--statsPage strong { 
-        color: var(--dynamic-color); 
+        color: var(--internal-pages-text-colour-bold); 
         font-weight: 400;
       }
 
@@ -1123,7 +1185,7 @@
         font-size: 0.238rem;
         line-height: 1.3em;
         font-family: var(--font-taviraj);
-        color: var(--dynamic-color); 
+        color: var(--internal-pages-text-colour-bold); 
       }
 
       .footerBanner {
@@ -1177,7 +1239,7 @@
         margin-bottom: 0.21rem;
         font-size: 0.64rem;
         font-weight: 700;
-        color: var(--dynamic-color);
+        color: var(--internal-pages-text-colour-bold);
         text-transform: uppercase;
       }
 
@@ -1216,7 +1278,7 @@
 
       .table__row--contentTwoColumn:first-child .table__item--secondary,
       .table__row--contentTwoColumn:first-child .table__item--tertiary {
-        color: var(--dynamic-color);
+        color: var(--internal-pages-text-colour-bold);
       }
 
       .table__row:last-child { margin-bottom: 0; }
@@ -1234,7 +1296,7 @@
       .column__container { display: flex; }
       .column__container--halfPageImageWithContent { flex: 1; } 
       .column__container--singlePageLayout { width: 100%; }
-      
+
       .column__container--flexiPage { 
         flex: 1;
         overflow: hidden;
@@ -1315,12 +1377,13 @@
         font-size: 0.455rem;
         line-height: 1.05em;
         font-family: var(--font-taviraj);
-        color: var(--dynamic-color);
+        color: var(--internal-pages-text-colour-bold);
       }
 
-      .quote--fullPageImageWithQuote h3 { color: var(--internal-pages-text-color-dynamic); }
+      .copy--halfPageImageWithContent { color: var(--internal-pages-coloured-section-text-color-dynamic); }
 
-
+      .quote--fullPageImageWithQuote { color: var(--internal-pages-coloured-section-text-color-dynamic); }
+      .quote--fullPageImageWithQuote h3 { color: var(--internal-pages-coloured-section-text-color-dynamic); }
 
       .quote h3:before,
       .quote h3:after,
@@ -1332,6 +1395,11 @@
         display: inline-block;
         font-size: 1em;
         color: var(--internal-pages-text-color-dynamic);
+      }
+
+      .quote--fullPageImageWithQuote h3:before,
+      .quote--fullPageImageWithQuote h3:after { 
+        color: var(--internal-pages-coloured-section-text-color-dynamic);
       }
 
       .quote h3:before {
@@ -1477,6 +1545,7 @@
         font-size: 0.3rem;
         line-height: 1.3em;
         font-family: var(--font-taviraj);
+        color: var(--internal-pages-coloured-section-text-color-dynamic);
       }
 
       .icon { 
@@ -1516,7 +1585,7 @@
       .copy--flexiPage h2,
       .testimonial__content h2,
       .copy--statsPage h2 { 
-        color: var(--dynamic-color);
+        color: var(--internal-pages-text-colour-bold);
       }
 
       .copy li,
@@ -1536,6 +1605,8 @@
         background: var(--internal-pages-text-color-dynamic);
         border-radius: 50%;
       }
+      
+      .copy--halfPageImageWithContent li:before { background: var(--internal-pages-coloured-section-text-color-dynamic); }
 
       .copy h2:last-child,
       .copy p:last-child,
@@ -1581,7 +1652,7 @@
       }
 
       .subheading strong {
-        color: var(--dynamic-color);
+        color: var(--internal-pages-text-colour-bold);
         font-weight: 400;
       }
 
@@ -1732,7 +1803,7 @@
         font-size: 1rem;
         line-height: 0.9em;
         font-family: var(--font-taviraj);
-        color: var(--dynamic-color);
+        color: var(--internal-pages-text-colour-bold);
       }
 
       .stats__number.overflow:hover:after { font-size: 0.3em; }
@@ -1772,13 +1843,15 @@
       }
 
       .pageNumber__square {
-        background: var(--dynamic-color);
+        background: var(--internal-pages-text-colour-bold);
         width: 0.3rem;
         height: 100%;
       }
 
       .pageNumber__square--defualtBackgroundColor { background: var(--internal-pages-text-color-dynamic); }
 
+      .pageNumber__container--colouredSection { color: var(--internal-pages-coloured-section-text-color-dynamic); }
+      .pageNumber__container--colouredSection .pageNumber__square { background: var(--internal-pages-coloured-section-text-color-dynamic); }
 
       .pageNumber {
         margin: 0 0.12rem;
@@ -1789,7 +1862,7 @@
       a { 
         margin-bottom: 0.15rem;
         font-size: 0.2rem;
-        color: var(--dynamic-color);
+        color: var(--internal-pages-text-colour-bold);
         text-decoration: none;
       }
 
@@ -2046,7 +2119,7 @@
       {{/block.blank-page}}
       {{#block.full-page-image-with-quote}}
       <!-- FULL PAGE IMAGE WITH QUOTE -->
-      <div class="page js-page">
+      <div class="page js-page  colouredSection">
 
         <div class="bleed">
 
@@ -2083,7 +2156,7 @@
       {{/block.full-page-image-with-quote}}
       {{#block.half-page-image-with-content}}
       <!-- HALF PAGE IMAGE WITH CONTENT -->
-      <div class="page js-page">
+      <div class="page js-page colouredSection">
 
         <div class="bleed">
 
@@ -2094,7 +2167,7 @@
                       imagePosition--{{image-position}}{{^image-position}}top{{/image-position}}
                       imageTextColor--{{image-text-colour}}{{^image-text-colour}}white{{/image-text-colour}}
                       ">
-            <div class="body body--halfPageImageWithContent">
+            <div class="body body--halfPageImageWithContent ">
               <div class="hero__container hero__container--halfPageImageWithContent">
                 {{#half-page-image}}
                 <div class="hero hero">
@@ -2115,7 +2188,7 @@
                     <div class="column__inner column__inner--halfPageImageWithContent" data-max-height="css">
                       {{#icon-image}}<img src="{{icon-image}}" class="icon" />{{/icon-image}}
                       {{#copy-content}}
-                      <div class="copy">
+                      <div class="copy copy--halfPageImageWithContent">
                         {{{copy-content}}}
                       </div><!-- copy -->
                       {{/copy-content}}
@@ -2130,7 +2203,7 @@
               <div class="title__inner"  data-target="document-title" data-max-line="1"></div><!-- title__inner -->
               <div class="date dateValidation" data-target="date"></div>
             </div><!-- title -->
-            <div class="pageNumber__container js-page-number-container">
+            <div class="pageNumber__container js-page-number-container pageNumber__container--colouredSection">
               <div class="pageNumber__square pageNumber__square--defualtBackgroundColor"></div><!-- pageNumber__square -->
               <div class="pageNumber js-page-number"></div><!-- pageNumber -->
             </div>
@@ -2330,7 +2403,7 @@
             </div><!-- header -->
             <div class="body body--statsPage">
               {{#heading--br}}
-              <div class="heading heading--statsPage">{{{heading--br}}}</div><!-- heading--flexiPage -->
+              <div class="heading heading--statsPage" data-max-height="css">{{{heading--br}}}</div><!-- heading--flexiPage -->
               {{/heading--br}}
               <div class="content content--statsPage">
                 <div class="content__inner" data-max-height="dynamic">
