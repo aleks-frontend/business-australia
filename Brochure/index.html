@@ -345,13 +345,6 @@
 
       /*Internal Pages */
 
-      .blankPageBackgroundColour--red { --blank-page-background-color: var(--red); }
-      .blankPageBackgroundColour--blue { --blank-page-background-color: var(--blue); }
-      .blankPageBackgroundColour--green { --blank-page-background-color: var(--green); }
-      .blankPageBackgroundColour--yellow { --blank-page-background-color: var(--yellow); }
-      .blankPageBackgroundColour--black { --blank-page-background-color: var(--black); }
-      .blankPageBackgroundColour--white { --blank-page-background-color: var(--white); }
-
       .themeInternalColour--red .fit { --dynamic-color: var(--red); --internal-pages-text-colour-bold: var(--dynamic-color); }
       .themeInternalColour--blue .fit { --dynamic-color: var(--blue); --internal-pages-text-colour-bold: var(--dynamic-color); }
       .themeInternalColour--green .fit { --dynamic-color: var(--green); --internal-pages-text-colour-bold: var(--dynamic-color); }
@@ -465,6 +458,8 @@
         --internal-pages-coloured-section-text-color-dynamic: var(--black); 
       }
 
+      /* Blank Page */
+      .fit--blankPage { --blank-page-background-color: var(--dynamic-color); }
 
       /* 
       Input Order
@@ -478,7 +473,6 @@
 
       {{BA_themeColour--br}}
       {{BA_document-title--br}}
-      {{BA_section-heading--br}}
       {{BA_date--br}}
       {{BA_dark_logo--br}}
       {{BA_light_logo--br}}
@@ -486,11 +480,6 @@
       {{#collection.BA_cover-page--br}}
       {{#block.BA_cover-page-block-banner--br}}
       {{page-theme--br}}
-      {{gradient-opacity--br}}
-      {{gradient-colour}}
-      {{top-grad-height}}
-      {{left-grad-width}}
-      {{bottom-grad-height}}
       {{background-image--br}}
       {{banner-theme--br}}
       {{banner-transparency--br}}
@@ -522,20 +511,24 @@
       {{/block.BA_one-column--br}}
       {{/collection.BA_content-page--br}}
 
-      {{#collection.BA_internal-pages--br}} 
+      {{#collection.BA_internal-pages--br}}     
       {{#block.two-pages}}
       {{themeColour}}
       {{page-theme}}
+
       {{#collection.two-pages}}
+
       {{#block.blank-page}}
       {{background-colour}}
       {{/block.blank-page}}
+
       {{#block.full-page-image-with-quote}}
       {{full-page-image}}
       {{quote-block}}
       {{quote-opacity}}
       {{quote-position}}
       {{/block.full-page-image-with-quote}}
+
       {{#block.half-page-image-with-content}}
       {{half-page-image}}
       {{image-position}}
@@ -550,7 +543,9 @@
       {{/block.column}}
       {{/collection.column-content}}
       {{/block.half-page-image-with-content}}
+
       {{#block.single-page-layout}}
+      {{section-heading--br}}
       {{heading-font-size-br}}
       {{heading--br}}
       {{subheading--br}}
@@ -573,7 +568,9 @@
       {{/block.column--br}}
       {{/collection.body-content--br}}
       {{/block.single-page-layout}}
+
       {{#block.flexi-page}}
+      {{section-heading--br}}
       {{heading--br}}
       {{#collection.body-content--br}}
       {{#block.column--br}}
@@ -596,7 +593,9 @@
       {{feature-image--br}}
       {{feature-image-position--br}}
       {{/block.flexi-page}}
+
       {{#block.stats-page}}
+      {{section-heading--br}}
       {{heading--br}}
       {{#collection.body-content--br}}
       {{#block.testimonial--br}}
@@ -621,6 +620,7 @@
       {{/block.stats--br}}
       {{/collection.body-content--br}}
       {{/block.stats-page}}
+
       {{/collection.two-pages}}
       {{/block.two-pages}}
       {{/collection.BA_internal-pages--br}}
@@ -689,13 +689,6 @@
       }
 
       {{#collection.BA_cover-page--br}}
-
-      {{#block.BA_cover-page-block-banner--br}}
-      .gradient { opacity: {{gradient-opacity--br}}{{^gradient-opacity--br}}1{{/gradient-opacity--br}}; }
-      .gradient--top { height: {{top-grad-height}}%; }      
-      .gradient--left { width: {{left-grad-width}}%; }
-      .gradient--bottom { height: {{bottom-grad-height}}%; }
-      {{/block.BA_cover-page-block-banner--br}}
 
       {{#block.BA_cover-page-highlight-banner--br}}
       .gradient { opacity: {{gradient-opacity--br}}{{^gradient-opacity--br}}1{{/gradient-opacity--br}}; }
@@ -795,15 +788,13 @@
         border-bottom: 0.03rem solid var(--internal-pages-text-color-dynamic);
       }
 
-      .header--singlePageLayout { margin-bottom: 3.55rem; }
-
-      .header--flexiPage,
-      .header--statsPage { 
-        margin-bottom: 2.05rem; 
-      }
+      .header--singlePageLayout { margin-bottom: 3.55rem; }    
+      .header--statsPage { margin-bottom: 2.05rem; }    
 
       .header--flexiPage { 
         display: flex;
+        margin-left: 1.1rem;
+        margin-bottom: 1.05rem; 
         padding-right: 1.2rem;
       }
 
@@ -835,7 +826,20 @@
 
       .fitBackgroundColor--white .body--contentOneColumn,
       .fitBackgroundColor--white .body--contentTwoColumn { color: var(--black); } 
-      .fit--blankPage { background-color: var(--blank-page-background-color); }
+
+      .fit--blankPage { 
+        background-color: var(--blank-page-background-color);
+        color: var(--black); 
+      }
+
+      .blankPageBackgroundColour--black.fit--blankPage { background: var(--black); }
+      .blankPageBackgroundColour--white.fit--blankPage { background-color: var(--white); }
+
+      .themeInternalColour--blue .blankPageBackgroundColour--colour.fit--blankPage,
+      .themeInternalColour--black .blankPageBackgroundColour--colour.fit--blankPage,
+      .blankPageBackgroundColour--black.fit--blankPage {
+        color: var(--white);
+      }
 
       .headingPosition--center .body--coverPageHighlightBanner { align-items: center; }
       .headingPosition--bottom .body--coverPageHighlightBanner { align-items: flex-end; }
@@ -869,7 +873,6 @@
 
       .body--flexiPage { 
         flex-direction: column;        
-        padding-right: 1.2rem;
         overflow: hidden;
       }
 
@@ -982,7 +985,7 @@
         display: flex;
         align-items: flex-end;
         width: 12.35rem;
-        padding: 0.8rem 1.7rem 1rem 1.95rem;
+        padding: 0.8rem 1.7rem 1rem;
       }
 
       .banner__backgroundColor {
@@ -1605,7 +1608,7 @@
         background: var(--internal-pages-text-color-dynamic);
         border-radius: 50%;
       }
-      
+
       .copy--halfPageImageWithContent li:before { background: var(--internal-pages-coloured-section-text-color-dynamic); }
 
       .copy h2:last-child,
@@ -1628,8 +1631,6 @@
         font-weight: bold;
       }
 
-      .sectionHeading--flexiPage { display: none; }
-
       .body__content {
         flex: 1;
         display: flex;
@@ -1638,7 +1639,9 @@
 
       .body__content--flexiPage { 
         flex-direction: column;
-        margin-left: 1.1rem;
+        margin: 0 1.1rem;
+        flex: unset;
+        max-height: 10.1rem;
         overflow: hidden;
       }
 
@@ -1712,8 +1715,7 @@
 
       .featureImage__container {
         position: relative;
-        height: 8.7rem;
-        flex-shrink: 0;
+        flex: 1;
       }
 
       .featureImagePosition--top-left .featureImage__container,
@@ -1734,14 +1736,14 @@
 
       .featureImagePosition--top-right .featureImage,
       .featureImagePosition--bottom-right .featureImage { 
-        left: 0;
-        right: -1rem;
+        left: 1.1rem;
+        right: -0.2rem;
       }
 
       .featureImagePosition--top-left .featureImage,
       .featureImagePosition--bottom-left .featureImage { 
-        right: 0;
-        left: -1rem;
+        right: 1.1rem;
+        left: 0;
       }
 
       .testimonial { 
@@ -1791,7 +1793,7 @@
       .stats:last-child { margin-bottom: 0; }
 
       .stats__item {
-        max-width: 2.1rem;
+        max-width: 2.7rem;
         height: 1.5rem;
       }
 
@@ -1852,6 +1854,14 @@
 
       .pageNumber__container--colouredSection { color: var(--internal-pages-coloured-section-text-color-dynamic); }
       .pageNumber__container--colouredSection .pageNumber__square { background: var(--internal-pages-coloured-section-text-color-dynamic); }
+      .pageNumber__square--blankPage { background: var(--black); }
+
+      .themeInternalColour--blue .blankPageBackgroundColour--colour .pageNumber__square--blankPage,
+      .themeInternalColour--black .blankPageBackgroundColour--colour .pageNumber__square--blankPage,
+      .blankPageBackgroundColour--black .pageNumber__square--blankPage {
+        background: var(--white);
+      }
+
 
       .pageNumber {
         margin: 0 0.12rem;
@@ -1872,6 +1882,7 @@
       .masterContainer { display: none; }
       .u-block { display: block; }
       .u-flex { display: flex; }
+      .u-display-none { display: none ; }
 
       /* ANY OTHER STYLES THAT NEED MUSTACHE.JS CAPABILITIES */
     </style>
@@ -1894,8 +1905,7 @@
     <div class="masterContainer">
       <div class="js-inject-src" data-target-id="dark-logo" data-is-image="true">{{{BA_dark_logo--br}}}</div>
       <div class="js-inject-src" data-target-id="light-logo" data-is-image="true">{{{BA_light_logo--br}}}</div>
-      <div class="js-inject-src" data-target-id="document-title">{{BA_document-title--br}}</div>
-      <div class="js-inject-src" data-target-id="section-heading">{{BA_section-heading--br}}</div>     
+      <div class="js-inject-src" data-target-id="document-title">{{BA_document-title--br}}</div>  
       <div class="js-inject-src" data-target-id="date">{{BA_date--br}}</div>  
     </div><!-- masterContainer -->
 
@@ -1912,14 +1922,10 @@
                     bannerTheme--{{banner-theme--br}}{{^banner-theme--br}}colour{{/banner-theme--br}}
                     bannerTransparency--{{banner-transparency--br}}{{^banner-transparency--br}}fullColour{{/banner-transparency--br}}
                     bannerPosition--{{banner-position--br}}{{^banner-position--br}}left{{/banner-position--br}}
-                    gradientColour--{{{gradient-colour}}}{{^gradient-colour}}white{{/gradient-colour}}
                     ">
           <div class="backgroundImage">
             <div class="reposition-fix">{{{background-image--br}}}</div><!-- reposition-fix -->
           </div><!-- backgroundImage -->
-          <div class="gradient gradient--left"></div><!--left-grad-->
-          <div class="gradient gradient--top"></div><!--top-grad-->
-          <div class="gradient gradient--bottom"></div><!--bottom-grad-->
           <div class="logo__container logo__container--coverPageBlockBanner">         
             <img src="{{{account.logos.BA_Reverse}}}" class="logo logo--defaultDark" />
             <img src="{{{account.logos.BA_Mono}}}" class="logo logo--defaultLight" />
@@ -2104,10 +2110,10 @@
           <div class="container 
                       fit 
                       fit--blankPage
-                      blankPageBackgroundColour--{{background-colour}}{{^background-colour}}white{{/background-colour}}
+                      blankPageBackgroundColour--{{background-colour}}{{^background-colour}}colour{{/background-colour}}
                       ">
-            <div class="pageNumber__container pageNumber__container--hidden js-page-number-container">
-              <div class="pageNumber__square"></div><!-- pageNumber__square -->
+            <div class="pageNumber__container js-page-number-container">
+              <div class="pageNumber__square pageNumber__square--blankPage"></div><!-- pageNumber__square -->
               <div class="pageNumber js-page-number"></div><!-- pageNumber -->
             </div>
           </div><!--container fit-->
@@ -2201,7 +2207,7 @@
             </div><!-- body -->
             <div class="title title--halfPageImageWithContent">
               <div class="title__inner"  data-target="document-title" data-max-line="1"></div><!-- title__inner -->
-              <div class="date dateValidation" data-target="date"></div>
+              <div class="date" data-target="date"></div>
             </div><!-- title -->
             <div class="pageNumber__container js-page-number-container pageNumber__container--colouredSection">
               <div class="pageNumber__square pageNumber__square--defualtBackgroundColor"></div><!-- pageNumber__square -->
@@ -2226,7 +2232,7 @@
                       fit--singlePageLayout
                       ">
             <div class="header header--singlePageLayout">
-              <div class="sectionHeading" data-target="section-heading" data-max-line="1"></div><!-- sectionHeading -->
+              <div class="sectionHeading" data-max-line="1">{{section-heading--br}}{{^section-heading--br}}Add Section Heading Here{{/section-heading--br}}</div><!-- sectionHeading -->
             </div><!-- header -->
             <div class="body body--singlePageLayout">
               <div class="heading heading--singlePageLayout">
@@ -2310,25 +2316,27 @@
                       {{#feature-image--br}}feature-image-exist{{/feature-image--br}}
                       ">
             <div class="header header--flexiPage">
-              <div class="sectionHeading sectionHeading--flexiPage" data-target="section-heading" data-max-line="1"></div><!-- sectionHeading -->
-              <div class="title title--flexiPage" data-max-line="1">
+              <div class="sectionHeading sectionHeading--flexiPage" data-max-line="1">
+                {{section-heading--br}}{{^section-heading--br}}Add Section Heading Here{{/section-heading--br}}
+              </div><!-- sectionHeading -->
+              <div class="title title--flexiPage u-display-none" data-max-line="1">
                 <div class="title__inner" data-target="document-title"></div>
-                <div class="date dateValidation" data-target="date"></div>
+                <div class="date" data-target="date"></div>
               </div><!-- title -->
             </div><!-- header -->
             <div class="body body--flexiPage">
-              <div class="body__content body__content--flexiPage">
+              <div class="body__content body__content--flexiPage" data-max-height="css">
                 {{#heading--br}}
                 <div class="heading heading--flexiPage" data-max-height="css">
                   {{{heading--br}}}
                 </div><!-- heading -->
                 {{/heading--br}}
                 {{#collection.body-content--br.length}}
-                <div class="column__container column__container--flexiPage" data-first-column-width="{{first-column-width}}{{^first-column-width}}50{{/first-column-width}}">
+                <div class="column__container column__container--flexiPage">
                   {{#collection.body-content--br}}
                   {{#block.column--br}}
                   <div class="column column--flexiPage js-imageHeightSetter-container" >
-                    <div class="column__inner" data-max-height="dynamic">
+                    <div class="column__inner">
                       {{#collection.content--br}}
                       {{#block.copy--br}}
                       {{#copy--br}}
@@ -2399,7 +2407,9 @@
                       fit--statsPage
                       ">
             <div class="header header--statsPage">
-              <div class="sectionHeading" data-target="section-heading" data-max-line="1"></div><!-- sectionHeading -->
+              <div class="sectionHeading" data-max-line="1">
+                {{section-heading--br}}{{^section-heading--br}}Add Section Heading Here{{/section-heading--br}}
+              </div><!-- sectionHeading -->
             </div><!-- header -->
             <div class="body body--statsPage">
               {{#heading--br}}
@@ -2436,7 +2446,7 @@
                     {{#collection.stat--br}}
                     {{#block.stats--br}}
                     <div class="stats__item">
-                      <div class="stats__number" data-char-limit="3">{{{stat-number--br}}}</div><!-- stats__number -->
+                      <div class="stats__number" data-char-limit="4">{{{stat-number--br}}}</div><!-- stats__number -->
                       <div class="stats__title" data-max-line="2">{{{stat-title--br}}}</div><!-- stats__title -->
                     </div><!-- stats__item -->
                     {{/block.stats--br}}
@@ -2610,7 +2620,7 @@
           maxLineCheck();
           maxHeightCheck();
           injectDynamicContent();
-          dateUtil();
+          //dateUtil(); - I left this here just in Case if fe needed it
           hideEmptyTitles();
           imageHeightSetter();
 
@@ -2639,7 +2649,7 @@
         }
       }
 
-      setFirstColumnWidth();
+      //setFirstColumnWidth(); - this is here just in case if client wanted this functionality back
 
       function pageNumberInject() {
         const pageNumberContainer = document.querySelectorAll('.js-page-number-container');
@@ -2647,7 +2657,7 @@
         pageNumberContainer.forEach((container, index) => {
           const pageNumber = container.querySelector('.js-page-number');
 
-          if ( index % 2 !== 0 ) { container.classList.add("pageNumber__container--inverse") }
+          if ( index % 2 === 0 ) { container.classList.add("pageNumber__container--inverse") }
 
           pageNumber.innerText = index + 1;  
 
