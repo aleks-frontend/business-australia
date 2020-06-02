@@ -303,30 +303,6 @@
       }
 
       /* Footer Banner */
-      /* Banner Light */
-
-      .footerBannerTheme--light {
-        --footer-banner-background: var(--white);
-        --footer-banner-heading: var(--black);
-        --footer-banner-heading-bold: var(--black);
-        --footer-banner-content: var(--black);
-      }
-
-      .themeColour--red .footerBannerTheme--light { --footer-banner-heading-bold: var(--red); }
-      .themeColour--blue .footerBannerTheme--light { --footer-banner-heading-bold: var(--blue); }
-
-      /* Banner Dark */
-      .footerBannerTheme--dark {
-        --footer-banner-background: var(--black);
-        --footer-banner-heading: var(--white);
-        --footer-banner-heading-bold: var(--white);
-        --footer-banner-content: var(--white);
-      }
-
-      .themeColour--red .footerBannerTheme--dark { --footer-banner-heading-bold: var(--red); }
-      .themeColour--green .footerBannerTheme--dark { --footer-banner-heading-bold: var(--green);  }
-      .themeColour--yellow .footerBannerTheme--dark {  --footer-banner-heading-bold: var(--yellow);  }   
-
       /* Banner Transparent */
       /* Banner Dark */
       .footerBannerTheme--transparent {
@@ -533,8 +509,7 @@
       {{half-page-image}}
       {{image-position}}
       {{image-text-colour}}
-      {{image-caption}}
-      {{quote-block}}
+      {{intro-copy--br}}
       {{colour-block-introductory-copy}}
       {{#collection.column-content}}
       {{#block.column}}
@@ -714,26 +689,23 @@
         width:100%;
       }
 
-      .gradientColour--white .gradient--top { background-image: url(https://files.outfit.io/media_library_items/186480/gradient-white-top-4.png); }
-      .gradientColour--black .gradient--top { background-image: url(https://files.outfit.io/media_library_items/186476/gradient-grey-top-3.png); }
+      .gradientColour--white .gradient--top { background-image: url(https://files.outfit.io/media_library_items/191865/gradient-top-white.png); }
+      .gradientColour--black .gradient--top { background-image: url(https://files.outfit.io/media_library_items/191866/gradient-top-black.png); }
 
       .gradient--left { height:100%; }
 
-      .gradientColour--white .gradient--left { background-image: url(https://files.outfit.io/media_library_items/186481/gradient-white-left-3.png); }
-      .gradientColour--black .gradient--left { background-image: url(https://files.outfit.io/media_library_items/186477/gradient-grey-left-3.png); }
+      .gradientColour--white .gradient--left { background-image: url(https://files.outfit.io/media_library_items/191867/gradient-left-white.png); }
+      .gradientColour--black .gradient--left { background-image: url(https://files.outfit.io/media_library_items/191868/gradient-left-black.png); }
 
       .gradient--bottom { width:100%; }
 
-      .gradientColour--white .gradient--bottom { background-image: url(https://files.outfit.io/media_library_items/186479/gradient-white-bottom-4.png); }
-      .gradientColour--black .gradient--bottom { background-image: url(https://files.outfit.io/media_library_items/186478/gradient-grey-bottom-2.png); }
+      .gradientColour--white .gradient--bottom { background-image: url(https://files.outfit.io/media_library_items/191863/gradient-bottom-white.png); }
+      .gradientColour--black .gradient--bottom { background-image: url(https://files.outfit.io/media_library_items/191864/gradient-bottom-black.png); }
 
       .gradientColour--white .gradient { opacity: 0.9; }
 
       .footerBannerTheme--transparent .gradient--hero,
       .footerBannerTheme--transparent .gradient--fit { display: none; }
-
-      .footerBannerTheme--transparent .gradient--fit { display: block; }
-
 
       .fit { display: flex; }      
       .fit--coverPageHighlightBanner { flex-direction: column; }    
@@ -1301,7 +1273,7 @@
       .column__container--singlePageLayout { width: 100%; }
 
       .column__container--flexiPage { 
-        flex: 1;
+        min-height: 1.5rem;
         overflow: hidden;
       }
 
@@ -1425,7 +1397,7 @@
         flex: 1;
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
+        justify-content: flex-end;
         align-items: flex-end;
         padding: 1.93rem 1.1rem 0.6rem;
         color: var(--hero-text-colour);
@@ -1515,7 +1487,6 @@
 
       .hero__quote {
         position: relative;
-        width: 6.9rem;
         max-height: 2.6rem;
       }
 
@@ -1584,7 +1555,7 @@
         margin-bottom: 0.2rem;
       }
 
-      .copy--singlePageLayout h2,
+      .copy--singlePageLayout h2 strong,
       .copy--flexiPage h2,
       .testimonial__content h2,
       .copy--statsPage h2 { 
@@ -1966,7 +1937,7 @@
           <div class="body body--coverPageHighlightBanner">
             <div class="gradient gradient--left gradient--hero"></div><!--left-grad-->
             <div class="gradient gradient--top gradient--hero"></div><!--top-grad-->
-            <div class="gradient gradient--bottom"></div><!--bottom-grad-->
+            <div class="gradient gradient--bottom gradient--hero"></div><!--bottom-grad-->
             <div class="heading heading--coverPageHighlightBanner" data-max-height="css">
               {{{cover-heading--br}}}
             </div><!-- heading -->
@@ -2180,8 +2151,7 @@
                   <div class="reposition-fix">{{{half-page-image}}}</div><!-- reposition-fix -->
                 </div><!-- hero -->
                 {{/half-page-image}}
-                <div class="hero__caption" data-max-height="css">{{{image-caption}}}</div><!-- hero__caption -->
-                {{#quote-block}}<div class="hero__quote" data-max-height="css">{{{quote-block}}}</div>{{/quote-block}}<!-- hero__quote -->
+                {{#intro-copy--br}}<div class="hero__quote" data-max-height="css">{{{intro-copy--br}}}</div>{{/intro-copy--br}}<!-- hero__quote -->
               </div><!-- hero__container -->
               <div class="content content--halfPageImageWithContent">
                 {{#colour-block-introductory-copy}}
@@ -2332,7 +2302,7 @@
                 </div><!-- heading -->
                 {{/heading--br}}
                 {{#collection.body-content--br.length}}
-                <div class="column__container column__container--flexiPage">
+                <div class="column__container column__container--flexiPage ">
                   {{#collection.body-content--br}}
                   {{#block.column--br}}
                   <div class="column column--flexiPage js-imageHeightSetter-container" >
@@ -2496,7 +2466,7 @@
             </div><!-- contact -->
           </div> <!-- body -->
           <div class="logo__container logo__container--backPage">
-            <img src="https://files.outfit.io/media_library_items/157158/NSWBC_Wordmark_NSW_Stack_Black_RGB.svg" class="logo logo--defaultDark logo--backPage " />
+            <img src="https://files.outfit.io/media_library_items/157158/NSWBC_Wordmark_NSW_Stack_Black_RGB.svg" class="logo logo--defaultDark logo--backPage" />
             <img src="https://files.outfit.io/media_library_items/157159/NSWBC_Wordmark_NSW_Stack_White_RGB.svg" class="logo logo--defaultLight logo--backPage" />
           </div><!-- logo__container -->
         </div><!--container fit-->
