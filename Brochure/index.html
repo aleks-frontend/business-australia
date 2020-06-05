@@ -517,6 +517,7 @@
       {{copy-content}}
       {{/block.column}}
       {{/collection.column-content}}
+      {{content-background-colour--br}}
       {{/block.half-page-image-with-content}}
 
       {{#block.single-page-layout}}
@@ -538,6 +539,7 @@
       {{image-height--br}}
       {{caption--br}}
       {{caption-alignment}}
+      {{caption-text-colour--br}}
       {{/block.image--br}}
       {{/collection.content--br}}
       {{/block.column--br}}
@@ -561,6 +563,7 @@
       {{image-height--br}}
       {{caption--br}}
       {{caption-alignment}}
+      {{caption-text-colour--br}}
       {{/block.image--br}}
       {{/collection.content--br}}
       {{/block.column--br}}
@@ -703,9 +706,6 @@
       .gradientColour--black .gradient--bottom { background-image: url(https://files.outfit.io/media_library_items/191864/gradient-bottom-black.png); }
 
       .gradientColour--white .gradient { opacity: 0.9; }
-
-      .footerBannerTheme--transparent .gradient--hero,
-      .footerBannerTheme--transparent .gradient--fit { display: none; }
 
       .fit { display: flex; }      
       .fit--coverPageHighlightBanner { flex-direction: column; }    
@@ -1356,6 +1356,7 @@
       }
 
       .copy--halfPageImageWithContent { color: var(--internal-pages-coloured-section-text-color-dynamic); }
+      .contentBackgroundColour--mono .copy--halfPageImageWithContent { color: var(--white); }
 
       .quote--fullPageImageWithQuote { color: var(--internal-pages-coloured-section-text-color-dynamic); }
       .quote--fullPageImageWithQuote h3 { color: var(--internal-pages-coloured-section-text-color-dynamic); }
@@ -1416,6 +1417,7 @@
       }
 
       .imagePosition--bottom .content--halfPageImageWithContent { padding-top: 1.5rem; }
+      .contentBackgroundColour--mono  .content--halfPageImageWithContent { background-color: var(--black); }
 
       .hero {
         position: absolute;
@@ -1521,6 +1523,8 @@
         font-family: var(--font-taviraj);
         color: var(--internal-pages-coloured-section-text-color-dynamic);
       }
+
+      .contentBackgroundColour--mono .introductoryCopy { color: var(--white); }
 
       .icon { 
         margin-bottom: 0.4rem;
@@ -1663,6 +1667,9 @@
         font-size: 0.155rem;
         line-height: 1.3em;
       }
+      
+      .captionTextColour--white .image__caption p { color: var(--white); }
+      .captionTextColour--black .image__caption p { color: var(--black); }
 
       .image__caption--flexiPage { max-height: 0.75rem; }
 
@@ -1764,16 +1771,16 @@
       .stats:last-child { margin-bottom: 0; }
 
       .stats__item {
-        max-width: 2.7rem;
+        max-width: 2.4rem;
         height: 1.5rem;
       }
 
-      .stats__item + .stats__item { margin-left: 0.9rem; }
+      .stats__item + .stats__item { margin-left: 0.5rem; }
 
       .stats__number {
         margin-bottom: 0.14rem;
         height: 0.8rem;
-        font-size: 1rem;
+        font-size: 0.9rem;
         line-height: 0.9em;
         font-family: var(--font-taviraj);
         color: var(--internal-pages-text-colour-bold);
@@ -1833,6 +1840,8 @@
         background: var(--white);
       }
 
+      .contentBackgroundColour--mono .pageNumber__container--colouredSection { color: var(--white); }
+      .contentBackgroundColour--mono .pageNumber__container--colouredSection .pageNumber__square { background: var(--white); }
 
       .pageNumber {
         margin: 0 0.12rem;
@@ -1934,10 +1943,10 @@
           <div class="backgroundImage">
             <div class="reposition-fix">{{{background-image--br}}}</div><!-- reposition-fix -->
           </div><!-- backgroundImage -->
+          <div class="gradient gradient--left"></div><!--left-grad-->
+          <div class="gradient gradient--top"></div><!--top-grad-->
+          <div class="gradient gradient--bottom"></div><!--bottom-grad-->
           <div class="body body--coverPageHighlightBanner">
-            <div class="gradient gradient--left gradient--hero"></div><!--left-grad-->
-            <div class="gradient gradient--top gradient--hero"></div><!--top-grad-->
-            <div class="gradient gradient--bottom gradient--hero"></div><!--bottom-grad-->
             <div class="heading heading--coverPageHighlightBanner" data-max-height="css">
               {{{cover-heading--br}}}
             </div><!-- heading -->
@@ -1959,8 +1968,6 @@
               <img src="#" class="logo logo--light"data-target="light-logo" />
             </div><!-- logo__container -->
           </div><!-- footer -->
-          <div class="gradient gradient--left gradient--fit"></div><!--left-grad-->
-          <div class="gradient gradient--bottom gradient--fit"></div><!--top-grad-->
         </div><!--container fit-->
 
       </div><!--bleed-->
@@ -2143,6 +2150,7 @@
                       fit--halfPageImageWithContent
                       imagePosition--{{image-position}}{{^image-position}}top{{/image-position}}
                       imageTextColor--{{image-text-colour}}{{^image-text-colour}}white{{/image-text-colour}}
+                      contentBackgroundColour--{{content-background-colour--br}}{{^content-background-colour--br}}colour{{/content-background-colour--br}}
                       ">
             <div class="body body--halfPageImageWithContent ">
               <div class="hero__container hero__container--halfPageImageWithContent">
@@ -2240,7 +2248,8 @@
                       <div class="image__container 
                                   js-imageHeightSetter-image 
                                   image__container--singlePageLayout
-                                  captionAlignment--{{caption-alignment}}{{^caption-alignment}}right{{/caption-alignment}}" 
+                                  captionAlignment--{{caption-alignment}}{{^caption-alignment}}right{{/caption-alignment}}
+                                  captionTextColour--{{caption-text-colour--br}}" 
                            data-image-height="{{image-height--br}}">
                         {{#image--br}}
                         <div class="image">
@@ -2326,7 +2335,8 @@
                       <div class="image__container 
                                   js-imageHeightSetter-image 
                                   image__container--flexiPage
-                                  captionAlignment--{{caption-alignment}}{{^caption-alignment}}right{{/caption-alignment}}" 
+                                  captionAlignment--{{caption-alignment}}{{^caption-alignment}}right{{/caption-alignment}}
+                                  captionTextColour--{{caption-text-colour--br}}" 
                            data-image-height="{{image-height--br}}">
                         {{#image--br}}
                         <div class="image image--flexiPage">
