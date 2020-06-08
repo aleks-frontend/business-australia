@@ -996,6 +996,7 @@
         background: var(--content-back-page-background);
       }
 
+      .fit--contentOneColumn { padding-top: 3.65rem; }
       .fit--contentTwoColumn { padding-top: 1.65rem; }
 
       .fit--internalPage {
@@ -1029,11 +1030,7 @@
       }
 
 
-      .header--contentOneColumn {
-        display: flex;
-        justify-content: flex-end;
-        margin-bottom: 2.85rem;
-      }
+      .header--contentOneColumn { margin-bottom: 2.85rem; }
 
       .header--singlePageLayout,
       .header--flexiPage,
@@ -1101,6 +1098,8 @@
       .headingPosition--center .body--coverPageHighlightBanner { align-items: center; }
       .headingPosition--bottom .body--coverPageHighlightBanner { align-items: flex-end; }
       .body--backPage { padding: 2.1rem 1.5rem 1.9rem; }
+
+      .contactPosition--top .body--backPage { padding-bottom: 3rem; }
 
       .contactPosition--bottom .body { align-items: flex-end; }
 
@@ -1183,23 +1182,20 @@
 
       /* update logo logic */
 
-      .logo__container--backPage { 
+      .logo__container--backPage,
+      .logo__container--contentTwoColumn,
+      .logo__container--contentOneColumn{ 
         background: transparent;
         position: absolute;
-        bottom: 0;
+        top: 0;
         right: 0;
-        padding: 0.65rem 0.85rem 0.85rem 0.75rem;
+        padding: 1.45rem 0.85rem 1.35rem 0.75rem;
       } 
       /* toggle logo with global selector */
 
-      .contactPosition--bottom .logo__container--backPage {
-        top: 0.2rem;
-        bottom: unset;
-      }
-
-      .logo__container--contentOneColumn,
-      .logo__container--contentTwoColumn {
-        background: transparent;
+      .contactPosition--top .logo__container--backPage {
+        top: unset;
+        bottom: 0;
       }
 
       .logo {
@@ -1214,6 +1210,73 @@
       .logo--contentTwoColumn {
         width: 2.4rem;
       }
+
+      /* Logo display logic */
+
+      /* theme colour - dark */
+      .pageTheme--dark .logo--defaultLight { display: block; }   
+      .pageTheme--dark.light-logo-exist .logo--defaultLight { display: none; }   
+
+      .pageTheme--dark.light-logo-exist .logo--light { display: block; }
+
+      /* theme colour - light */
+
+      .pageTheme--light .logo--defaultDark { display: block; }   
+      .pageTheme--light.dark-logo-exist .logo--defaultDark { display: none; }   
+
+      .pageTheme--light.dark-logo-exist .logo--dark { display: block; }
+
+      /* theme colour - colour */
+
+      .pageTheme--colour.themeColour--black .logo--defaultLight { display: block; }   
+      .pageTheme--colour.themeColour--black.light-logo-exist .logo--defaultLight { display: none; }  
+      .pageTheme--colour.themeColour--black.light-logo-exist .logo--light { display: block; }  
+
+      .pageTheme--colour.themeColour--white .logo--defaultDark { display: block; }   
+      .pageTheme--colour.themeColour--white.dark-logo-exist .logo--defaultDark { display: none; }   
+      .pageTheme--colour.themeColour--white.dark-logo-exist .logo--dark { display: block; }
+
+      .pageTheme--colour.themeColour--green .logo--defaultDark.logo--cover,
+      .pageTheme--colour.themeColour--red.textColour--black .logo--defaultDark.logo--cover,
+      .pageTheme--colour.themeColour--yellow .logo--defaultDark.logo--cover { display: block; }   
+
+      .pageTheme--colour.themeColour--green.dark-logo-exist .logo--defaultDark,
+      .pageTheme--colour.themeColour--red.textColour--black.dark-logo-exist .logo--defaultDark,
+      .pageTheme--colour.themeColour--yellow.dark-logo-exist .logo--defaultDark { display: none; }   
+
+      .pageTheme--colour.themeColour--green.dark-logo-exist .logo--dark.logo--cover,
+      .pageTheme--colour.themeColour--red.textColour--black.dark-logo-exist .logo--dark.logo--cover,
+      .pageTheme--colour.themeColour--yellow.dark-logo-exist .logo--dark.logo--cover { display: block; }     
+
+      .pageTheme--colour.themeColour--green .logo--defaultLight.logo--contentBack,
+      .pageTheme--colour.themeColour--red.textColour--black .logo--defaultLight.logo--contentBack,
+      .pageTheme--colour.themeColour--yellow .logo--defaultLight.logo--contentBack { display: block; }   
+
+      .pageTheme--colour.themeColour--green.light-logo-exist .logo--defaultLight.logo--contentBack,
+      .pageTheme--colour.themeColour--red.textColour--black.light-logo-exist .logo--defaultLight.logo--contentBack,
+      .pageTheme--colour.themeColour--yellow.light-logo-exist .logo--defaultLight.logo--contentBack { display: none; }   
+
+      .pageTheme--colour.themeColour--green.light-logo-exist .logo--light.logo--contentBack,
+      .pageTheme--colour.themeColour--red.textColour--black.light-logo-exist .logo--light.logo--contentBack,
+      .pageTheme--colour.themeColour--yellow.light-logo-exist .logo--light.logo--contentBack { display: block; }
+
+      .pageTheme--colour.themeColour--blue .logo--defaultLight.logo--cover,
+      .pageTheme--colour.themeColour--red.textColour--white .logo--defaultLight.logo--cover { display: block; }   
+      
+      .pageTheme--colour.themeColour--blue.light-logo-exist .logo--defaultLight,
+      .pageTheme--colour.themeColour--red.textColour--white.light-logo-exist .logo--defaultLight { display: none; } 
+      
+      .pageTheme--colour.themeColour--blue.light-logo-exist .logo--light.logo--cover,
+      .pageTheme--colour.themeColour--red.textColour--white.light-logo-exist .logo--light.logo--cover { display: block; }     
+
+      .pageTheme--colour.themeColour--blue .logo--defaultDark.logo--contentBack,
+      .pageTheme--colour.themeColour--red.textColour--white .logo--defaultDark.logo--contentBack { display: block; }  
+      
+      .pageTheme--colour.themeColour--blue.dark-logo-exist .logo--defaultDark.logo--contentBack,
+      .pageTheme--colour.themeColour--red.textColour--white.dark-logo-exist .logo--defaultDark.logo--contentBack { display: none; }   
+      
+      .pageTheme--colour.themeColour--blue.dark-logo-exist .logo--dark.logo--contentBack,
+      .pageTheme--colour.themeColour--red.textColour--white.dark-logo-exist .logo--dark.logo--contentBack { display: block; }
 
       .banner {
         position: relative;
@@ -2160,10 +2223,10 @@
             <div class="reposition-fix">{{{background-image--br}}}</div><!-- reposition-fix -->
           </div><!-- backgroundImage -->
           <div class="logo__container logo__container--coverPageBlockBanner">         
-            <img src="{{{account.logos.BA_Reverse}}}" class="logo logo--defaultDark" />
-            <img src="{{{account.logos.BA_Mono}}}" class="logo logo--defaultLight" />
-            <img src="#" class="logo logo--dark" data-target="dark-logo"/>
-            <img src="#" class="logo logo--light" data-target="light-logo"/>
+            <img src="{{{account.logos.BA_Reverse}}}" class="logo logo--defaultLight logo--coverPageBlockBanner logo--cover" />
+            <img src="{{{account.logos.BA_Mono}}}" class="logo logo--defaultDark logo--coverPageBlockBanner logo--cover" />
+            <img src="#" class="logo logo--dark logo--coverPageBlockBanner logo--cover" data-target="dark-logo"/>
+            <img src="#" class="logo logo--light logo--coverPageBlockBanner logo--cover" data-target="light-logo"/>
           </div><!-- logo__container -->
           <div class="body body--coverPageBlockBanner">
             <div class="banner">
@@ -2214,10 +2277,10 @@
               {{/collection.highlights--br}}
             </div><!-- footerBanner -->
             <div class="logo__container logo__container--coverPageHighlightBanner">
-              <img src="{{{account.logos.BA_Reverse}}}" class="logo logo--defaultDark logo--coverPageHighlightBanner" />
-              <img src="{{{account.logos.BA_Mono}}}" class="logo logo--defaultLight logo--coverPageHighlightBanner" />
-              <img src="#" class="logo logo--dark" data-target="dark-logo"/>
-              <img src="#" class="logo logo--light"data-target="light-logo" />
+              <img src="{{{account.logos.BA_Reverse}}}" class="logo logo--defaultLight logo--coverPageHighlightBanner logo--cover" />
+              <img src="{{{account.logos.BA_Mono}}}" class="logo logo--defaultDark logo--coverPageHighlightBanner logo--cover" />
+              <img src="#" class="logo logo--dark logo--coverPageHighlightBanner logo--cover" data-target="dark-logo"/>
+              <img src="#" class="logo logo--light logo--coverPageHighlightBanner logo--cover"data-target="light-logo" />
             </div><!-- logo__container -->
           </div><!-- footer -->
         </div><!--container fit-->
@@ -2241,12 +2304,12 @@
                     fit 
                     fit--contentOneColumn
                     ">
-          <div class="header header--contentOneColumn">
-            <div class="logo__container logo__container--contentOneColumn">
-              <img src="https://files.outfit.io/media_library_items/157158/NSWBC_Wordmark_NSW_Stack_Black_RGB.svg" class="logo logo--defaultDark logo--contentOneColumn " />
-              <img src="https://files.outfit.io/media_library_items/157159/NSWBC_Wordmark_NSW_Stack_White_RGB.svg" class="logo logo--defaultLight logo--contentOneColumn" />
-            </div><!-- logo__container -->
-          </div><!-- header -->
+          <div class="logo__container logo__container--contentOneColumn">         
+            <img src="{{{account.logos.BA_Reverse}}}" class="logo logo--defaultLight logo--contentOneColumn logo--contentBack" />
+            <img src="{{{account.logos.BA_Mono}}}" class="logo logo--defaultDark logo--contentOneColumn logo--contentBack" />
+            <img src="#" class="logo logo--dark logo--contentOneColumn logo--contentBack" data-target="dark-logo"/>
+            <img src="#" class="logo logo--light logo--contentOneColumn logo--contentBack" data-target="light-logo"/>
+          </div><!-- logo__container -->
           <div class="body body--contentOneColumn">
             <div class="body__inner" data-max-height="dynamic">
               {{#page-heading--br}}
@@ -2312,6 +2375,12 @@
               <img src="https://files.outfit.io/media_library_items/157159/NSWBC_Wordmark_NSW_Stack_White_RGB.svg" class="logo logo--defaultLight logo--contentTwoColumn" />
             </div><!-- logo__container -->
           </div><!-- footer -->
+          <div class="logo__container logo__container--contentTwoColumn">         
+            <img src="{{{account.logos.BA_Reverse}}}" class="logo logo--defaultLight logo--contentTwoColumn logo--contentBack" />
+            <img src="{{{account.logos.BA_Mono}}}" class="logo logo--defaultDark logo--contentTwoColumn logo--contentBack" />
+            <img src="#" class="logo logo--dark logo--contentTwoColumn logo--contentBack" data-target="dark-logo"/>
+            <img src="#" class="logo logo--light logo--contentTwoColumn logo--contentBack" data-target="light-logo"/>
+          </div><!-- logo__container -->
         </div><!--container fit-->
 
       </div><!--bleed-->
@@ -2725,8 +2794,10 @@
             </div><!-- contact -->
           </div> <!-- body -->
           <div class="logo__container logo__container--backPage">
-            <img src="https://files.outfit.io/media_library_items/157158/NSWBC_Wordmark_NSW_Stack_Black_RGB.svg" class="logo logo--defaultDark logo--backPage" />
-            <img src="https://files.outfit.io/media_library_items/157159/NSWBC_Wordmark_NSW_Stack_White_RGB.svg" class="logo logo--defaultLight logo--backPage" />
+            <img src="{{{account.logos.BA_Reverse}}}" class="logo logo--defaultLight logo--backPage logo--contentBack" />
+            <img src="{{{account.logos.BA_Mono}}}" class="logo logo--defaultDark logo--backPage logo--contentBack" />
+            <img src="#" class="logo logo--dark logo--backPage logo--contentBack" data-target="dark-logo"/>
+            <img src="#" class="logo logo--light logo--backPage logo--contentBack" data-target="light-logo"/>
           </div><!-- logo__container -->
         </div><!--container fit-->
 
