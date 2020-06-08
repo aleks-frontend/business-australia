@@ -29,26 +29,20 @@
         --transparent: transparent;
 
         /* Cover Page Block Banner */
-        --banner-background-color: var(--red);
-        --banner-heading-color: var(--black);
-        --banner-heading-bold-color: var(--white);
-        --banner-body-content-heading: var(--black);
-        --banner-body-content-heading-bold: var(--white);
-        --banner-body-content: var(--white);
-        --banner-body-content-bold: var(--red);
+        --cover-block-banner-background-color: var(--black);
+        --cover-block-logo-container-color: var(--black);
+        --cover-block-banner-text-color: var(--white);
+        --cover-block-banner-text-color-bold: var(--white);
 
         /* Cover Page Highigh Banner */
-        --body-heading-color: var(--white);
-        --body-heading-bold-color: var(--red);
-        --body-subheading-color: var(--white);
-        --body-subheading-bold-color: var(--red);
-        --body-copy-color: var(--white);
-        --body-copy-bold-color: var(--red);
-        --footer-banner-background: var(--red);
-        --footer-banner-heading: var(--black);
-        --footer-banner-heading-bold: var(--white);
-        --footer-banner-content: var(--black);
-        --border-item-before-background: transparent;
+        --highlight-block-text-color: var(--white);    
+        --highlight-block-text-color-bold: var(--black);
+        --highlight-block-logo-container-color: var(--black);
+        --highlight-block-banner-background-color: var(--black);
+        --highlight-block-banner-decoration-line-color: var(--white);
+        --highlight-block-banner-text-color: var(--white);
+        --highlight-block-banner-text-color-bold: var(--white);
+
 
         /*Internal Pages */
         --dynamic-color: var(--red);
@@ -61,264 +55,459 @@
       }
 
       /* COVER PAGE BLOCK BANNER */
-      /* Banner Theme Colour */
-      .themeColour--red .bannerTheme--colour {
-        --banner-background-color: var(--red);
-        --banner-heading-color: var(--black);
-        --banner-heading-bold-color: var(--white);
-        --banner-body-content-heading: var(--black);
-        --banner-body-content-heading-bold: var(--white);
-        --banner-body-content: var(--white);
-        --banner-body-content-bold: var(--white);
+      /* Page Theme Colour */
+      .pageTheme--colour.themeColour--black {
+        --cover-block-banner-background-color: var(--black);
+        --cover-block-logo-container-color: var(--black);
+        --cover-block-banner-text-color: var(--white);
+        --cover-block-banner-text-color-bold: var(--white);
       }
 
-      .themeColour--blue .bannerTheme--colour {
-        --banner-background-color: var(--blue);
-        --banner-heading-color: var(--white);
-        --banner-heading-bold-color: var(--white);
-        --banner-body-content-heading: var(--white);
-        --banner-body-content-heading-bold: var(--white);
-        --banner-body-content: var(--white);
-        --banner-body-content-bold: var(--white);
+      .pageTheme--colour.themeColour--white {
+        --cover-block-banner-background-color: var(--white);
+        --cover-block-logo-container-color: var(--white);
+        --cover-block-banner-text-color: var(--black);
+        --cover-block-banner-text-color-bold: var(--black);
       }
 
-      .themeColour--green .bannerTheme--colour {
-        --banner-background-color: var(--green);
-        --banner-heading-color: var(--black);
-        --banner-heading-bold-color: var(--black);
-        --banner-body-content-heading: var(--black);
-        --banner-body-content-heading-bold: var(--black);
-        --banner-body-content: var(--black);
-        --banner-body-content-bold: var(--black);
+      .pageTheme--colour.themeColour--green {
+        --cover-block-banner-background-color: var(--green);
+        --cover-block-logo-container-color: var(--green);
+        --cover-block-banner-text-color: var(--black);
+        --cover-block-banner-text-color-bold: var(--black);
       }
 
-      .themeColour--yellow .bannerTheme--colour {
-        --banner-background-color: var(--yellow);
-        --banner-heading-color: var(--black);
-        --banner-heading-bold-color: var(--black);
-        --banner-body-content-heading: var(--black);
-        --banner-body-content-heading-bold: var(--black);
-        --banner-body-content: var(--black);
-        --banner-body-content-bold: var(--black);
+      .pageTheme--colour.themeColour--yellow {
+        --cover-block-banner-background-color: var(--yellow);
+        --cover-block-logo-container-color: var(--yellow);
+        --cover-block-banner-text-color: var(--black);
+        --cover-block-banner-text-color-bold: var(--black);
       }
 
-      .themeColour--black .bannerTheme--colour {
-        --banner-background-color: var(--black);
-        --banner-heading-color: var(--white);
-        --banner-heading-bold-color: var(--white);
-        --banner-body-content-heading: var(--whhite);
-        --banner-body-content-heading-bold: var(--white);
-        --banner-body-content: var(--white);
-        --banner-body-content-bold: var(--white);
+      .pageTheme--colour.themeColour--red {
+        --cover-block-banner-background-color: var(--red);
+        --cover-block-logo-container-color: var(--red);
+        --cover-block-banner-text-color: var(--black);
+        --cover-block-banner-text-color-bold: var(--white);
       }
 
-      .themeColour--white .bannerTheme--colour {
-        --banner-background-color: var(--white);
-        --banner-heading-color: var(--black);
-        --banner-heading-bold-color: var(--black);
-        --banner-body-content-heading: var(--black);
-        --banner-body-content-heading-bold: var(--black);
-        --banner-body-content: var(--black);
-        --banner-body-content-bold: var(--black);
+      .pageTheme--colour.themeColour--blue {
+        --cover-block-banner-background-color: var(--blue);
+        --cover-block-logo-container-color: var(--blue);
+        --cover-block-banner-text-color: var(--white);
+        --cover-block-banner-text-color-bold: var(--white);
       }
 
-      /* Banner Theme Light */
+      /* Page Theme Light */
 
-      .bannerTheme--light {
-        --banner-background-color: var(--white);
-        --banner-heading-color: var(--black);
-        --banner-heading-bold-color: var(--black);
-        --banner-body-content-heading: var(--black);
-        --banner-body-content-heading-bold: var(--black);
-        --banner-body-content: var(--black);
-        --banner-body-content-bold: var(--black);
-      }
-      .themeColour--red .bannerTheme--light {
-        --banner-heading-bold-color: var(--red);
-        --banner-body-content-heading-bold: var(--red);
-        --banner-body-content-bold: var(--red);
+      .pageTheme--light {
+        --cover-block-banner-background-color: var(--white);
+        --cover-block-logo-container-color: var(--white);
+        --cover-block-banner-text-color: var(--black);
+        --cover-block-banner-text-color-bold: var(--black);
       }
 
-      .themeColour--blue .bannerTheme--light {
-        --banner-heading-bold-color: var(--blue);
-        --banner-body-content-heading-bold: var(--blue);
-        --banner-body-content-bold: var(--blue);
+      .pageTheme--light.themeColour--red {
+        --cover-block-banner-text-color-bold: var(--red);
       }
 
-      /* Banner Theme Dark */
-
-      .bannerTheme--dark {
-        --banner-background-color: var(--black);
-        --banner-heading-color: var(--white);
-        --banner-heading-bold-color: var(--white);
-        --banner-body-content-heading: var(--white);
-        --banner-body-content-heading-bold: var(--white);
-        --banner-body-content: var(--white);
-        --banner-body-content-bold: var(--white);
+      .pageTheme--light.themeColour--blue {
+        --cover-block-banner-text-color-bold: var(--blue);
       }
 
-      .themeColour--red .bannerTheme--dark {
-        --banner-heading-bold-color: var(--red);
-        --banner-body-content-heading-bold: var(--red);
-        --banner-body-content-bold: var(--red);
+      /* Page Theme Dark */
+
+      .pageTheme--dark {
+        --cover-block-banner-background-color: var(--black);
+        --cover-block-logo-container-color: var(--black);
+        --cover-block-banner-text-color: var(--white);
+        --cover-block-banner-text-color-bold: var(--white);
       }
 
-      .themeColour--green .bannerTheme--dark {
-        --banner-heading-bold-color: var(--green);
-        --banner-body-content-heading-bold: var(--green);
-        --banner-body-content-bold: var(--green);
+      .pageTheme--dark.themeColour--green {
+        --cover-block-banner-text-color-bold: var(--green);
       }
 
-      .themeColour--yellow .bannerTheme--dark {
-        --banner-heading-bold-color: var(--yellow);
-        --banner-body-content-heading-bold: var(--yellow);
-        --banner-body-content-bold: var(--yellow);
+      .pageTheme--dark.themeColour--yellow {
+        --cover-block-banner-text-color-bold: var(--yellow);
       }
 
-      /* Banner Theme Transparent */
-      .bannerTheme--transparent {
-        --banner-background-color: var(--transparent);
-        --banner-heading-color: var(--white);
-        --banner-heading-bold-color: var(--white);
-        --banner-body-content-heading: var(--white);
-        --banner-body-content-heading-bold: var(--white);
-        --banner-body-content: var(--white);
-        --banner-body-content-bold: var(--white);
+      .pageTheme--dark.themeColour--red {
+        --cover-block-banner-text-color-bold: var(--red);
       }
 
-      .themeColour--red .bannerTheme--transparent {
-        --banner-heading-bold-color: var(--red);
-        --banner-body-content-heading-bold: var(--red);
-        --banner-body-content-bold: var(--red);
-      }
+      /* Text Colour Input Deviation */
 
-      .themeColour--blue .bannerTheme--transparent {
-        --banner-heading-bold-color: var(--blue);
-        --banner-body-content-heading-bold: var(--blue);
-        --banner-body-content-bold: var(--blue);
+      .pageTheme--colour.themeColour--red.textColour--white {
+        --cover-block-banner-text-color: var(--white);
+        --cover-block-banner-text-color-bold: var(--black);
       }
 
 
-      .themeColour--green .bannerTheme--transparent {
-        --banner-heading-bold-color: var(--green);
-        --banner-body-content-heading-bold: var(--green);
-        --banner-body-content-bold: var(--green);
+      /* COVER PAGE BLOCK BANNER */
+
+      /* COVER PAGE HIGHLIGHT BANNER */
+      /* Page Theme Colour */
+      .pageTheme--color.themeColour--black {
+        --highlight-block-text-color: var(--white);    
+        --highlight-block-text-color-bold: var(--black);
+        --highlight-block-logo-container-color: var(--black);
+        --highlight-block-banner-background-color: var(--black);
+        --highlight-block-banner-decoration-line-color: var(--white);
+        --highlight-block-banner-text-color: var(--white);
+        --highlight-block-banner-text-color-bold: var(--white);
       }
 
-
-      .themeColour--yellow .bannerTheme--transparent {
-        --banner-heading-bold-color: var(--yellow);
-        --banner-body-content-heading-bold: var(--yellow);
-        --banner-body-content-bold: var(--yellow);
+      .pageTheme--colour.themeColour--white {
+        --highlight-block-text-color: var(--white);    
+        --highlight-block-text-color-bold: var(--black);
+        --highlight-block-logo-container-color: var(--white);
+        --highlight-block-banner-background-color: var(--white);
+        --highlight-block-banner-decoration-line-color: var(--black);
+        --highlight-block-banner-text-color: var(--black);
+        --highlight-block-banner-text-color-bold: var(--black);
       }
 
-      .themeColour--black .bannerTheme--transparent {
-        --banner-heading-bold-color: var(--black);
-        --banner-body-content-heading-bold: var(--black);
-        --banner-body-content-bold: var(--black);
+      .pageTheme--colour.themeColour--green {
+        --highlight-block-text-color: var(--white);    
+        --highlight-block-text-color-bold: var(--green);
+        --highlight-block-logo-container-color: var(--green);
+        --highlight-block-banner-background-color: var(--green);
+        --highlight-block-banner-decoration-line-color: var(--black);
+        --highlight-block-banner-text-color: var(--black);
+        --highlight-block-banner-text-color-bold: var(--black);
+      }
+
+      .pageTheme--colour.themeColour--yellow {
+        --highlight-block-text-color: var(--white);    
+        --highlight-block-text-color-bold: var(--yellow);
+        --highlight-block-logo-container-color: var(--yellow);
+        --highlight-block-banner-background-color: var(--yellow);
+        --highlight-block-banner-decoration-line-color: var(--black);
+        --highlight-block-banner-text-color: var(--black);
+        --highlight-block-banner-text-color-bold: var(--black);
+      }
+
+      .pageTheme--colour.themeColour--red {
+        --highlight-block-text-color: var(--white);    
+        --highlight-block-text-color-bold: var(--red);
+        --highlight-block-logo-container-color: var(--red);
+        --highlight-block-banner-background-color: var(--red);
+        --highlight-block-banner-decoration-line-color: var(--white);
+        --highlight-block-banner-text-color: var(--white);
+        --highlight-block-banner-text-color-bold: var(--white);
+      }
+
+      .pageTheme--colour.themeColour--blue {
+        --highlight-block-text-color: var(--white);    
+        --highlight-block-text-color-bold: var(--blue);
+        --highlight-block-logo-container-color: var(--blue);
+        --highlight-block-banner-background-color: var(--blue);
+        --highlight-block-banner-decoration-line-color: var(--white);
+        --highlight-block-banner-text-color: var(--white);
+        --highlight-block-banner-text-color-bold: var(--white);
+      }
+
+      /* Page Theme Light */
+
+      .pageTheme--light {
+        --highlight-block-text-color: var(--white);    
+        --highlight-block-logo-container-color: var(--white);
+        --highlight-block-banner-background-color: var(--white);
+        --highlight-block-banner-decoration-line-color: var(--black);
+        --highlight-block-banner-text-color: var(--black);
+        --highlight-block-banner-text-color-bold: var(--black);
+      }
+
+      .pageTheme--light.themeColour--black { 
+        --highlight-block-text-color-bold: var(--black);
+      }
+
+      .pageTheme--light.themeColour--white { 
+        --highlight-block-text-color-bold: var(--black);
+      }
+
+      .pageTheme--light.themeColour--green { 
+        --highlight-block-text-color-bold: var(--green);
+      }
+
+      .pageTheme--light.themeColour--yellow { 
+        --highlight-block-text-color-bold: var(--yellow);
+      }
+
+      .pageTheme--light.themeColour--red { 
+        --highlight-block-text-color-bold: var(--red);
+      }
+
+      .pageTheme--light.themeColour--blue { 
+        --highlight-block-text-color-bold: var(--blue);
+      }
+
+      /* Page Theme Dark */
+
+      .pageTheme--dark {
+        --highlight-block-logo-container-color: var(--black);
+        --highlight-block-banner-background-color: var(--black);
+        --highlight-block-banner-decoration-line-color: var(--white);
+        --highlight-block-banner-text-color: var(--white);
+      }    
+
+      .pageTheme--dark.themeColour--black {
+        --highlight-block-text-color: var(--black);    
+        --highlight-block-text-color-bold: var(--white);
+        --highlight-block-banner-text-color-bold: var(--white);
+      }
+
+      .pageTheme--dark.themeColour--white {
+        --highlight-block-text-color: var(--white);    
+        --highlight-block-text-color-bold: var(--black);
+        --highlight-block-banner-text-color-bold: var(--white);
+      }
+
+      .pageTheme--dark.themeColour--green {
+        --highlight-block-text-color: var(--black);    
+        --highlight-block-text-color-bold: var(--green);
+        --highlight-block-banner-text-color-bold: var(--green);
+      }
+
+      .pageTheme--dark.themeColour--yellow {
+        --highlight-block-text-color: var(--black);    
+        --highlight-block-text-color-bold: var(--yellow);
+        --highlight-block-banner-text-color-bold: var(--yellow);
+      }
+
+      .pageTheme--dark.themeColour--red {
+        --highlight-block-text-color: var(--black);    
+        --highlight-block-text-color-bold: var(--red);
+        --highlight-block-banner-text-color-bold: var(--red);
+      }
+
+      .pageTheme--dark.themeColour--blue {
+        --highlight-block-text-color: var(--black);    
+        --highlight-block-text-color-bold: var(--blue);
+        --highlight-block-banner-text-color-bold: var(--blue);
+      }
+
+      /* Banner Transparent */
+
+      .pageTheme--colour .footerBannerTheme--transparent,
+      .pageTheme--light .footerBannerTheme--transparent,
+      .pageTheme--dark .footerBannerTheme--transparent {
+        --highlight-block-banner-background-color: var(--transparent);
+        --highlight-block-banner-decoration-line-color: var(--transparent);
+      }
+
+      /* colour - transparent */
+
+      .pageTheme--colour .footerBannerTheme--transparent {
+        --highlight-block-text-color: var(--white);    
+        --highlight-block-banner-text-color: var(--white);
+      }
+
+      .pageTheme--colour.themeColour--black .footerBannerTheme--transparent {
+        --highlight-block-text-color-bold: var(--black);
+        --highlight-block-logo-container-color: var(--black);
+        --highlight-block-banner-text-color-bold: var(--black);
+      }
+
+      .pageTheme--colour.themeColour--white .footerBannerTheme--transparent {
+        --highlight-block-text-color-bold: var(--black);
+        --highlight-block-logo-container-color: var(--white);
+        --highlight-block-banner-text-color-bold: var(--black);
+      }
+
+      .pageTheme--colour.themeColour--green .footerBannerTheme--transparent {
+        --highlight-block-text-color-bold: var(--green);
+        --highlight-block-logo-container-color: var(--green);
+        --highlight-block-banner-text-color-bold: var(--green);
+      }
+
+      .pageTheme--colour.themeColour--yellow .footerBannerTheme--transparent {
+        --highlight-block-text-color-bold: var(--yellow);
+        --highlight-block-logo-container-color: var(--yellow);
+        --highlight-block-banner-text-color-bold: var(--yellow);
+      }
+
+      .pageTheme--colour.themeColour--red .footerBannerTheme--transparent {
+        --highlight-block-text-color-bold: var(--red);
+        --highlight-block-logo-container-color: var(--red);
+        --highlight-block-banner-text-color-bold: var(--red);
+      }
+
+      .pageTheme--colour.themeColour--blue .footerBannerTheme--transparent {
+        --highlight-block-text-color-bold: var(--blue);
+        --highlight-block-logo-container-color: var(--blue);
+        --highlight-block-banner-text-color-bold: var(--blue);
+      }
+
+      /* light - transparent */
+
+      .pageTheme--light .footerBannerTheme--transparent {
+        --highlight-block-text-color: var(--white);    
+        --highlight-block-banner-text-color: var(--white);
+        --highlight-block-logo-container-color: var(--white);
+      }
+
+      .pageTheme--light.themeColour--black .footerBannerTheme--transparent {
+        --highlight-block-text-color-bold: var(--black);
+        --highlight-block-banner-text-color-bold: var(--black);
+      }
+
+      .pageTheme--light.themeColour--white .footerBannerTheme--transparent {
+        --highlight-block-text-color-bold: var(--black);
+        --highlight-block-banner-text-color-bold: var(--black);
+      }
+
+      .pageTheme--light.themeColour--green .footerBannerTheme--transparent {
+        --highlight-block-text-color-bold: var(--green);
+        --highlight-block-banner-text-color-bold: var(--green);
+      }
+
+      .pageTheme--light.themeColour--yellow .footerBannerTheme--transparent {
+        --highlight-block-text-color-bold: var(--yellow);
+        --highlight-block-banner-text-color-bold: var(--yellow);
+      }
+
+      .pageTheme--light.themeColour--red .footerBannerTheme--transparent {
+        --highlight-block-text-color-bold: var(--red);
+        --highlight-block-banner-text-color-bold: var(--red);
+      }
+
+      .pageTheme--light.themeColour--blue .footerBannerTheme--transparent {
+        --highlight-block-text-color-bold: var(--blue);
+        --highlight-block-banner-text-color-bold: var(--blue);
+      }
+
+      /* dark - transparent */
+      .pageTheme--dark .footerBannerTheme--transparent {
+        --highlight-block-logo-container-color: var(--black);
+      }
+
+      .pageTheme--dark.themeColour--black .footerBannerTheme--transparent {
+        --highlight-block-text-color: var(--black);  
+        --highlight-block-text-color-bold: var(--white);
+        --highlight-block-banner-text-color: var(--black);
+        --highlight-block-banner-text-color-bold: var(--white);
+      }
+
+      .pageTheme--dark.themeColour--white .footerBannerTheme--transparent {
+        --highlight-block-text-color: var(--white);  
+        --highlight-block-text-color-bold: var(--black);
+        --highlight-block-banner-text-color: var(--white);
+        --highlight-block-banner-text-color-bold: var(--black);
+      }
+
+      .pageTheme--dark.themeColour--green .footerBannerTheme--transparent {
+        --highlight-block-text-color: var(--black);  
+        --highlight-block-text-color-bold: var(--green);
+        --highlight-block-banner-text-color: var(--black);
+        --highlight-block-banner-text-color-bold: var(--green);
+      }
+
+      .pageTheme--dark.themeColour--yellow .footerBannerTheme--transparent {
+        --highlight-block-text-color: var(--black);  
+        --highlight-block-text-color-bold: var(--yellow);
+        --highlight-block-banner-text-color: var(--black);
+        --highlight-block-banner-text-color-bold: var(--yellow);
+      }
+
+      .pageTheme--dark.themeColour--red .footerBannerTheme--transparent {
+        --highlight-block-text-color: var(--black);  
+        --highlight-block-text-color-bold: var(--red);
+        --highlight-block-banner-text-color: var(--black);
+        --highlight-block-banner-text-color-bold: var(--red);
+      }
+
+      .pageTheme--dark.themeColour--blue .footerBannerTheme--transparent {
+        --highlight-block-text-color: var(--black);  
+        --highlight-block-text-color-bold: var(--blue);
+        --highlight-block-banner-text-color: var(--black);
+        --highlight-block-banner-text-color-bold: var(--blue);
+      }
+
+      /* Text Colour Input Deviation */
+
+      /* colour */
+      .pageTheme--colour.themeColour--green.textColour--black {
+        --highlight-block-text-color: var(--black);    
+        --highlight-block-logo-container-color: var(--green);
+        --highlight-block-banner-background-color: var(--green);
+        --highlight-block-banner-decoration-line-color: var(--black);
+        --highlight-block-banner-text-color: var(--black);
+        --highlight-block-banner-text-color-bold: var(--black);
+      }
+
+      .pageTheme--colour.themeColour--yellow.textColour--black {
+        --highlight-block-text-color: var(--black);    
+        --highlight-block-logo-container-color: var(--yellow);
+        --highlight-block-banner-background-color: var(--yellow);
+        --highlight-block-banner-decoration-line-color: var(--black);
+        --highlight-block-banner-text-color: var(--black);
+        --highlight-block-banner-text-color-bold: var(--black);
+      }
+
+      .pageTheme--colour.themeColour--red.textColour--black {
+        --highlight-block-text-color: var(--black);    
+        --highlight-block-logo-container-color: var(--red);
+        --highlight-block-banner-background-color: var(--red);
+        --highlight-block-banner-decoration-line-color: var(--black);
+        --highlight-block-banner-text-color: var(--black);
+        --highlight-block-banner-text-color-bold: var(--black);
+      }
+
+      .pageTheme--colour.themeColour--blue.textColour--black {
+        --highlight-block-text-color: var(--black);    
+        --highlight-block-logo-container-color: var(--blue);
+        --highlight-block-banner-background-color: var(--blue);
+        --highlight-block-banner-decoration-line-color: var(--white);
+        --highlight-block-banner-text-color: var(--white);
+        --highlight-block-banner-text-color-bold: var(--white);
+      }
+
+      /* transparent */
+
+      .pageTheme--colour.themeColour--green.textColour--black .footerBannerTheme--transparent {
+        --highlight-block-text-color: var(--black);    
+        --highlight-block-text-color-bold: var(--green);   
+        --highlight-block-logo-container-color: var(--green);
+        --highlight-block-banner-background-color: transparent;
+        --highlight-block-banner-decoration-line-color: transparent;
+        --highlight-block-banner-text-color: var(--black);
+        --highlight-block-banner-text-color-bold: var(--green);
+      }
+
+      .pageTheme--colour.themeColour--yellow.textColour--black .footerBannerTheme--transparent {
+        --highlight-block-text-color: var(--black);    
+        --highlight-block-text-color-bold: var(--yellow);   
+        --highlight-block-logo-container-color: var(--yellow);
+        --highlight-block-banner-background-color: transparent;
+        --highlight-block-banner-decoration-line-color: transparent;
+        --highlight-block-banner-text-color: var(--black);
+        --highlight-block-banner-text-color-bold: var(--yellow);
+      }
+
+      .pageTheme--colour.themeColour--red.textColour--black .footerBannerTheme--transparent {
+        --highlight-block-text-color: var(--black);    
+        --highlight-block-text-color-bold: var(--red);   
+        --highlight-block-logo-container-color: var(--red);
+        --highlight-block-banner-background-color: transparent;
+        --highlight-block-banner-decoration-line-color: transparent;
+        --highlight-block-banner-text-color: var(--black);
+        --highlight-block-banner-text-color-bold: var(--red);
+      }
+
+      .pageTheme--colour.themeColour--blue.textColour--black .footerBannerTheme--transparent {
+        --highlight-block-text-color: var(--black);    
+        --highlight-block-text-color-bold: var(--blue);   
+        --highlight-block-logo-container-color: var(--blue);
+        --highlight-block-banner-background-color: transparent;
+        --highlight-block-banner-decoration-line-color: transparent;
+        --highlight-block-banner-text-color: var(--black);
+        --highlight-block-banner-text-color-bold: var(--blue);
       }
 
 
       /* COVER PAGE HIGHLIGHT BANNER */
-      /* Body Content */
-
-      .themeColour--red {
-        --body-heading-bold-color: var(--red);
-        --body-subheading-bold-color: var(--red);
-        --body-copy-bold-color: var(--red);
-      }
-
-      .themeColour--blue {
-        --body-heading-bold-color: var(--blue);
-        --body-subheading-bold-color: var(--blue);
-        --body-copy-bold-color: var(--blue);
-      }
-
-      .themeColour--green {
-        --body-heading-bold-color: var(--green);
-        --body-subheading-bold-color: var(--green);
-        --body-copy-bold-color: var(--green);
-      }
-
-      .themeColour--yellow  {
-        --body-heading-bold-color: var(--yellow);
-        --body-subheading-bold-color: var(--yellow);
-        --body-copy-bold-color: var(--yellow);
-      }
-
-      .themeColour--black {
-        --body-heading-bold-color: var(--black);
-        --body-subheading-bold-color: var(--black);
-        --body-copy-bold-color: var(--black);
-      }
-
-      .themeColour--white {
-        --body-heading-bold-color: var(--white);
-        --body-subheading-bold-color: var(--white);
-        --body-copy-bold-color: var(--white);
-      }
-
-      /* Footer Banner */
-      /* Banner Theme Colour */
-      .themeColour--red .footerBannerTheme--colour {
-        --footer-banner-background: var(--red);
-        --footer-banner-heading: var(--black);
-        --footer-banner-heading-bold: var(--white);
-        --footer-banner-content: var(--white);
-      }
-
-      .themeColour--blue .footerBannerTheme--colour {
-        --footer-banner-background: var(--blue);
-        --footer-banner-heading: var(--white);
-        --footer-banner-heading-bold: var(--white);
-        --footer-banner-content: var(--white);
-      }
-
-      .themeColour--green .footerBannerTheme--colour {
-        --footer-banner-background: var(--green);
-        --footer-banner-heading: var(--black);
-        --footer-banner-heading-bold: var(--black);
-        --footer-banner-content: var(--black);
-      }
-
-      .themeColour--yellow .footerBannerTheme--colour {
-        --footer-banner-background: var(--yellow);
-        --footer-banner-heading: var(--black);
-        --footer-banner-heading-bold: var(--black);
-        --footer-banner-content: var(--black);
-      }
-
-      .themeColour--black .footerBannerTheme--colour {
-        --footer-banner-background: var(--black);
-        --footer-banner-heading: var(--white);
-        --footer-banner-heading-bold: var(--white);
-        --footer-banner-content: var(--white);
-      }
-
-      .themeColour--white .footerBannerTheme--colour {
-        --footer-banner-background: var(--white);
-        --footer-banner-heading: var(--black);
-        --footer-banner-heading-bold: var(--black);
-        --footer-banner-content: var(--black);
-      }
-
-      /* Footer Banner */
-      /* Banner Transparent */
-      /* Banner Dark */
-      .footerBannerTheme--transparent {
-        --footer-banner-background: var(--transparent);
-        --footer-banner-heading: var(--white);
-        --footer-banner-heading-bold: var(--white);
-        --footer-banner-content: var(--white);
-        --border-item-before-background: var(--white);
-      }
-
-      .themeColour--red .footerBannerTheme--transparent { --footer-banner-heading-bold: var(--red); }
-      .themeColour--blue .footerBannerTheme--transparent { --footer-banner-heading-bold: var(--blue); }
-      .themeColour--green .footerBannerTheme--transparent { --footer-banner-heading-bold: var(--green); }
-      .themeColour--yellow .footerBannerTheme--transparent { --footer-banner-heading-bold: var(--yellow); }
-      .themeColour--black .footerBannerTheme--transparent { --footer-banner-heading-bold: var(--black);  }
-
       /*Internal Pages */
 
       .themeInternalColour--red .fit { --dynamic-color: var(--red); --internal-pages-text-colour-bold: var(--dynamic-color); }
@@ -448,6 +637,8 @@
       {{placeholder-validation}}
 
       {{BA_themeColour--br}}
+      {{BA_page-theme-colour---br}}
+      {{BA_text-colour}}
       {{BA_document-title--br}}
       {{BA_date--br}}
       {{BA_dark_logo--br}}
@@ -455,16 +646,12 @@
 
       {{#collection.BA_cover-page--br}}
       {{#block.BA_cover-page-block-banner--br}}
-      {{page-theme--br}}
       {{background-image--br}}
-      {{banner-theme--br}}
-      {{banner-transparency--br}}
       {{banner-position--br}}
       {{cover-heading--br}}
       {{brochure-highlight--br}}
       {{/block.BA_cover-page-block-banner--br}}
       {{#block.BA_cover-page-highlight-banner--br}}
-      {{page-theme--br}}
       {{gradient-opacity--br}}
       {{gradient-colour}}
       {{top-grad-height}}
@@ -480,11 +667,13 @@
 
       {{#collection.BA_content-page--br}}
       {{#block.BA_one-column--br}}
-      {{background-color--br}}
       {{page-heading--br}}
       {{#spreadsheet.table-of-contents--br}}
       {{/spreadsheet.table-of-contents--br}}
       {{/block.BA_one-column--br}}
+
+
+      --------------------- add here two column inputs for ordering ---------------------
       {{/collection.BA_content-page--br}}
 
       {{#collection.BA_internal-pages--br}}     
@@ -563,7 +752,6 @@
       {{image-height--br}}
       {{caption--br}}
       {{caption-alignment}}
-      {{caption-text-colour--br}}
       {{/block.image--br}}
       {{/collection.content--br}}
       {{/block.column--br}}
@@ -604,7 +792,6 @@
       {{/collection.BA_internal-pages--br}}
 
       {{#collection.BA_back-page--br}}
-      {{background-color--br}}
       {{contact-position--br}}
       {{page-heading--br}}
       {{contact-details--br}}
@@ -796,8 +983,9 @@
         margin-bottom: 0.5rem;
       }
 
-      .fitBackgroundColor--white .body--contentOneColumn,
-      .fitBackgroundColor--white .body--contentTwoColumn { color: var(--black); } 
+      .body--contentOneColumn,
+      .body--contentTwoColumn { color: var(--black); } 
+      /* this selector should come from global input */
 
       .fit--blankPage { 
         background-color: var(--blank-page-background-color);
@@ -865,7 +1053,7 @@
 
       .footer--coverPageHighlightBanner { 
         display: flex;
-        background: var(--footer-banner-background);
+        background: var(--highlight-block-banner-background-color);
         z-index: 1;
       }
 
@@ -888,19 +1076,15 @@
         right: 0;
         padding: 1.45rem 0.85rem 1.35rem 0.75rem;
         z-index: 1;
+        background: var(--cover-block-logo-container-color);
       }
 
-      .logo__container--coverPageHighlightBanner { padding: 0.75rem 0.65rem 0.95rem 0.45rem; }
-
-      .pageTheme--light  .logo__container,
-      .dark-logo-exist .pageTheme--dark  .logo__container { 
-        background: var(--white);
+      .logo__container--coverPageHighlightBanner { 
+        padding: 0.75rem 0.65rem 0.95rem 0.45rem; 
+        background: var(--highlight-block-logo-container-color);
       }
 
-      .pageTheme--dark .logo__container,
-      .light-logo-exist .pageTheme--light .logo__container {
-        background: var(--black); 
-      }
+      /* update logo logic */
 
       .logo__container--backPage { 
         background: transparent;
@@ -908,7 +1092,8 @@
         bottom: 0;
         right: 0;
         padding: 0.65rem 0.85rem 0.85rem 0.75rem;
-      }
+      } 
+      /* toggle logo with global selector */
 
       .contactPosition--bottom .logo__container--backPage {
         top: 0.2rem;
@@ -925,31 +1110,12 @@
         width: 2.6rem;
       }
 
-      .pageTheme--light .logo--defaultLight,
-      .pageTheme--dark .logo--defaultDark,
-      .dark-logo-exist .pageTheme--dark .logo--dark,
-      .light-logo-exist .pageTheme--light .logo--light {
-        display: block;
-      }
-
-      .dark-logo-exist .logo--defaultDark,
-      .light-logo-exist .logo--defaultLight {
-        display: none;
-      }
+      /* update logo logic */
 
       .logo--backPage,
       .logo--contentOneColumn,
       .logo--contentTwoColumn {
         width: 2.4rem;
-      }
-
-      .fitBackgroundColor--black .logo--backPage.logo--defaultLight,
-      .fitBackgroundColor--white .logo--backPage.logo--defaultDark,
-      .fitBackgroundColor--black .logo--contentOneColumn.logo--defaultLight,
-      .fitBackgroundColor--white .logo--contentOneColumn.logo--defaultDark,
-      .fitBackgroundColor--black .logo--contentTwoColumn.logo--defaultLight,
-      .fitBackgroundColor--white .logo--contentTwoColumn.logo--defaultDark {
-        display: block;
       }
 
       .banner {
@@ -966,12 +1132,8 @@
         left: 0;
         right: 0;
         bottom: 0;
-        background: var(--banner-background-color);
+        background: var(--cover-block-banner-background-color);
       }
-
-
-      .bannerTheme--colour.bannerTransparency--transparent .banner__backgroundColor { opacity: 0.5; }
-      .bannerTheme--transparent .banner__backgroundColor { opacity: 0; }
 
       .banner__heading {
         position: relative;
@@ -992,16 +1154,16 @@
         margin-bottom: 0.38rem;
       }      
 
-      .banner__heading h1 { color: var(--banner-heading-color); }
+      .banner__heading h1 { color: var(--cover-block-banner-text-color); }
 
       .banner__heading h1 strong {
-        color: var(--banner-heading-bold-color);
+        color: var(--cover-block-banner-text-color-bold);
         font-weight: 700;
       }
 
-      .heading--coverPageHighlightBanner h1 { color: var(--body-heading-color); }
+      .heading--coverPageHighlightBanner h1 { color: var(--highlight-block-text-color); }
       .heading--coverPageHighlightBanner h1 strong { 
-        color: var(--body-heading-bold-color);
+        color: var(--highlight-block-text-color-bold);
         font-weight: 700;
       }
 
@@ -1019,21 +1181,18 @@
       }
 
       .banner__heading h2 { 
-        color: var(--banner-body-content);
+        color: var(--cover-block-banner-text-color);
         font-weight: 400;
       }
 
       .banner__heading h2 strong {
-        color: var(--banner-body-content-bold);
+        color: var(--cover-block-banner-text-color-bold);
         font-weight: 400;
       }
 
-      .heading--coverPageHighlightBanner h2 { color: var(--body-subheading-color); }
+      .heading--coverPageHighlightBanner h2 { color: var(--highlight-block-text-color); }
 
-      .heading--coverPageHighlightBanner h2 strong {      
-        color: var(--body-subheading-bold-color);
-        font-weight: 400;
-      }
+      .heading--coverPageHighlightBanner h2 strong { font-weight: 400;}
 
       .banner__heading h2:last-child,
       .heading--coverPageHighlightBanner h2:last-child { 
@@ -1053,14 +1212,14 @@
         font-size: 0.23rem;
         line-height: 1.2em;
         font-family: var(--font-archivo-black);
-        color: var(--banner-body-content-heading);
+        color: var(--cover-block-banner-text-color);
         text-transform: uppercase;
         margin-bottom: 0.55rem;
       }
 
 
       .banner__highlight h3 strong {
-        color: var(--banner-body-content-heading-bold);
+        color: var(--cover-block-banner-text-color-bold);
         font-weight: normal;
       }
 
@@ -1068,12 +1227,12 @@
         font-size: 0.25rem;
         line-height: 1.4em;
         font-family: var(--font-taviraj);
-        color: var(--banner-body-content);
+        color: var(--cover-block-banner-text-color);
         margin-bottom: 0.15rem;
       }
 
       .banner__highlight h4 strong {
-        color: var(--banner-body-content-bold);
+        color: var(--cover-block-banner-text-color-bold);
         font-weight: 400;
       }
 
@@ -1094,20 +1253,17 @@
         line-height: 1.2em;
         text-transform: uppercase;
         margin-bottom: 0.55rem;
+        color: var(--highlight-block-text-color);
       }
 
-      .heading--coverPageHighlightBanner h3 { color: var(--body-copy-color); }
 
-      .footerBanner__item p { color: var(--footer-banner-content); }
+      .footerBanner__item p { color: var(--highlight-block-banner-text-color); }
 
-      .banner__highlight p { color: var(--banner-body-content); }
+      .banner__highlight p { color: var(--cover-block-banner-text-color); }
 
       .banner__highlight p strong {
-        color: var(--banner-body-content-bold);
-        font-weight: 400;
+        font-weight: 700;
       }
-
-      .heading--coverPageHighlightBanner h3 strong { color: var(--body-copy-bold-color); }
 
       .heading--contentOneColumn,
       .heading--contentTwoColumn {
@@ -1177,34 +1333,32 @@
         flex-shrink: 0;
       }
 
-      .footerBannerTheme--transparent .footerBanner { padding-left: 2.35rem; }
+      .footerBannerTheme--transparent .footerBanner { padding-left: 1.95rem; }
 
       .footerBanner__item + .footerBanner__item { margin-left: 0.9rem; }
 
       .footer-alt .footerBanner__item:nth-child(3) { display: none; }
 
       .footerBanner__item:before {
-        display: none;
+        display: block;
         content: '';
         position: absolute;
         right: 110%;
         width: 0.1rem;
         height: 100%;
-        border-left: 1pt solid var(--border-item-before-background);
+        border-left: 1pt solid var(--highlight-block-banner-decoration-line-color);
       }
-
-      .footerBannerTheme--transparent .footerBanner__item:before { display: block; }
 
       .footerBanner__item h3 {
         font-size: 0.25rem;
         line-height: 1.2em;
         font-family: var(--font-taviraj);        
         margin-bottom: 0.2rem;
-        color: var(--footer-banner-heading);
+        color: var(--highlight-block-banner-text-color);
       }
 
       .footerBanner__item h3 strong {
-        color: var(--footer-banner-heading-bold);
+        color: var(--highlight-block-banner-text-color-bold);
         font-weight: 400;
       }
 
@@ -1224,7 +1378,7 @@
         color: var(--white);
       }
 
-      .fitBackgroundColor--white .contact__text { color: var(--black) } 
+      .contact__text { color: var(--black) } /* Selector should come from (global page theme variable) */
 
       .table {
         margin-left: 0.05rem;
@@ -1667,7 +1821,7 @@
         font-size: 0.155rem;
         line-height: 1.3em;
       }
-      
+
       .captionTextColour--white .image__caption p { color: var(--white); }
       .captionTextColour--black .image__caption p { color: var(--black); }
 
@@ -1876,6 +2030,8 @@
                {{#BA_dark_logo--br}}dark-logo-exist{{/BA_dark_logo--br}}
                {{#BA_light_logo--br}}light-logo-exist{{/BA_light_logo--br}}    
                themeColour--{{BA_themeColour--br}}{{^BA_themeColour--br}}red{{/BA_themeColour--br}}
+               pageTheme--{{BA_page-theme-colour---br}}{{^BA_page-theme-colour---br}}colour{{/BA_page-theme-colour---br}}
+               textColour--{{BA_text-colour}}{{^BA_text-colour}}white{{/BA_text-colour}}
                ">
     <div class="placeholderMaster" data-opacity="{{ placeholder-opacity }}">
       <div class="placeholderMaster__item" data-bg="{{ placeholder-image-11 }}"></div>
@@ -1898,9 +2054,6 @@
       <div class="bleed">
 
         <div class="container fit fit--coverPageBlockBanner
-                    pageTheme--{{page-theme--br}}{{^page-theme--br}}light{{/page-theme--br}}
-                    bannerTheme--{{banner-theme--br}}{{^banner-theme--br}}colour{{/banner-theme--br}}
-                    bannerTransparency--{{banner-transparency--br}}{{^banner-transparency--br}}fullColour{{/banner-transparency--br}}
                     bannerPosition--{{banner-position--br}}{{^banner-position--br}}left{{/banner-position--br}}
                     ">
           <div class="backgroundImage">
@@ -1935,7 +2088,6 @@
       <div class="bleed">
 
         <div class="container fit fit--coverPageHighlightBanner
-                    pageTheme--{{page-theme--br}}{{^page-theme--br}}light{{/page-theme--br}}
                     headingPosition--{{heading-position--br}}{{^heading-position--br}}top{{/heading-position--br}}
                     footerBannerTheme--{{banner-theme--br}}{{^banner-theme--br}}colour{{/banner-theme--br}}
                     gradientColour--{{{gradient-colour}}}{{^gradient-colour}}white{{/gradient-colour}}
@@ -1988,7 +2140,6 @@
         <div class="container 
                     fit 
                     fit--contentOneColumn
-                    fitBackgroundColor--{{background-color--br}}{{^background-color--br}}black{{/background-color--br}}
                     ">
           <div class="header header--contentOneColumn">
             <div class="logo__container logo__container--contentOneColumn">
@@ -2026,7 +2177,6 @@
 
         <div class="container fit
                     fit--contentTwoColumn
-                    fitBackgroundColor--{{background-color--br}}{{^background-color--br}}black{{/background-color--br}}
                     ">
           <div class="body body--contentTwoColumn">
             <div class="body__inner" data-max-height="dynamic">
@@ -2462,7 +2612,6 @@
         <div class="container 
                     fit 
                     fit--backPage
-                    fitBackgroundColor--{{background-color--br}}{{^background-color--br}}black{{/background-color--br}}
                     contactPosition--{{contact-position--br}}{{^contact-position--br}}top{{/contact-position--br}}
                     ">
           <div class="body body--backPage">
