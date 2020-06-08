@@ -52,6 +52,12 @@
         --internal-pages-coloured-section-text-color-dynamic: var(--black);
         --internal-pages-background-color-dynamic: var(--black);
         --hero-text-colour: var(--white);
+
+        /*Content / Back Page */
+
+        --content-back-page-background: var(--black);
+        --content-back-page-text-color: var(--white);
+        --content-back-page-dynamic-color: var(--white);
       }
 
       /* COVER PAGE BLOCK BANNER */
@@ -626,6 +632,90 @@
       /* Blank Page */
       .fit--blankPage { --blank-page-background-color: var(--dynamic-color); }
 
+      /* Contents / Back Page */
+
+      /* colour */
+
+      .pageTheme--colour.themeColour--black {
+        --content-back-page-background: var(--black);
+        --content-back-page-text-color: var(--white);
+        --content-back-page-dynamic-color: var(--white);
+      }
+
+      .pageTheme--colour.themeColour--white {
+        --content-back-page-background: var(--white);
+        --content-back-page-text-color: var(--black);
+        --content-back-page-dynamic-color: var(--black);
+      }
+
+      .pageTheme--colour.themeColour--green {
+        --content-back-page-background: var(--black);
+        --content-back-page-text-color: var(--white);
+        --content-back-page-dynamic-color: var(--green);
+      }
+
+      .pageTheme--colour.themeColour--yellow {
+        --content-back-page-background: var(--black);
+        --content-back-page-text-color: var(--white);
+        --content-back-page-dynamic-color: var(--yellow);
+      }
+
+      .pageTheme--colour.themeColour--red {
+        --content-back-page-background: var(--black);
+        --content-back-page-text-color: var(--white);
+        --content-back-page-dynamic-color: var(--red);
+      }
+
+      .pageTheme--colour.themeColour--blue {
+        --content-back-page-background: var(--white);
+        --content-back-page-text-color: var(--black);
+        --content-back-page-dynamic-color: var(--blue);
+      }
+
+      /* light */
+
+      .pageTheme--light {
+        --content-back-page-background: var(--white);
+        --content-back-page-text-color: var(--black);
+        --content-back-page-dynamic-color: var(--black);
+      }
+
+      .pageTheme--light.themeColour--red {
+        --content-back-page-dynamic-color: var(--red);
+      }
+
+      .pageTheme--light.themeColour--blue {
+        --content-back-page-dynamic-color: var(--blue);
+      }
+
+      /* dark */
+
+      .pageTheme--dark {
+        --content-back-page-background: var(--black);
+        --content-back-page-text-color: var(--white);
+        --content-back-page-dynamic-color: var(--white);
+      }
+
+      .pageTheme--dark.themeColour--yellow {
+        --content-back-page-dynamic-color: var(--yellow);
+      }
+
+      .pageTheme--dark.themeColour--green {
+        --content-back-page-dynamic-color: var(--green);
+      }
+
+      .pageTheme--dark.themeColour--red {
+        --content-back-page-dynamic-color: var(--red);
+      }
+
+      /* Text Colour Input Deviation */
+
+      .pageTheme--colour.themeColour--red.textColour--white {
+        --content-back-page-background: var(--white);
+        --content-back-page-text-color: var(--black);
+        --content-back-page-dynamic-color: var(--red);
+      }
+
       /* 
       Input Order
       {{show-crop}}
@@ -903,6 +993,7 @@
       .fit--contentTwoColumn { 
         flex-direction: column;
         padding: 0.85rem 0.85rem 0.85rem 1.6rem;
+        background: var(--content-back-page-background);
       }
 
       .fit--contentTwoColumn { padding-top: 1.65rem; }
@@ -930,6 +1021,11 @@
       .fit--statsPage {
         flex-direction: column;
         padding: 0.7rem 0 1.5rem 1rem;
+      }
+
+      .fit--backPage {
+        background: var(--content-back-page-background);
+        color: var(--content-back-page-text-color);
       }
 
 
@@ -984,8 +1080,9 @@
       }
 
       .body--contentOneColumn,
-      .body--contentTwoColumn { color: var(--black); } 
-      /* this selector should come from global input */
+      .body--contentTwoColumn { 
+        color: var(--content-back-page-text-color); 
+      } 
 
       .fit--blankPage { 
         background-color: var(--blank-page-background-color);
@@ -1276,11 +1373,16 @@
       .heading--contentOneColumn { margin-bottom: 3.2rem; }
       .heading--contentTwoColumn { margin-bottom: 0.93rem; }
 
+      .heading--contentOneColumn strong,
+      .heading--contentTwoColumn strong {
+        color: var(--content-back-page-dynamic-color); 
+        font-weight: 400;
+      }
+
       .heading--flexiPage { max-height: 6.5rem; }
       .feature-image-exist .heading--flexiPage { max-height: 5rem; }
       .heading--statsPage { max-height: 6.5rem; }
 
-      .heading--contentOneColumn strong,
       .heading--singlePageLayout strong,
       .heading--flexiPage h1 strong,
       .heading--statsPage strong { 
@@ -1368,17 +1470,15 @@
         margin-bottom: 0.21rem;
         font-size: 0.64rem;
         font-weight: 700;
-        color: var(--internal-pages-text-colour-bold);
+        color: var(--content-back-page-dynamic-color);
         text-transform: uppercase;
       }
 
       .contact__text {
         font-size: 0.233rem;
         line-height: 1.7em;
-        color: var(--white);
+        color: var(--content-back-page-text-color);
       }
-
-      .contact__text { color: var(--black) } /* Selector should come from (global page theme variable) */
 
       .table {
         margin-left: 0.05rem;
@@ -1407,7 +1507,7 @@
 
       .table__row--contentTwoColumn:first-child .table__item--secondary,
       .table__row--contentTwoColumn:first-child .table__item--tertiary {
-        color: var(--internal-pages-text-colour-bold);
+        color: var(--content-back-page-dynamic-color);
       }
 
       .table__row:last-child { margin-bottom: 0; }
