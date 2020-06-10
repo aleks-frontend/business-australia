@@ -761,9 +761,19 @@
       {{#spreadsheet.table-of-contents--br}}
       {{/spreadsheet.table-of-contents--br}}
       {{/block.BA_one-column--br}}
-
-
-      --------------------- add here two column inputs for ordering ---------------------
+      {{#block.BA_two-column--br}}
+      {{page-heading--br}}
+      {{#collection.columns--br}}
+      {{#block.column--br}}
+      {{#collection.chapters--br}}
+      {{#block.chapter--br}}
+      {{#spreadsheet.chapter-contents--br}}
+      {{/spreadsheet.chapter-contents--br}}
+      {{/block.chapter--br}}
+      {{/collection.chapters--br}}
+      {{/block.column--br}}
+      {{/collection.columns--br}}
+      {{/block.BA_two-column--br}}
       {{/collection.BA_content-page--br}}
 
       {{#collection.BA_internal-pages--br}}     
@@ -867,12 +877,14 @@
       {{/block.column-content--br}}
       {{#block.stats--br}}
       {{stats-alignment--br}}
-      {{#collection.stat--br}}
-      {{#block.stats--br}}
-      {{stat-number--br}}
-      {{stat-title--br}}
-      {{/block.stats--br}}
-      {{/collection.stat--br}}
+      {{stat-1-number--br}}
+      {{stat-1-title--br}}
+      {{stat-2-number--br}}
+      {{stat-2-title--br}}
+      {{stat-3-number--br}}
+      {{stat-3-title--br}}
+      {{stat-4-number--br}}
+      {{stat-4-title--br}}
       {{/block.stats--br}}
       {{/collection.body-content--br}}
       {{/block.stats-page}}
@@ -1180,6 +1192,8 @@
         background: var(--highlight-block-logo-container-color);
       }
 
+      .footer-alt .logo__container--coverPageHighlightBanner { padding: 0.75rem 0.95rem 0.95rem 0.75rem; } 
+
       /* update logo logic */
 
       .logo__container--backPage,
@@ -1202,6 +1216,8 @@
         display: none;
         width: 2.6rem;
       }
+
+      .footer-alt .logo { width: 4.6rem; }
 
       /* update logo logic */
 
@@ -1262,19 +1278,19 @@
 
       .pageTheme--colour.themeColour--blue .logo--defaultLight.logo--cover,
       .pageTheme--colour.themeColour--red.textColour--white .logo--defaultLight.logo--cover { display: block; }   
-      
+
       .pageTheme--colour.themeColour--blue.light-logo-exist .logo--defaultLight,
       .pageTheme--colour.themeColour--red.textColour--white.light-logo-exist .logo--defaultLight { display: none; } 
-      
+
       .pageTheme--colour.themeColour--blue.light-logo-exist .logo--light.logo--cover,
       .pageTheme--colour.themeColour--red.textColour--white.light-logo-exist .logo--light.logo--cover { display: block; }     
 
       .pageTheme--colour.themeColour--blue .logo--defaultDark.logo--contentBack,
       .pageTheme--colour.themeColour--red.textColour--white .logo--defaultDark.logo--contentBack { display: block; }  
-      
+
       .pageTheme--colour.themeColour--blue.dark-logo-exist .logo--defaultDark.logo--contentBack,
       .pageTheme--colour.themeColour--red.textColour--white.dark-logo-exist .logo--defaultDark.logo--contentBack { display: none; }   
-      
+
       .pageTheme--colour.themeColour--blue.dark-logo-exist .logo--dark.logo--contentBack,
       .pageTheme--colour.themeColour--red.textColour--white.dark-logo-exist .logo--dark.logo--contentBack { display: block; }
 
@@ -2090,6 +2106,7 @@
       .stats__item {
         max-width: 2.4rem;
         height: 1.5rem;
+        display: none;
       }
 
       .stats__item + .stats__item { margin-left: 0.5rem; }
@@ -2266,7 +2283,7 @@
               {{{cover-heading--br}}}
             </div><!-- heading -->
           </div><!-- body -->
-          <div class="footer footer--coverPageHighlightBanner">
+          <div class="footer footer--coverPageHighlightBanner js-footer">
             <div class="footerBanner">
               {{#collection.highlights--br}}
               {{#block.brochure-highlight--br}}
@@ -2277,10 +2294,10 @@
               {{/collection.highlights--br}}
             </div><!-- footerBanner -->
             <div class="logo__container logo__container--coverPageHighlightBanner">
-              <img src="{{{account.logos.BA_Reverse}}}" class="logo logo--defaultLight logo--coverPageHighlightBanner logo--cover" />
-              <img src="{{{account.logos.BA_Mono}}}" class="logo logo--defaultDark logo--coverPageHighlightBanner logo--cover" />
-              <img src="#" class="logo logo--dark logo--coverPageHighlightBanner logo--cover" data-target="dark-logo"/>
-              <img src="#" class="logo logo--light logo--coverPageHighlightBanner logo--cover"data-target="light-logo" />
+              <img src="{{{account.logos.BA_Reverse}}}" class="logo logo--defaultLight logo--coverPageHighlightBanner logo--cover js-footer-logo" />
+              <img src="{{{account.logos.BA_Mono}}}" class="logo logo--defaultDark logo--coverPageHighlightBanner logo--cover js-footer-logo" />
+              <img src="#" class="logo logo--dark logo--coverPageHighlightBanner logo--cover js-footer-logo" data-target="dark-logo"/>
+              <img src="#" class="logo logo--light logo--coverPageHighlightBanner logo--cover js-footer-logo"data-target="light-logo" />
             </div><!-- logo__container -->
           </div><!-- footer -->
         </div><!--container fit-->
@@ -2741,15 +2758,23 @@
                   </div><!-- text__container -->
                   {{/block.column-content--br}}
                   {{#block.stats--br}}
-                  <div class="stats statsAlignment--{{stats-alignment--br}}{{^stats-alignment--br}}left{{/stats-alignment--br}}">
-                    {{#collection.stat--br}}
-                    {{#block.stats--br}}
-                    <div class="stats__item">
-                      <div class="stats__number" data-char-limit="4">{{{stat-number--br}}}</div><!-- stats__number -->
-                      <div class="stats__title" data-max-line="2">{{{stat-title--br}}}</div><!-- stats__title -->
+                  <div class="stats statsAlignment--{{stats-alignment--br}}{{^stats-alignment--br}}left{{/stats-alignment--br}}"> 
+                    <div class="stats__item {{#stat-1-number--br}}u-block{{/stat-1-number--br}} {{^stat-1-title--br}}u-block{{/stat-1-title--br}}">
+                      <div class="stats__number" data-char-limit="4">{{{stat-1-number--br}}}</div><!-- stats__number -->
+                      <div class="stats__title" data-max-line="2">{{{stat-1-title--br}}}</div><!-- stats__title -->
                     </div><!-- stats__item -->
-                    {{/block.stats--br}}
-                    {{/collection.stat--br}}
+                    <div class="stats__item {{#stat-2-number--br}}u-block{{/stat-2-number--br}} {{^stat-2-title--br}}u-block{{/stat-2-title--br}}">
+                      <div class="stats__number" data-char-limit="4">{{{stat-2-number--br}}}</div><!-- stats__number -->
+                      <div class="stats__title" data-max-line="2">{{{stat-2-title--br}}}</div><!-- stats__title -->
+                    </div><!-- stats__item -->
+                    <div class="stats__item {{#stat-3-number--br}}u-block{{/stat-3-number--br}} {{^stat-3-title--br}}u-block{{/stat-3-title--br}}">
+                      <div class="stats__number" data-char-limit="4">{{{stat-3-number--br}}}</div><!-- stats__number -->
+                      <div class="stats__title" data-max-line="2">{{{stat-3-title--br}}}</div><!-- stats__title -->
+                    </div><!-- stats__item -->
+                    <div class="stats__item {{#stat-4-number--br}}u-block{{/stat-4-number--br}} {{^stat-4-title--br}}u-block{{/stat-4-title--br}}">
+                      <div class="stats__number" data-char-limit="4">{{{stat-4-number--br}}}</div><!-- stats__number -->
+                      <div class="stats__title" data-max-line="2">{{{stat-4-title--br}}}</div><!-- stats__title -->
+                    </div><!-- stats__item -->
                   </div><!-- stats -->
                   {{/block.stats--br}}
                   {{/collection.body-content--br}}
@@ -2920,7 +2945,6 @@
           maxLineCheck();
           maxHeightCheck();
           injectDynamicContent();
-          //dateUtil(); - I left this here just in Case if fe needed it
           hideEmptyTitles();
           imageHeightSetter();
 
@@ -2981,6 +3005,33 @@
       }
 
       displayHeaderText();
+
+      function footerController() {	
+        const footer = document.querySelector('.js-footer');
+        const logos = document.querySelectorAll('.js-footer-logo');
+
+        logos.forEach(logo => {	
+          const logoStyles = window.getComputedStyle(logo);	
+          if (logoStyles.getPropertyValue('display') === 'none') return;
+
+          const logoWidth = logo.offsetWidth;	
+          const logoHeight = logo.offsetHeight;   
+        
+
+          if (logoHeight !== 0 && logoHeight * 4.5 <= logoWidth) {
+            footer.classList.add('footer-alt');	
+          } else {
+            footer.classList.remove('footer-alt');	
+          }
+
+          logo.onload = () => {	
+            footerController()	
+            maxHeightCheck();	
+          };	
+        })	
+      }	
+
+      footerController();      
 
 
     </script>
